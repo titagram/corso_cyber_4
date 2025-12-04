@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>4.6 Privilege Escalation via DB</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-blue">
+            <div class="card-title">4.6 Privilege Escalation modificando il DB</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><strong>Scenario:</strong> un attaccante trova una SQL Injection.</li>
+                        <li><strong>1.</strong> Trova l'ID di un utente a basso privilegio.</li>
+                        <li><strong>2.</strong> Aggiorna il campo <code>wp_capabilities</code> in <code>wp_usermeta</code>:</li>
+                    </ul>
+                    <div class="code-box">UPDATE wp_usermeta 
+SET meta_value = 'a:1:{s:13:"administrator";b:1;}'
+WHERE user_id = [ID] AND meta_key = 'wp_capabilities';</div>
+                    <ul>
+                        <li><strong>3.</strong> L'attaccante ora può loggarsi come admin.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Questo è uno scenario di attacco da manuale. Non serve nemmeno creare un nuovo utente, che potrebbe essere notato. Basta promuoverne uno esistente.</p>
+                    <p>Una singola query SQL è tutto ciò che serve per passare da una SQL Injection a un controllo completo del pannello di amministrazione di WordPress. Ecco perché prevenire le SQLi è assolutamente critico.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="4.5.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="4.7.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

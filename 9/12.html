@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Log4Shell - Evasione WAF</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-blue.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Evasione: Nascondersi in piena vista</h1>
+        <div class="subtitle">Evasione WAF</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Bypass Payload</div>
+                <div class="card-text">
+                    <pre><code class="language-bash">${${lower:j}ndi:...}</code></pre>
+                    <pre><code class="language-bash">${${::-j}${::-n}di:...}</code></pre>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione</div>
+                <div class="card-text">
+                    <p><strong>Perché questi comandi funzionano?</strong></p>
+                    <p>Log4j è ricorsivo. Risolve le istruzioni dall'interno verso l'esterno.</p>
+                    <p><code>${lower:j}</code> viene risolto in <code>j</code>.</p>
+                    <p>I firewall (WAF) che cercano la stringa statica "jndi" vengono aggirati perché la stringa non esiste finché Log4j non la "assembla" in memoria.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 12;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="main.js"></script>
+</body>
+</html>

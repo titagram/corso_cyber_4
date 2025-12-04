@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>3.5 File Nascosti Pericolosi</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-purple">
+            <div class="card-title">3.5 File Nascosti Pericolosi: `.git` e `.env`</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Se si usa <code>git</code> per il deploy, la cartella <code>.git</code> potrebbe essere esposta.</li>
+                        <li>Un <code>.git</code> esposto permette di scaricare l'intero codice sorgente, inclusi file con password.</li>
+                        <li>I file <code>.env</code>, usati da molti tool moderni, contengono spesso credenziali in chiaro.</li>
+                        <li><strong>Il web server deve bloccare l'accesso a questi file/cartelle.</strong></li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Un errore di deploy comune è lasciare la cartella <code>.git</code> accessibile via web. Esistono tool che possono ricostruire l'intero repository partendo da essa, rivelando non solo il codice attuale, ma anche la sua storia.</p>
+                    <p>Questo include commit dove magari sono state inserite e poi rimosse delle password. Stesso discorso per i file <code>.env</code>. Sono errori che trasformano una configurazione da "sicura" a "completamente esposta" in un attimo. Sempre verificare con scanner automatici.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="3.4.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="3.6.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

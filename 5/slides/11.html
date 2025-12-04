@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 2: WordPress Enumeration - User Enumeration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 2: WordPress Enumeration</h1>
+        <div class="subtitle">Slide 2.2: User Enumeration</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Trovare i Nomi Utente</div>
+                <div class="card-text">
+                    <p>Conoscere gli username validi è essenziale per attacchi di brute force. WordPress espone gli utenti in diversi modi:</p>
+                    <br>
+                    <p><strong>Metodi di enumerazione:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><span class="text-yellow">REST API</span>: <code>/wp-json/wp/v2/users</code></li>
+                        <li><span class="text-yellow">Author Archives</span>: <code>/?author=1</code>, <code>/?author=2</code>...</li>
+                        <li><span class="text-yellow">Login Error</span>: Messaggi diversi per user valido/invalido</li>
+                        <li><span class="text-yellow">RSS Feed</span>: Tag <code>&lt;dc:creator&gt;</code></li>
+                        <li><span class="text-yellow">oEmbed API</span>: <code>/wp-json/oembed/1.0/embed</code></li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> L'enumerazione utenti è classificata come "Informational", ma trasforma un attacco brute force da "indovina user+pass" a "indovina solo la password". Dimezza la complessità!</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: WPScan e REST API</div>
+                <div class="card-text">
+                    <p><strong>Con WPScan:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> wpscan --url http://vulnerable-wp.local -e u</div>
+                    <br>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-box">[+] Enumerating Users (via Passive and Aggressive Methods)
+ Brute Forcing Author IDs - Time: 00:00:01
+
+[i] User(s) Identified:
+[+] <span class="text-green">admin</span>
+ | Found By: Author Posts - Display Name
+ | Confirmed By: Author Id Brute Forcing
+
+[+] <span class="text-green">editor</span>
+ | Found By: Author Id Brute Forcing</div>
+                    <br>
+                    <p><strong>Verifica manuale REST API:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> curl -s http://vulnerable-wp.local/wp-json/wp/v2/users | jq '.[].slug'
+<span class="text-green">"admin"</span>
+<span class="text-green">"editor"</span></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ora cerchiamo bersagli per il brute force. A sinistra, tutti i modi in cui WordPress 'perde' informazioni sugli utenti.
+        Il più facile è la REST API: /wp-json/wp/v2/users restituisce un JSON con tutti gli utenti pubblici!
+        A destra, WPScan con -e u (enumerate users). Ha trovato 'admin' e 'editor'.
+        'admin' come username è un errore classico - è il primo che un attaccante proverà.
+        La verifica manuale con curl e jq conferma il risultato. jq è un parser JSON da riga di comando, molto utile.
+        Ora abbiamo due target per il password attack!"
+    -->
+
+    <script>const slideNumero = 11;</script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>5.4 Template Hierarchy</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-red">
+            <div class="card-title">5.4 Template Hierarchy</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Una volta ottenuti i risultati dalla query, WordPress deve decidere quale file del tema usare.</li>
+                        <li><strong>Es. per una pagina con slug "contatti", cerca:</strong></li>
+                        <li>1. <code>page-contatti.php</code></li>
+                        <li>2. <code>page.php</code></li>
+                        <li>3. <code>singular.php</code></li>
+                        <li>4. <code>index.php</code></li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Questo è il "routing" di WordPress. Non c'è un file di rotte, ma una convenzione sui nomi dei file. WordPress cerca il file più specifico disponibile nel tema, e se non lo trova, risale la gerarchia fino a <code>index.php</code>.</p>
+                    <p>Dal punto di vista della sicurezza, significa che un attaccante che può scrivere file nel tema può creare un template per un URL specifico per eseguire codice solo quando quell'URL viene visitato, rendendo la backdoor più difficile da individuare.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="5.3.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="5.5.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

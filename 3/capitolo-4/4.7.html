@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>4.7 Differenze con le Migration di Laravel</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-green">
+            <div class="card-title">4.7 Differenze con le Migration di Laravel</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><strong>Laravel:</strong> usa le "migrations": file PHP che definiscono la struttura del DB in modo versionato.</li>
+                        <li>Puoi creare, modificare e fare il rollback dello schema del DB con comandi <code>artisan</code>.</li>
+                        <li><strong>WordPress:</strong> i plugin modificano il DB direttamente con query SQL al momento dell'attivazione.</li>
+                        <li>Non c'è un sistema di versioning dello schema.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>La gestione dello schema del database è un'altra grande differenza architetturale. Laravel ha un sistema robusto e controllato. In WordPress, è il "selvaggio west".</p>
+                    <p>Ogni plugin fa quello che vuole, spesso aggiungendo tabelle o modificando opzioni senza un modo facile per annullare le modifiche. Questo può portare a un database "sporco" e a conflitti tra plugin, oltre a rendere difficile il troubleshooting.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="4.6.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="../capitolo-5/5.1.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

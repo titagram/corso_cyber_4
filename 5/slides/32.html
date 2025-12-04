@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 5: Post-Exploitation - Introduzione</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 5: Post-Exploitation</h1>
+        <div class="subtitle">Slide 5.1: Obiettivi Post-Compromise</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Cosa Fare Dopo l'Accesso</div>
+                <div class="card-text">
+                    <p>Abbiamo una shell come <code class="tech-term">www-data</code>. È solo l'inizio. La post-exploitation ha diversi obiettivi:</p>
+                    <br>
+                    <p><strong>1. Information Gathering</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Leggere wp-config.php (credenziali DB)</li>
+                        <li>Esplorare il filesystem</li>
+                        <li>Identificare altri utenti/servizi</li>
+                    </ul>
+                    <br>
+                    <p><strong>2. Privilege Escalation</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Da www-data a root</li>
+                        <li>Sfruttare misconfigurazioni</li>
+                    </ul>
+                    <br>
+                    <p><strong>3. Lateral Movement</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Accedere ad altri sistemi nella rete</li>
+                        <li>Usare credenziali trovate</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> In un pentest, documentate TUTTO. Ogni file letto, ogni comando eseguito. Serve per il report e per dimostrare l'impatto.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Primi Passi Post-Compromise</div>
+                <div class="card-text">
+                    <p><strong>Informazioni sistema:</strong></p>
+                    <div class="code-box"><span class="text-green">www-data@target:$</span> uname -a
+Linux vulnerable-wp 4.19.0-6-amd64 #1 SMP Debian
+
+<span class="text-green">www-data@target:$</span> cat /etc/os-release
+PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+
+<span class="text-green">www-data@target:$</span> id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)</div>
+                    <br>
+                    <p><strong>Leggere wp-config.php:</strong></p>
+                    <div class="code-box"><span class="text-green">www-data@target:$</span> cat /var/www/html/wp-config.php | grep -i "db_"
+
+define('DB_NAME', '<span class="text-yellow">wordpress</span>');
+define('DB_USER', '<span class="text-yellow">wp_user</span>');
+define('DB_PASSWORD', '<span class="text-red">Sup3rS3cr3tP@ss!</span>');
+define('DB_HOST', 'localhost');</div>
+                    <br>
+                    <p><span class="text-green">✓ Credenziali DB ottenute!</span></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Capitolo 5! Abbiamo una shell, ora cosa facciamo? A sinistra, i tre obiettivi principali.
+        A destra, i primi comandi. uname e os-release ci dicono quale sistema abbiamo compromesso.
+        Poi il tesoro: wp-config.php. Contiene le credenziali del database!
+        'Sup3rS3cr3tP@ss!' è la password del DB. Questa password potrebbe essere riutilizzata altrove (password reuse).
+        Potremmo provarla per SSH, per altri servizi, per altri utenti.
+        Inoltre, con accesso al DB possiamo dump completo di tutti i dati WordPress."
+    -->
+
+    <script>const slideNumero = 32;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>4.1 La tabella wp_options</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-blue">
+            <div class="card-title">4.1 La tabella `wp_options`</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Tabella chiave-valore per le impostazioni globali.</li>
+                        <li>Contiene <code>siteurl</code> e <code>home</code>, che definiscono l'URL del sito.</li>
+                        <li>Un attaccante con accesso al DB può cambiarli per reindirizzare il sito a un sito di phishing.</li>
+                        <li>Molte opzioni vengono caricate automaticamente (<code>autoload = 'yes'</code>).</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>La tabella <code>wp_options</code> è il pannello di controllo del sito a livello di database. Le due righe più critiche sono <code>siteurl</code> e <code>home</code>. Se un attaccante riesce a modificarle tramite SQL injection, può dirottare l'intero sito.</p>
+                    <p>Può anche iniettare JavaScript malevolo in opzioni che vengono poi stampate nelle pagine (es. il testo di un widget), ottenendo <strong>XSS persistente</strong>. Questo è un vettore di attacco molto comune dopo una SQLi.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="../capitolo-3/3.7.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="4.2.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

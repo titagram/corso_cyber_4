@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 3: Vulnerability Assessment - Prioritizzazione</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 3: Vulnerability Assessment & Triage</h1>
+        <div class="subtitle">Slide 3.6: Prioritizzazione e Roadmap</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Matrice di Rischio</div>
+                <div class="card-text">
+                    <p>Non tutte le vulnerabilità hanno la stessa urgenza. La prioritizzazione considera: <strong>CVSS + Contesto + Sfruttabilità</strong>.</p>
+                    <br>
+                    <p><strong>Fattori di priorità:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><span class="text-red">Exploit pubblico disponibile?</span></li>
+                        <li>Autenticazione richiesta?</li>
+                        <li>Dati sensibili esposti?</li>
+                        <li>Sistema in DMZ o interno?</li>
+                        <li>Impatto sul business?</li>
+                    </ul>
+                    <br>
+                    <p><strong>Formula semplificata:</strong></p>
+                    <div class="code-box">Priorità = CVSS × Exploit_Pubblico × Esposizione</div>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Una SQLi su un form di contatto è meno grave di una SQLi sul login admin. Il contesto è tutto!</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Riepilogo Vulnerabilità Target</div>
+                <div class="card-text">
+                    <p><strong>Vulnerabilità identificate su vulnerable-wp.local:</strong></p>
+                    <div class="code-box"><span class="text-red">CRITICAL:</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Simple File List 4.2.2 - RCE (CVE-2020-36385)
+  CVSS: 9.8 | Exploit: ✓ | Auth: None
+  <span class="text-yellow">→ FIX IMMEDIATO</span>
+
+<span class="text-red">HIGH:</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• WordPress 5.0 - Multiple vulnerabilities
+  CVSS: 7.5+ | Auth: Varie
+• Password deboli (admin/admin123)
+  → Cambio password + policy
+
+<span class="text-yellow">MEDIUM:</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• XML-RPC abilitato (brute force vector)
+• User enumeration via REST API
+
+<span class="text-green">LOW:</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Information disclosure (versioni esposte)
+• Missing security headers</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Fine del Capitolo 3 con il riepilogo. A sinistra, come prioritizzare le vulnerabilità.
+        CVSS da solo non basta - un bug critico su un sistema isolato è meno urgente di un bug medio su un sistema esposto.
+        A destra, il riepilogo del nostro target. La RCE su Simple File List è CRITICAL: CVSS 9.8, exploit pubblico, no auth.
+        Questa va risolta nelle prossime 24-48 ore.
+        WordPress 5.0 e password deboli sono HIGH - da risolvere nella prima settimana.
+        XML-RPC e user enumeration sono MEDIUM - mitigazioni nel primo mese.
+        Headers mancanti sono LOW - da inserire nel backlog di miglioramenti.
+        Ora passiamo alla parte più interessante: lo SFRUTTAMENTO!"
+    -->
+
+    <script>const slideNumero = 23;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

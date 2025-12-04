@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>5.5 Routing Implicito vs. Esplicito</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-purple">
+            <div class="card-title">5.5 Routing Implicito vs. Esplicito (Laravel)</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><strong>WordPress:</strong> Routing implicito basato sulla gerarchia dei file.</li>
+                        <li><strong>Laravel:</strong> Routing esplicito definito nel file <code>routes/web.php</code>.</li>
+                        <li>Il routing esplicito è più facile da analizzare e da proteggere (es. con i middleware).</li>
+                        <li>Quello implicito è più "magico", ma più difficile da debuggare.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Il confronto con Laravel è netto. In Laravel, apro un file e vedo tutte le rotte disponibili. Posso applicare un middleware di autenticazione a un gruppo di rotte in modo chiaro e leggibile.</p>
+                    <p>In WordPress, devo conoscere la gerarchia e guardare i file presenti nel tema per capire quale codice verrà eseguito per un dato URL. È un approccio meno dichiarativo e più basato su convenzioni, che può nascondere comportamenti inaspettati.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="5.4.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="5.6.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

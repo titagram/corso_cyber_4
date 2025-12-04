@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenVAS - Scan Configurations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">⚙️ OpenVAS - Scan Configurations</h1>
+        <div class="subtitle">NVT Families e Tipi di Scan</div>
+
+        <div class="card border-blue">
+            <div class="card-title">🔬 NVT - Network Vulnerability Tests</div>
+            <div class="card-text">
+                <p>Le configurazioni di scan multiple sfruttano le <strong>NVT (Network Vulnerability Test) Families</strong> di OpenVAS, che consistono in molte categorie diverse di vulnerabilità.</p>
+                <br>
+                <p><strong>Esempi di NVT Families:</strong></p>
+                <p>• Windows</p>
+                <p>• Linux</p>
+                <p>• Web Applications</p>
+                <p>• Databases</p>
+                <p>• Services</p>
+                <p>• Denial of Service</p>
+                <p>• E molte altre...</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/nvt2.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="NVT Families">
+        </div>
+
+        <div class="grid-2-col">
+            <div class="card border-green">
+                <div class="card-title">📊 Scan Configurations Raccomandate</div>
+                <div class="card-text">
+                    <p><strong>⚠️ Usare SOLO queste configurazioni per evitare disruzioni di sistema:</strong></p>
+                    <br>
+                    <p><span class="text-blue">🔹 Base:</span> Enumera informazioni sullo stato dell'host e OS. <strong>NON</strong> controlla vulnerabilità.</p>
+                    <br>
+                    <p><span class="text-green">🔹 Discovery:</span> Enumera servizi, hardware, porte, software. <strong>NON</strong> controlla vulnerabilità.</p>
+                    <br>
+                    <p><span class="text-yellow">🔹 Host Discovery:</span> Testa solo se l'host è vivo. Determina dispositivi attivi. <strong>NON</strong> controlla vulnerabilità.</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">🎯 Scan Configurations (cont.)</div>
+                <div class="card-text">
+                    <p><span class="text-purple">🔹 System Discovery:</span> Enumera ulteriormente rispetto a Discovery. Tenta di identificare OS e hardware.</p>
+                    <br>
+                    <p><span class="text-red">🔹 Full and Fast:</span> Configurazione <strong>raccomandata da OpenVAS</strong> come l'opzione più sicura. Usa intelligenza per selezionare i migliori NVT check basati sulle porte accessibili.</p>
+                    <br>
+                    <p class="security-insight">Full and Fast è il miglior compromesso tra completezza e sicurezza</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/scanconfigs.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Scan Configs">
+        </div>
+
+        <div class="card border-red" style="margin-top: 25px;">
+            <div class="card-title">⚠️ Importante: Evitare Disruzioni</div>
+            <div class="card-text">
+                <p>Altre configurazioni potrebbero causare <strong>disruzioni di sistema</strong> sulla rete. Attenersi sempre alle configurazioni raccomandate sopra a meno che non si abbia una chiara comprensione dell'impatto e autorizzazione esplicita.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 27;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

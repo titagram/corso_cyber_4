@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Input Validation - Whitelist vs Blacklist</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔍 Input Validation - Whitelist vs Blacklist</h1>
+        <div class="subtitle">"Never trust user input" - Validazione rigorosa e contestuale</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>Whitelist over Blacklist</strong> - Definisci esplicitamente cosa è permesso (allowed characters, format, range) invece di bloccare pattern malevoli noti. I blacklist sono sempre incompleti.</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>Validazione Server-Side Obbligatoria</strong> - Mai fidarsi della validazione client-side (è UX, non security)</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Whitelist Approach</strong> - Regex strict (es. <span class="tech-term">^[a-zA-Z0-9_-]{3,20}$</span> per username), type checking forte (TypeScript, Zod, Joi)</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Canonicalization</strong> - Normalizza l'input prima della validazione (URL decode, Unicode normalization) per evitare bypass</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Length & Range Limits</strong> - Imponi limiti stringenti per prevenire DoS (max length, max file size, rate limiting)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ DIFESA & IMPLEMENTAZIONE</div>
+            <div class="card-text">
+                <p><strong>Protezione Efficace:</strong> La validazione whitelist previene attacchi come <span class="tech-term">SQL Injection, Command Injection, Path Traversal, XXE, SSTI</span> impedendo che input malevoli raggiungano i componenti vulnerabili.</p>
+                <br>
+                <p><strong>Implementazione Whitelist - Approccio Sicuro:</strong></p>
+                <div class="code-box">// ✅ Whitelist con libreria di validazione
+const Joi = require('joi');
+
+const userSchema = Joi.object({
+    username: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(20)
+        .required(),
+    email: Joi.string()
+        .email()
+        .required(),
+    age: Joi.number()
+        .integer()
+        .min(13)
+        .max(120)
+});
+
+// Validazione centralizzata
+try {
+    const validated = await userSchema.validateAsync(req.body);
+    // Procedi solo con dati validati
+} catch (error) {
+    return res.status(400).json({ error: 'Invalid input' });
+}</div>
+                <br>
+                <p><strong>Best Practices per File Upload Sicuri:</strong></p>
+                <div class="code-box">// ✅ Validazione completa file upload
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: './uploads/',
+    filename: (req, file, cb) => {
+        // Genera nome file sicuro
+        const safeFilename = crypto.randomBytes(16).toString('hex');
+        cb(null, safeFilename + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB max
+    fileFilter: (req, file, cb) => {
+        // Whitelist MIME types
+        const allowedMimes = ['image/jpeg', 'image/png', 'application/pdf'];
+        if (allowedMimes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('Invalid file type'));
+        }
+    }
+});</div>
+                <br>
+                <p><strong>Tools di Validazione Consigliati:</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>JavaScript:</strong> Joi, Yup, Zod, class-validator</li>
+                    <li>✓ <strong>Python:</strong> Pydantic, Marshmallow, Cerberus</li>
+                    <li>✓ <strong>Java:</strong> Hibernate Validator, Bean Validation</li>
+                    <li>✓ <strong>C#:</strong> FluentValidation, Data Annotations</li>
+                </ul>
+                <br>
+                <p class="security-insight"><strong>Best Practice:</strong> Normalizza sempre l'input prima della validazione (URL decode, Unicode normalization, trim whitespace) per evitare bypass tramite encoding. Usa librerie consolidate invece di regex custom quando possibile.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 2;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>
+

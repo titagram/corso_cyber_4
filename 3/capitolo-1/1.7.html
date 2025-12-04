@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>1.7 Isolation: Docker e Chroot</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-green">
+            <div class="card-title">1.7 Isolation: Docker e Chroot</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><strong>Bare metal:</strong> Un sito compromesso può vedere gli altri siti.</li>
+                        <li><strong>chroot:</strong> Limita il processo a una porzione del filesystem. Legacy, ma meglio di niente.</li>
+                        <li><strong>Docker:</strong> Offre un isolamento a livello di filesystem, processi e network.</li>
+                        <li>Un container compromesso non vede l'host o gli altri container (di default).</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>L'installazione "bare metal" su un server condiviso è un rischio significativo. Docker è lo standard moderno per un motivo: isola i processi in "scatole" sigillate.</p>
+                    <p>Se un sito viene compromesso, l'attaccante è intrappolato dentro il container. Non può vedere i file degli altri siti, né i processi del sistema host. Questo limita enormemente il danno di una singola compromissione e previene il <strong>lateral movement</strong>, una tecnica chiave negli attacchi avanzati.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="1.6.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="../capitolo-2/2.1.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

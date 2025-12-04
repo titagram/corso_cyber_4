@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenVAS - Creare e Eseguire Scan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🚀 OpenVAS - Creare e Eseguire Scan</h1>
+        <div class="subtitle">Task Management e Wizard</div>
+
+        <div class="card border-blue">
+            <div class="card-title">🔍 Task e Scans</div>
+            <div class="card-text">
+                <p>Se navighi sul tab <strong>Scans</strong>, vedrai le scansioni che sono state eseguite in passato. Potrai anche creare nuove task per eseguire scansioni.</p>
+                <br>
+                <p><strong>Le task funzionano basandosi sulle scan configuration che l'utente imposta.</strong></p>
+                <br>
+                <p class="security-insight">⏱️ Nota: Le scansioni possono richiedere 1-2 ore per completarsi</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/creatingscan1.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Creating Scan">
+        </div>
+
+        <div class="grid-2-col">
+            <div class="card border-green">
+                <div class="card-title">🪄 Scan Wizard</div>
+                <div class="card-text">
+                    <p>Per creare una propria scan, navigare sul tab <strong>Scans</strong> e cliccare sull'icona wizard.</p>
+                    <br>
+                    <img src="img/creatingscan2.png" style="max-width: 100%; border-radius: 8px; margin: 15px 0;" alt="Scan Wizard">
+                    <br>
+                    <p>Una volta cliccata l'icona wizard, apparirà un pannello che permette di configurare la scansione.</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">⚙️ Configurazione Scan</div>
+                <div class="card-text">
+                    <img src="img/Newscan.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="New Scan">
+                    <p><strong>Parametri richiesti:</strong></p>
+                    <p>• <strong>Task Name:</strong> Nome della scan</p>
+                    <p>• <strong>Scan Config:</strong> Tipo di scan (Full and Fast raccomandato)</p>
+                    <p>• <strong>Target:</strong> IP o hostname</p>
+                    <p>• <strong>Start Time:</strong> Immediato o pianificato</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-purple">
+                <div class="card-title">🖥️ Esempio: Linux Basic Scan</div>
+                <div class="card-text">
+                    <img src="img/linux_basic.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="Linux Basic">
+                    <p><strong>Configurazione:</strong></p>
+                    <p>• Scan Config: Base</p>
+                    <p>• Target: 172.16.16.160</p>
+                    <p>• Authenticated: No</p>
+                </div>
+            </div>
+
+            <div class="card border-red">
+                <div class="card-title">🔓 Linux Unauthenticated Target</div>
+                <div class="card-text">
+                    <img src="img/linux_unauthedtarget.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="Linux Unauth">
+                    <p><strong>Scan non autenticato:</strong></p>
+                    <p>Fornisce informazioni limitate rispetto a uno scan autenticato, ma è comunque utile per identificare servizi esposti e potenziali vulnerabilità.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-blue" style="margin-top: 25px;">
+            <div class="card-title">⏳ Tempo di Esecuzione</div>
+            <div class="card-text">
+                <p>Le scansioni possono richiedere <strong>30-60 minuti o più</strong> per completarsi, a seconda di:</p>
+                <p>• Numero di host</p>
+                <p>• Configurazione della scan</p>
+                <p>• Numero di servizi esposti</p>
+                <p>• Velocità della rete</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 28;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

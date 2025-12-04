@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Log4Shell - Anatomia dell'Attacco</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-blue.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Il Triangolo della Morte: Flusso Logico</h1>
+        <div class="subtitle">Anatomia dell'Attacco (Diagramma)</div>
+
+        <div class="grid-2-col">
+            <div class="card border-purple">
+                <div class="card-title">Visual</div>
+                <div class="card-text">
+                    <p><i>* Diagramma non disponibile in questa versione. Verrà mostrato un diagramma che illustra il flusso dell'attacco.</i></p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">Spiegazione Passo-Passo</div>
+                <div class="card-text">
+                    <p>Questo attacco richiede un balletto tra 3 attori:</p>
+                    <ol>
+                        <li><strong>L'Innesco:</strong> L'attaccante invia la stringa malevola alla Vittima (es. in un form di login).</li>
+                        <li><strong>La Trappola (LDAP):</strong> La Vittima "chiama" il server LDAP dell'attaccante.</li>
+                        <li><strong>Il Rinvio:</strong> Il server LDAP risponde: "Non ce l'ho io, vai a scaricarlo da quel server Web".</li>
+                        <li><strong>Il Payload (HTTP):</strong> La Vittima scarica il codice Java malevolo dal server Web.</li>
+                        <li><strong>L'Esecuzione:</strong> La Vittima esegue il codice. Boom.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 3;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="main.js"></script>
+</body>
+</html>

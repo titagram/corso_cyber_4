@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 6: Reporting & Remediation - Scrivere un Finding</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 6: Reporting & Remediation</h1>
+        <div class="subtitle">Slide 6.2: Scrivere un Finding Efficace</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Struttura di un Finding</div>
+                <div class="card-text">
+                    <p>Ogni vulnerabilità deve essere documentata in modo completo e riproducibile.</p>
+                    <br>
+                    <p><strong>Elementi obbligatori:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Title</strong> - Chiaro e specifico</li>
+                        <li><strong>Severity</strong> - Critical/High/Medium/Low/Info</li>
+                        <li><strong>CVSS Score</strong> - Con breakdown</li>
+                        <li><strong>Affected Component</strong> - URL, plugin, versione</li>
+                        <li><strong>Description</strong> - Cos'è la vulnerabilità</li>
+                        <li><strong>Impact</strong> - Cosa può fare un attaccante</li>
+                        <li><strong>Proof of Concept</strong> - Come riprodurla</li>
+                        <li><strong>Remediation</strong> - Come correggerla</li>
+                        <li><strong>References</strong> - CVE, link documentazione</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Il PoC deve essere riproducibile! Il cliente deve poter verificare la vulnerabilità e testare il fix.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Template: Finding Dettagliato</div>
+                <div class="card-text">
+                    <div class="code-box" style="font-size: 0.9em;">
+<span class="text-red">━━━ FINDING #1 ━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+<span class="text-yellow">Title:</span> Unauthenticated RCE in Simple File List Plugin
+
+<span class="text-yellow">Severity:</span> <span class="text-red">CRITICAL</span>
+<span class="text-yellow">CVSS 3.1:</span> 9.8 (AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)
+
+<span class="text-yellow">Affected:</span> 
+  http://vulnerable-wp.local/
+  Plugin: Simple File List v4.2.2
+
+<span class="text-yellow">Description:</span>
+Il plugin non valida i file caricati, permettendo 
+upload di script PHP arbitrari.
+
+<span class="text-yellow">Impact:</span>
+Esecuzione di codice remoto sul server. 
+Compromissione completa del sistema.
+
+<span class="text-yellow">PoC:</span>
+  curl -X POST http://target/.../ee-upload-engine.php \
+    -F "file=@shell.php"
+  curl http://target/.../ee-files/shell.php?cmd=id
+
+<span class="text-yellow">Remediation:</span>
+Aggiornare Simple File List a versione >=4.2.3
+
+<span class="text-yellow">References:</span>
+  • CVE-2020-36385
+  • https://wpscan.com/vulnerability/...</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Come si scrive un finding che funziona? A sinistra, tutti gli elementi che devono esserci.
+        A destra, un esempio completo per la nostra RCE. Notate la struttura: chiara, completa, riproducibile.
+        Il CVSS breakdown (AV:N/AC:L...) è importante per giustificare la severity.
+        Il PoC sono due comandi cURL che il developer può copiare e incollare per verificare.
+        La remediation deve essere SPECIFICA: 'Aggiornare a >=4.2.3', non 'Aggiornare il plugin'.
+        Con questo formato, un developer sa esattamente cosa è rotto, perché è grave, e come sistemarlo."
+    -->
+
+    <script>const slideNumero = 38;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Incident Response & Security Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🚨 Incident Response & Security Monitoring</h1>
+        <div class="subtitle">Prepararsi, Rilevare, Rispondere, Recuperare</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>Assume Compromise</strong> - Non è questione di "se" ma "quando" ci sarà un incidente. Un sistema di monitoraggio efficace e un piano di incident response ben testato riducono drasticamente l'impatto di una compromissione.</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>Continuous Monitoring</strong> - SIEM, IDS/IPS, anomaly detection su log, metriche, network traffic</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Incident Response Plan</strong> - Playbook documentato, team definito, escalation path, communication plan</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Automated Alerting</strong> - Alert real-time su eventi critici con soglie appropriate (no alert fatigue)</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Regular Drills</strong> - Tabletop exercises trimestrali, full IR simulation annuale, lessons learned dopo ogni incidente</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ SECURITY MONITORING & INCIDENT RESPONSE</div>
+            <div class="card-text">
+                <p><strong>1. Continuous Security Monitoring - Cosa Monitorare</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Authentication Events:</strong> Login successo/fallimento, MFA bypass, account lockout</li>
+                    <li>✓ <strong>Authorization Failures:</strong> 403 errors, privilege escalation attempts, IDOR tentativi</li>
+                    <li>✓ <strong>Input Validation Failures:</strong> XSS/SQLi payload detected, rate limit violations</li>
+                    <li>✓ <strong>Application Errors:</strong> 500 errors spike, exception patterns, crash reports</li>
+                    <li>✓ <strong>Resource Access:</strong> Admin panel access, sensitive data queries, file downloads</li>
+                    <li>✓ <strong>Infrastructure:</strong> SSH logins, configuration changes, network anomalies</li>
+                </ul>
+                <br>
+                
+                <p><strong>2. SIEM & Log Management - Setup Essenziale</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Centralized Logging:</strong> ELK Stack, Splunk, Datadog - tutti i log in un unico posto</li>
+                    <li>✓ <strong>Structured Logging:</strong> JSON format, campi consistenti (timestamp, userId, ip, event, severity)</li>
+                    <li>✓ <strong>Log Retention:</strong> Minimum 90 giorni (compliance), archivio immutabile per forensics</li>
+                    <li>✓ <strong>Index Optimization:</strong> Campi chiave indicizzati per query veloci (ip, userId, eventType)</li>
+                    <li>✓ <strong>Real-time Processing:</strong> Stream processing per alert immediati (Logstash, Fluentd)</li>
+                </ul>
+                <br>
+                
+                <p><strong>3. Alerting Strategy - Evitare Alert Fatigue</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Severity Levels:</strong> Critical (PagerDuty), High (Slack), Medium (Email), Low (Dashboard)</li>
+                    <li>✓ <strong>Threshold Tuning:</strong> Baseline normale + anomaly detection, non solo soglie statiche</li>
+                    <li>✓ <strong>Alert Grouping:</strong> Aggrega eventi correlati, no spam di singoli eventi</li>
+                    <li>✓ <strong>Snooze Logic:</strong> Realert window per evitare duplicati (30-60 min)</li>
+                    <li>✓ <strong>Actionable Alerts:</strong> Ogni alert deve avere runbook chiaro</li>
+                </ul>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #888;">
+                    📊 <strong>Examples:</strong> >10 failed logins in 3min → High, >50 403 da stesso IP in 5min → Critical
+                </p>
+                <br>
+                
+                <p><strong>4. Incident Response Plan - Fasi Chiave</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li><strong>📋 Preparation:</strong> Contact list aggiornata, tools pronti, backups testati, drill trimestrali</li>
+                    <li><strong>🔍 Identification:</strong> Verifica alert (no false positive), stima scope e severity</li>
+                    <li><strong>🚧 Containment:</strong> Isola sistemi compromessi, revoca credenziali, blocca IP, preserva evidenze</li>
+                    <li><strong>🗑️ Eradication:</strong> Identifica root cause, rimuovi artifacts malevoli, patch vulnerabilità</li>
+                    <li><strong>🔄 Recovery:</strong> Restore da backup sicuri, verifica integrity, monitoring enhanced 30 giorni</li>
+                    <li><strong>📝 Lessons Learned:</strong> Post-mortem entro 48h, documenta timeline, aggiorna procedure</li>
+                </ul>
+                <br>
+                
+                <p><strong>5. Automated Response - Azioni Immediate</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>IP Blocking:</strong> Auto-block IPs con >50 failed logins o pattern bruteforce</li>
+                    <li>✓ <strong>Session Revocation:</strong> Invalida tutte sessioni utente su privilege escalation attempt</li>
+                    <li>✓ <strong>Rate Limiting Enhanced:</strong> Throttle aggressivo su alert spike</li>
+                    <li>✓ <strong>Read-Only Mode:</strong> Failsafe per data exfiltration in corso</li>
+                    <li>✓ <strong>Forensic Snapshots:</strong> Auto-snapshot volumi per analisi post-breach</li>
+                    <li>✓ <strong>Team Notification:</strong> PagerDuty + Slack alert automatici con context</li>
+                </ul>
+                <br>
+                
+                <p><strong>6. Security Dashboard - KPI da Monitorare</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>MTTD:</strong> Mean Time To Detect - quanto tempo per identificare incidente</li>
+                    <li>✓ <strong>MTTR:</strong> Mean Time To Respond - quanto tempo per mitigare</li>
+                    <li>✓ <strong>False Positive Rate:</strong> Alert verified vs total alerts (target <5%)</li>
+                    <li>✓ <strong>Failed Auth Rate:</strong> Tentativi falliti per ora/giorno</li>
+                    <li>✓ <strong>403/401 Trends:</strong> Authorization failures nel tempo</li>
+                    <li>✓ <strong>Vulnerability Age:</strong> Tempo medio di remediation per severity</li>
+                </ul>
+                <br>
+                
+                <p><strong>7. Security Tools Ecosystem</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>📊 <strong>SIEM:</strong> ELK Stack, Splunk, Datadog, Sumo Logic</li>
+                    <li>🚨 <strong>Alerting:</strong> PagerDuty, Opsgenie, VictorOps</li>
+                    <li>📈 <strong>Metrics:</strong> Grafana + Prometheus, Datadog, New Relic</li>
+                    <li>🔍 <strong>Threat Intel:</strong> AlienVault OTX, MISP, AbuseIPDB</li>
+                    <li>🛡️ <strong>IDS/IPS:</strong> Snort, Suricata, Zeek (Bro)</li>
+                    <li>📋 <strong>Incident Management:</strong> JIRA, ServiceNow, TheHive</li>
+                </ul>
+                <br>
+                
+                <p class="security-insight"><strong>Best Practice:</strong> Log TUTTO con structured format. Alert solo su eventi actionable (no fatigue). Playbook documentato per ogni tipo di incidente (SQLi, XSS, data breach, DDoS). Automated response per pattern noti. Drill IR regolari (quarterly tabletop, annual full simulation). Post-mortem sempre, anche per near-miss. Misura MTTD/MTTR e ottimizza. Retention logs 90+ giorni. Team on-call con escalation chiara.</p>
+            </div>
+        </div>
+
+        <div class="card border-green" style="margin-top: 20px;">
+            <div class="card-title">🎯 Conclusione Finale - Secure Development Lifecycle</div>
+            <div class="card-text">
+                <p><strong>La sicurezza è un viaggio continuo, non una destinazione.</strong></p>
+                <br>
+                <p>✓ <strong>Design:</strong> Threat modeling, security requirements, secure architecture</p>
+                <p>✓ <strong>Development:</strong> Secure coding practices, linting, pre-commit hooks</p>
+                <p>✓ <strong>Testing:</strong> SAST, DAST, penetration testing, security test automation</p>
+                <p>✓ <strong>Deployment:</strong> Security headers, infrastructure hardening, WAF</p>
+                <p>✓ <strong>Operations:</strong> Monitoring, alerting, incident response, patching</p>
+                <p>✓ <strong>Improvement:</strong> Post-mortems, lessons learned, continuous training</p>
+                <br>
+                <p class="security-insight"><strong>Remember:</strong> Ogni controllo di sicurezza implementato aumenta il costo dell'attacco. Una difesa stratificata e ben monitorata rende il tuo sistema un bersaglio non conveniente. <strong>Investire in security oggi è molto più economico che rispondere a un breach domani.</strong></p>
+                <br>
+                <p style="text-align: center; font-size: 1.2em; color: #667eea; margin-top: 20px;">
+                    <strong>🛡️ Build Secure, Stay Secure, Be Vigilant 🛡️</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 11;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+</body>
+</html>
+

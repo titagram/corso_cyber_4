@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 2: WordPress Enumeration - Theme Enumeration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 2: WordPress Enumeration</h1>
+        <div class="subtitle">Slide 2.5: Theme & Timthumb Enumeration</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Anche i Temi sono Codice</div>
+                <div class="card-text">
+                    <p>I temi WordPress non sono solo grafica: contengono codice PHP eseguibile. Un tema vulnerabile è pericoloso quanto un plugin.</p>
+                    <br>
+                    <p><strong>Vulnerabilità comuni nei temi:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><span class="text-red">Timthumb.php</span> - RCE nelle versioni vecchie</li>
+                        <li>Local File Inclusion (LFI)</li>
+                        <li>Cross-Site Scripting (XSS)</li>
+                        <li>Arbitrary File Upload</li>
+                        <li>SQL Injection nei custom query</li>
+                    </ul>
+                    <br>
+                    <p><strong>Timthumb:</strong> Libreria per il ridimensionamento immagini, afflitta da vulnerabilità RCE gravi (CVE-2011-4106).</p>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Cercate sempre file <code>timthumb.php</code> o <code>thumb.php</code>. Anche se il tema è aggiornato, potrebbero essere rimasti file orfani vulnerabili.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Scansione Temi e Timthumb</div>
+                <div class="card-text">
+                    <p><strong>Enumerazione temi:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> wpscan --url http://vulnerable-wp.local -e t</div>
+                    <br>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-box">[+] Enumerating Most Popular Themes (via Passive Methods)
+
+[i] Theme(s) Identified:
+[+] <span class="text-yellow">twentynineteen</span>
+ | Location: .../themes/twentynineteen/
+ | Last Updated: 2024-04-02
+ | Readme: .../themes/twentynineteen/readme.txt
+ | Style URL: .../style.css
+ | Style Name: Twenty Nineteen
+ | Style URI: https://wordpress.org/themes/twentynineteen/
+ | Description: Theme for WordPress 5.0+</div>
+                    <br>
+                    <p><strong>Scansione Timthumb:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> wpscan --url http://vulnerable-wp.local -e tt</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Non dimentichiamo i temi! A sinistra, le vulnerabilità tipiche. Timthumb è stato un disastro di sicurezza storico.
+        A destra, -e t per i temi, -e tt per cercare specificamente Timthumb.
+        Il tema twentynineteen è il default di WordPress 5.x, generalmente sicuro, ma verificate sempre la versione.
+        Consiglio: combinate più enumerazioni in un comando solo:
+        wpscan --url ... -e u,p,t,tt --plugins-detection aggressive
+        Questo esegue tutto in una passata sola, risparmiando tempo."
+    -->
+
+    <script>const slideNumero = 14;</script>
+    <script src="main.js"></script>
+</body>
+</html>

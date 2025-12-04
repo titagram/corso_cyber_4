@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>4.5 wp_usermeta e i Ruoli</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-purple">
+            <div class="card-title">4.5 `wp_usermeta` e i Ruoli (Capabilities)</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Tabella chiave-valore per i metadati degli utenti.</li>
+                        <li>La chiave <code>wp_capabilities</code> definisce il ruolo di un utente.</li>
+                        <li>È una stringa serializzata:</li>
+                    </ul>
+                    <div class="code-box">a:1:{s:13:"administrator";b:1;}</div>
+                    <ul>
+                        <li>Un attaccante con accesso al DB può promuovere qualsiasi utente ad admin.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>I ruoli e i permessi non sono in una tabella dedicata, ma in <code>wp_usermeta</code>. Il ruolo di un utente è solo una stringa in un campo <code>meta_value</code>. Questo rende la privilege escalation via SQL injection trivialmente facile.</p>
+                    <p>Basta un <code>UPDATE</code> sulla tabella <code>wp_usermeta</code> per trasformare un utente "subscriber" in "administrator". Nessun controllo di integrità, nessuna validazione aggiuntiva.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="4.4.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="4.6.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

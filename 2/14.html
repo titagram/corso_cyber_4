@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>CVE e OVAL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔖 CVE e OVAL</h1>
+        <div class="subtitle">Standardizzazione delle Vulnerabilità</div>
+
+        <div class="card border-blue">
+            <div class="card-title">📋 CVE - Common Vulnerabilities and Exposures</div>
+            <div class="card-text">
+                <p>Catalogo <strong>pubblicamente disponibile</strong> di problemi di sicurezza sponsorizzato dal Department of Homeland Security degli Stati Uniti.</p>
+                <br>
+                <p><strong>Struttura ID:</strong> <span class="tech-term">CVE-ANNO-NUMERO</span></p>
+                <div class="code-box">Esempio: CVE-2021-34527 (PrintNightmare)
+CVE-2020-5902 (BIG-IP RCE)</div>
+                <br>
+                <p><strong>Contenuti di un CVE:</strong></p>
+                <p>• Descrizione della vulnerabilità o exposure</p>
+                <p>• Riferimenti e documentazione</p>
+                <p>• Informazioni per il team IT sull'impatto</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/VulnerabilityAssessment_Diagram_01.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="CVE Assignment Process">
+        </div>
+
+        <div class="grid-2-col">
+            <div class="card border-green">
+                <div class="card-title">🔄 Processo di Ottenimento CVE</div>
+                <div class="card-text">
+                    <p><strong>1.</strong> Identificare se CVE è richiesto e rilevante</p>
+                    <p><strong>2.</strong> Contattare il vendor del prodotto affetto</p>
+                    <p><strong>3.</strong> Identificare la CNA appropriata</p>
+                    <p><strong>4.</strong> Richiedere CVE ID tramite web form</p>
+                    <p><strong>5.</strong> Ricevere conferma</p>
+                    <p><strong>6.</strong> Ricevere CVE ID</p>
+                    <p><strong>7.</strong> Disclosure pubblico</p>
+                    <p><strong>8.</strong> Annunciare il CVE</p>
+                    <p><strong>9.</strong> Fornire informazioni al CVE Team</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">⚠️ Responsible Disclosure</div>
+                <div class="card-text">
+                    <p>La <strong>divulgazione responsabile</strong> è essenziale nella community della sicurezza.</p>
+                    <br>
+                    <p>Permette a un'organizzazione o ricercatore di lavorare direttamente con un vendor, fornendo prima i dettagli del problema per garantire che sia disponibile una patch prima dell'annuncio pubblico.</p>
+                    <br>
+                    <p class="security-insight">Se un problema non viene divulgato responsabilmente, threat actor reali potrebbero sfruttarlo (zero-day/0-day)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 14;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

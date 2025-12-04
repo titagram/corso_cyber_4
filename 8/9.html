@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esecuzione e Primo Contatto - Slide 9</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Exploit: Caricamento e Trigger</h1>
+        <div class="subtitle">Esecuzione e Primo Contatto</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Azione</div>
+                <div class="card-text">
+                    <ol>
+                        <li>Dashboard WP -> Media -> Aggiungi Nuovo.</li>
+                        <li>Selezionare <code>payload.wav</code>.</li>
+                        <li>Osservare il terminale con <code>php -S</code>.</li>
+                        <li><strong>Log:</strong> <code>GET /?p=fVPNauMwEP4qh...</code></li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione Tecnica</div>
+                <div class="card-text">
+                    <p><strong>Il Momento della Verità:</strong> Appena WP tenta di processare l'immagine ("Crunching..." o generazione miniature), il parser XML si attiva.</p>
+                    <p><strong>Il Traffico:</strong> Il server vittima si connette a noi. Abbiamo conferma RCE (Remote Code Execution, o meglio, Arbitrary File Read).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 9;</script>
+    <script src="main.js"></script>
+</body>
+</html>

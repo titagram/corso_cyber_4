@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Log4Shell - Persistenza</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-blue.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Persistenza: Creare una porta di servizio</h1>
+        <div class="subtitle">Persistenza</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Azione</div>
+                <div class="card-text">
+                    <pre><code class="language-bash">whoami</code></pre>
+                    <p>-> solr.</p>
+                    <pre><code class="language-bash">sudo -l</code></pre>
+                    <p>-> (NOPASSWD).</p>
+                    <pre><code class="language-bash">sudo passwd solr</code></pre>
+                    <p>-> Imposta nuova password.</p>
+                    <pre><code class="language-bash">ssh solr@TARGET</code></pre>
+                    <p>-> Accesso stabile.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione</div>
+                <div class="card-text">
+                    <p>L'exploit Log4Shell è rumoroso e potrebbe essere patchato.</p>
+                    <p>Cambiare la password di un utente esistente (o aggiungere una chiave SSH) ci garantisce di poter rientrare domani, anche se Log4j viene aggiornato.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 11;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 3: Vulnerability Assessment - Interpretare l'Output</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 3: Vulnerability Assessment & Triage</h1>
+        <div class="subtitle">Slide 3.1: Interpretare l'Output di WPScan</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Separare il Segnale dal Rumore</div>
+                <div class="card-text">
+                    <p>Gli scanner automatici producono molti dati. Il nostro lavoro è fare <strong>triage</strong>: distinguere vulnerabilità reali da falsi positivi.</p>
+                    <br>
+                    <p><strong>Come WPScan identifica le vulnerabilità:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Confronta versione rilevata con database CVE</li>
+                        <li>Se versione < versione_fix → segnala vuln</li>
+                        <li>Non verifica se la vuln è effettivamente sfruttabile</li>
+                    </ul>
+                    <br>
+                    <p><strong>Livelli di confidenza:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><span class="text-green">100%</span> - Versione confermata</li>
+                        <li><span class="text-yellow">80%</span> - Versione probabile</li>
+                        <li><span class="text-red">&lt;80%</span> - Da verificare manualmente</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Mai fidarsi ciecamente di uno scanner! Ogni vulnerabilità va verificata manualmente prima di inserirla nel report.</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">Lab: Analisi Output Vulnerabilità</div>
+                <div class="card-text">
+                    <p><strong>Esempio output WPScan con CVE:</strong></p>
+                    <div class="code-box">[+] simple-file-list
+ | Location: .../plugins/simple-file-list/
+ | <span class="text-yellow">Version: 4.2.2 (80% confidence)</span>
+ 
+ [!] 1 vulnerability identified:
+ 
+ [!] Title: Simple File List < 4.2.3 - Unauthenticated RCE
+  | Fixed in: <span class="text-green">4.2.3</span>
+  | References:
+  |  - https://wpscan.com/vulnerability/xyz
+  |  - https://nvd.nist.gov/vuln/detail/<span class="text-red">CVE-2020-36385</span>
+  
+<span class="text-yellow">[i] Based on the version number, the vulnerability may not be present.</span></div>
+                    <br>
+                    <p><strong>⚠️ Attenzione!</strong> WPScan dice "may not be present" perché ha solo 80% di confidenza sulla versione. Dobbiamo verificare!</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Iniziamo il Capitolo 3. Ora abbiamo una marea di dati, dobbiamo dargli un senso. A sinistra, come funziona WPScan.
+        Confronta le versioni che trova con un database di CVE note. Se la versione è inferiore al fix, segnala la vulnerabilità.
+        Ma attenzione: non verifica se è VERAMENTE sfruttabile nel contesto specifico!
+        A destra, un esempio reale. WPScan ha trovato simple-file-list, stima la versione 4.2.2 con 80% di confidenza.
+        Segnala una RCE, ma nota in giallo 'may not be present'. Questo è un potenziale falso positivo.
+        Il nostro lavoro: verificare la versione esatta e confermare se la vulnerabilità è reale."
+    -->
+
+    <script>const slideNumero = 18;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

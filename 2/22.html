@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Nessus - Scanning con Credenziali</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔐 Nessus - Scanning con Credenziali</h1>
+        <div class="subtitle">Authenticated Scanning per Maggiore Visibilità</div>
+
+        <div class="card border-blue">
+            <div class="card-title">🎯 Perché gli Authenticated Scan?</div>
+            <div class="card-text">
+                <p>Le scansioni autenticate permettono a Nessus di <strong>accedere ai sistemi target</strong> e ottenere informazioni molto più dettagliate sulle vulnerabilità presenti.</p>
+                <br>
+                <p><strong>Vantaggi:</strong></p>
+                <p>✓ Identificazione di patch mancanti</p>
+                <p>✓ Verifica configurazioni di sicurezza</p>
+                <p>✓ Rilevamento software installato</p>
+                <p>✓ Meno falsi positivi</p>
+                <br>
+                <p class="security-insight">Tipicamente si utilizzano utenti altamente privilegiati (root, Administrator)</p>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-green">
+                <div class="card-title">💻 Host-Based Authentication</div>
+                <div class="card-text">
+                    <img src="img/creds.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="Credentials">
+                    <p><strong>SSH (Linux/Unix):</strong></p>
+                    <p>• Password</p>
+                    <p>• Public key</p>
+                    <p>• Certificate</p>
+                    <p>• Kerberos</p>
+                    <br>
+                    <p><strong>Windows:</strong></p>
+                    <p>• Password</p>
+                    <p>• Kerberos</p>
+                    <p>• LM hash</p>
+                    <p>• NTLM hash</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">🗄️ Database Authentication</div>
+                <div class="card-text">
+                    <img src="img/db_creds.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="DB Credentials">
+                    <p><strong>Database supportati:</strong></p>
+                    <p>• Oracle</p>
+                    <p>• PostgreSQL</p>
+                    <p>• DB2</p>
+                    <p>• MySQL</p>
+                    <p>• SQL Server</p>
+                    <p>• MongoDB</p>
+                    <p>• Sybase</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-red">
+                <div class="card-title">🌐 Plaintext Authentication</div>
+                <div class="card-text">
+                    <img src="img/plaintext_auth.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="Plaintext Auth">
+                    <p>Nessus può autenticarsi a vari servizi:</p>
+                    <p>• FTP</p>
+                    <p>• HTTP</p>
+                    <p>• IMAP</p>
+                    <p>• IPMI</p>
+                    <p>• Telnet</p>
+                    <p>• E altri...</p>
+                </div>
+            </div>
+
+            <div class="card border-purple">
+                <div class="card-title">✅ Verificare l'Autenticazione</div>
+                <div class="card-text">
+                    <img src="img/sqlserv.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="SQL Server Auth">
+                    <p>Controllare sempre l'output di Nessus per confermare che l'autenticazione sia avvenuta con successo.</p>
+                    <br>
+                    <p class="security-insight">Se l'autenticazione fallisce, la scansione sarà equivalente a una non autenticata</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 22;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

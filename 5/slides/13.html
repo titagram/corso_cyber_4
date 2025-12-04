@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 2: WordPress Enumeration - Plugin Enumeration Aggressive</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 2: WordPress Enumeration</h1>
+        <div class="subtitle">Slide 2.4: Plugin Enumeration (Aggressive)</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Più Rumore, Più Risultati</div>
+                <div class="card-text">
+                    <p>La modalità <strong>aggressive</strong> tenta di accedere a file comuni (readme.txt, changelog.txt) per migliaia di plugin noti.</p>
+                    <br>
+                    <p><strong>Differenze chiave:</strong></p>
+                    <table style="width: 100%; margin-top: 10px; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;"><strong>Passive</strong></td>
+                            <td style="padding: 8px;">Analizza solo HTML pubblico</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;"><strong>Aggressive</strong></td>
+                            <td style="padding: 8px;">Brute force di ~100.000 plugin</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><strong>Mixed</strong></td>
+                            <td style="padding: 8px;">Combina entrambi</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> La scansione aggressiva genera MOLTO traffico e può essere rilevata. In un pentest Red Team, evitarla. In un Vulnerability Assessment autorizzato, è indispensabile.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: WPScan Aggressive Mode</div>
+                <div class="card-text">
+                    <p><strong>Comando:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> wpscan --url http://vulnerable-wp.local \
+    -e ap --plugins-detection aggressive</div>
+                    <br>
+                    <p><strong>Flag:</strong></p>
+                    <div class="code-box">-e ap                    → All Plugins
+--plugins-detection      → aggressive/passive/mixed</div>
+                    <br>
+                    <p><strong>Output (troncato):</strong></p>
+                    <div class="code-box">[+] Enumerating All Plugins (via Aggressive Methods)
+ Checking Known Locations - Time: 00:02:35 
+ (98576 / 98576) 100.00% 
+
+[i] Plugin(s) Identified:
+[+] <span class="text-red">simple-file-list</span>
+ | Version: <span class="text-red">4.2.2</span> (80% confidence)
+ | Found By: Readme - Stable Tag
+
+[+] <span class="text-red">wp-file-manager</span>
+ | Version: <span class="text-red">6.0</span>
+ | Found By: Readme - Stable Tag
+ | <span class="text-red">[!] 1 vulnerability identified</span></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ora alziamo il volume! A sinistra, le differenze tra modalità passive e aggressive.
+        A destra, il comando. Notate -e ap (all plugins) e --plugins-detection aggressive.
+        La scansione prova quasi 100.000 plugin noti! Richiede tempo (2-3 minuti) e genera molto traffico.
+        Risultato: ora abbiamo la versione di simple-file-list (4.2.2) e abbiamo trovato un nuovo plugin: wp-file-manager!
+        WPScan segnala già '1 vulnerability identified' per wp-file-manager. Questo è oro!
+        ATTENZIONE: questa scansione in un ambiente reale con IDS/IPS verrebbe certamente rilevata."
+    -->
+
+    <script>const slideNumero = 13;</script>
+    <script src="main.js"></script>
+</body>
+</html>

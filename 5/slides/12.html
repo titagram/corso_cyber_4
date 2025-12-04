@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 2: WordPress Enumeration - Plugin Enumeration Base</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 2: WordPress Enumeration</h1>
+        <div class="subtitle">Slide 2.3: Plugin Enumeration (Passive)</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: I Plugin sono la Porta d'Ingresso</div>
+                <div class="card-text">
+                    <p>La maggior parte delle vulnerabilità WordPress NON è nel core, ma nei <strong>plugin di terze parti</strong>. Identificarli è la fase più critica.</p>
+                    <br>
+                    <p><strong>Perché i plugin sono pericolosi:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Sviluppati da terze parti (qualità variabile)</li>
+                        <li>Spesso non aggiornati</li>
+                        <li>Accesso diretto a file system e database</li>
+                        <li>Possono introdurre RCE, SQLi, LFI, XSS</li>
+                    </ul>
+                    <br>
+                    <p><strong>Detection passiva:</strong> WPScan analizza il codice HTML cercando riferimenti a <code>/wp-content/plugins/</code></p>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Un attaccante non ha bisogno di 100 plugin vulnerabili. Ne basta UNO. Anche un plugin "innocuo" può essere il punto di ingresso se non aggiornato.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: WPScan Plugin Scan Passivo</div>
+                <div class="card-text">
+                    <p><strong>Comando:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> wpscan --url http://vulnerable-wp.local -e p</div>
+                    <br>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-box">[+] Enumerating Most Popular Plugins (via Passive Methods)
+
+[i] Plugin(s) Identified:
+
+[+] <span class="text-yellow">akismet</span>
+ | Location: .../wp-content/plugins/akismet/
+ | Latest Version: 5.3
+ | Last Updated: 2024-01-15
+ 
+[+] <span class="text-yellow">contact-form-7</span>
+ | Location: .../wp-content/plugins/contact-form-7/
+ | Found By: Urls In Homepage
+
+[+] <span class="text-red">simple-file-list</span>
+ | Location: .../wp-content/plugins/simple-file-list/
+ | Found By: Urls In Homepage (Passive Detection)
+ | <span class="text-red">The version could not be determined.</span></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Passiamo ai plugin - qui si trova il tesoro. A sinistra, perché sono così importanti.
+        A destra, il comando -e p enumera i plugin. La scansione passiva analizza solo l'HTML della homepage.
+        Abbiamo trovato 3 plugin: Akismet (anti-spam, comune), Contact Form 7 (form), e simple-file-list.
+        Notate: per simple-file-list non è riuscito a determinare la versione. Questo richiede investigazione manuale.
+        La scansione passiva trova solo plugin che 'si espongono' nel frontend. Per trovare plugin nascosti, serve la modalità aggressiva..."
+    -->
+
+    <script>const slideNumero = 12;</script>
+    <script src="main.js"></script>
+</body>
+</html>

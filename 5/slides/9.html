@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 1: Network Discovery & Fingerprinting - Technology Stack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 1: Network Discovery & Fingerprinting</h1>
+        <div class="subtitle">Slide 1.8: Identificazione Technology Stack Completo</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Stack Fingerprinting Avanzato</div>
+                <div class="card-text">
+                    <p>Oltre a web server e CMS, vogliamo mappare l'intero stack tecnologico: librerie JavaScript, CDN, analytics, framework CSS.</p>
+                    <br>
+                    <p><strong>Tecnologie da identificare:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>CMS e versione (WordPress 5.x)</li>
+                        <li>Framework JS (jQuery, React, Vue)</li>
+                        <li>Librerie vulnerabili (jQuery < 3.5.0)</li>
+                        <li>CDN utilizzato (Cloudflare, AWS)</li>
+                        <li>Analytics (Google, Matomo)</li>
+                        <li>Plugin di caching (W3 Total Cache)</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Librerie JavaScript obsolete (es. jQuery 1.x) possono essere vettori per XSS. Strumenti come Retire.js le identificano automaticamente.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Whatweb e WPScan</div>
+                <div class="card-text">
+                    <p><strong>Whatweb - Fingerprinting generico:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> whatweb -a 3 http://vulnerable-wp.local</div>
+                    <br>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-box">http://vulnerable-wp.local [200 OK]
+ Apache[2.4.38], Country[RESERVED][ZZ],
+ HTML5, HTTPServer[Debian Linux][Apache/2.4.38],
+ <span class="text-yellow">JQuery[1.12.4]</span>, MetaGenerator[<span class="text-green">WordPress 5.0</span>],
+ PHP[7.3.4], Script, UncommonHeaders[link],
+ <span class="text-green">WordPress[5.0]</span></div>
+                    <br>
+                    <p><strong>Flag -a 3:</strong> Aggression level 3 (più dettagliato)</p>
+                    <br>
+                    <p><strong>Browser Extension:</strong> Wappalyzer (Chrome/Firefox) per analisi visuale</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ultima slide del Capitolo 1. Ora mettiamo insieme tutto quello che abbiamo raccolto per avere il quadro completo dello stack.
+        A sinistra, tutte le tecnologie che vogliamo identificare. Ognuna può avere le sue vulnerabilità.
+        A destra, whatweb è fantastico per questo. Con -a 3 (aggressive) estrae più informazioni possibili.
+        Notate: WordPress 5.0 (vecchio!), jQuery 1.12.4 (vulnerabile a XSS!), PHP 7.3.4.
+        Ora abbiamo un'immagine completa: sappiamo con cosa abbiamo a che fare.
+        Fine della fase di Discovery. Passiamo al Capitolo 2: Enumeration specifica di WordPress."
+    -->
+
+    <script>const slideNumero = 9;</script>
+    <script src="main.js"></script>
+</body>
+</html>

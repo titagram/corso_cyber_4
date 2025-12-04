@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>3.7 Protezione tramite .htaccess</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-green">
+            <div class="card-title">3.7 Protezione tramite `.htaccess`</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>File di configurazione di Apache che agisce a livello di directory.</li>
+                        <li><strong>Può essere usato per:</strong></li>
+                        <li>• Bloccare l'accesso a <code>wp-config.php</code>.</li>
+                        <li>• Impedire l'esecuzione di PHP in <code>wp-content/uploads</code>.</li>
+                        <li>• Bloccare l'hotlinking di immagini.</li>
+                        <li>⚠️ <strong>Attenzione:</strong> se <code>www-data</code> può scrivere su <code>.htaccess</code>, può aggirare le regole.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Il file <code>.htaccess</code> è un'arma a doppio taglio. È potente per l'hardening: potete definire regole di sicurezza granulari. Ma se l'attaccante riesce a modificarlo, può disabilitare tutte le vostre protezioni.</p>
+                    <p>Può anche creare nuove regole a suo vantaggio (es. dire ad Apache di trattare i file <code>.jpg</code> come file <code>.php</code>). Quindi, anche il file <code>.htaccess</code> deve avere permessi restrittivi (644) e non essere scrivibile da <code>www-data</code>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="3.6.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="../capitolo-4/4.1.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Nessus - Scan Policies e Plugins</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">📋 Nessus - Scan Policies e Plugins</h1>
+        <div class="subtitle">Personalizzazione e Gestione dei Plugin</div>
+
+        <div class="card border-blue">
+            <div class="card-title">📐 Scan Policies</div>
+            <div class="card-text">
+                <p>Le <strong>Scan Policies</strong> sono scansioni personalizzate che permettono di definire opzioni specifiche, salvare la configurazione e renderla disponibile nei Scan Templates.</p>
+                <br>
+                <p><strong>Casi d'uso:</strong></p>
+                <p>• Scan più lenti e evasivi</p>
+                <p>• Scan focalizzati su web application</p>
+                <p>• Scan per specifici clienti con set di credenziali</p>
+                <br>
+                <p class="security-insight">Le policy possono essere importate/esportate tra scanner Nessus</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/nessus_policies.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Nessus Policies">
+        </div>
+
+        <div class="grid-2-col">
+            <div class="card border-green">
+                <div class="card-title">🆕 Creare una Policy</div>
+                <div class="card-text">
+                    <img src="img/policy.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="Policy Creation">
+                    <p><strong>1.</strong> Click su <strong>New Policy</strong></p>
+                    <p><strong>2.</strong> Selezionare un template base (es. Advanced Scan)</p>
+                    <p><strong>3.</strong> Dare nome e descrizione</p>
+                    <p><strong>4.</strong> Configurare settings, credentials, compliance</p>
+                    <p><strong>5.</strong> Abilitare/disabilitare plugin families o singoli plugin</p>
+                    <p><strong>6.</strong> Salvare</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">📂 User Defined Templates</div>
+                <div class="card-text">
+                    <img src="img/htb_policydefined.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="User Defined">
+                    <p>Dopo aver creato una policy, apparirà nel tab <strong>User Defined</strong> sotto Scan Templates.</p>
+                    <br>
+                    <p>Questo permette di riutilizzare configurazioni complesse senza doverle ricreare ogni volta.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-red" style="margin-top: 25px;">
+            <div class="card-title">🔌 Nessus Plugins</div>
+            <div class="card-text">
+                <p>Nessus lavora con plugin scritti in <strong>Nessus Attack Scripting Language (NASL)</strong> per targetare nuove vulnerabilità e CVE.</p>
+                <br>
+                <p><strong>Statistiche (al momento della scrittura):</strong></p>
+                <div class="code-box">145,973 plugins pubblicati
+58,391 CVE IDs coperti
+30,696 Bugtraq IDs</div>
+                <br>
+                <p><strong>Severity Levels:</strong> <span class="text-red">Critical</span>, <span class="text-red">High</span>, <span class="text-yellow">Medium</span>, <span class="text-green">Low</span>, <span class="text-blue">Info</span></p>
+                <br>
+                <p>Database ricercabile disponibile sul sito Tenable</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 20;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

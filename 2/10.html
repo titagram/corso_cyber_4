@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Standard di Compliance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">📋 Standard di Compliance</h1>
+        <div class="subtitle">PCI-DSS, HIPAA, FISMA, ISO 27001</div>
+
+        <div class="card border-blue">
+            <div class="card-title">⚖️ Perché Gli Standard Sono Importanti</div>
+            <div class="card-text">
+                <p>Sia i penetration test che i vulnerability assessment devono rispettare standard specifici per essere <strong>accreditati e accettati</strong> da governi e autorità legali.</p>
+                <br>
+                <p>Gli standard aiutano a garantire che la valutazione sia eseguita in modo approfondito e concordato per aumentare l'efficienza e ridurre la probabilità di attacchi.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/PCI-DSS-Goals.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="PCI-DSS Goals">
+        </div>
+
+        <div class="grid-2-col">
+            <div class="card border-red">
+                <div class="card-title">💳 PCI-DSS</div>
+                <div class="card-text">
+                    <p><strong>Payment Card Industry Data Security Standard</strong></p>
+                    <br>
+                    <p><strong>Applicabile a:</strong> Organizzazioni che memorizzano, processano o trasmettono dati di carte di credito (banche, e-commerce)</p>
+                    <br>
+                    <p><strong>Requisiti:</strong></p>
+                    <p>• Scansioni interne ed esterne</p>
+                    <p>• Cardholder Data Environment (CDE) segregato</p>
+                    <p>• Protezione dei dati delle carte</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">🏥 HIPAA</div>
+                <div class="card-text">
+                    <p><strong>Health Insurance Portability and Accountability Act</strong></p>
+                    <br>
+                    <p><strong>Applicabile a:</strong> Organizzazioni sanitarie</p>
+                    <br>
+                    <p><strong>Requisiti:</strong></p>
+                    <p>• Protezione dei dati dei pazienti</p>
+                    <p>• Risk assessment obbligatorio</p>
+                    <p>• Identificazione delle vulnerabilità</p>
+                    <br>
+                    <p class="security-insight">Non richiede esplicitamente vulnerability scan, ma risk assessment sì</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-yellow">
+                <div class="card-title">🏛️ FISMA</div>
+                <div class="card-text">
+                    <p><strong>Federal Information Security Management Act</strong></p>
+                    <br>
+                    <p><strong>Applicabile a:</strong> Operazioni e informazioni governative</p>
+                    <br>
+                    <p><strong>Requisiti:</strong></p>
+                    <p>• Documentazione del programma di vulnerability management</p>
+                    <p>• Mantenimento di disponibilità, confidenzialità e integrità</p>
+                </div>
+            </div>
+
+            <div class="card border-purple">
+                <div class="card-title">🌐 ISO 27001</div>
+                <div class="card-text">
+                    <p><strong>Standard internazionale per la gestione della sicurezza delle informazioni</strong></p>
+                    <br>
+                    <p><strong>Applicabile a:</strong> Organizzazioni in tutto il mondo</p>
+                    <br>
+                    <p><strong>Requisiti:</strong></p>
+                    <p>• Scansioni trimestrali esterne e interne</p>
+                    <p>• Information Security Management System (ISMS) efficace</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 10;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

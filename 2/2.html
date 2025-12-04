@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Assessments - Panoramica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔒 Security Assessments</h1>
+        <div class="subtitle">Tipi di Valutazioni di Sicurezza</div>
+
+        <div class="card border-blue">
+            <div class="card-title">📋 Perché Sono Necessari</div>
+            <div class="card-text">
+                <p>Ogni organizzazione deve eseguire diversi tipi di security assessment sulla propria rete, computer e applicazioni. Lo scopo principale è <strong>identificare e confermare la presenza di vulnerabilità</strong>, per poterle correggere, mitigare o rimuovere.</p>
+                <br>
+                <p>Le organizzazioni hanno:</p>
+                <p>• Diversi requisiti di compliance</p>
+                <p>• Diversa tolleranza al rischio</p>
+                <p>• Diverse minacce da affrontare</p>
+                <p>• Diversi modelli di business</p>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-green">
+                <div class="card-title">🎯 Vulnerability Assessment</div>
+                <div class="card-text">
+                    <p><strong>Appropriato per:</strong> Tutte le organizzazioni</p>
+                    <br>
+                    <p>Basato su standard di sicurezza specifici, analizza la conformità attraverso una checklist. Identifica e categorizza i rischi senza sfruttare attivamente le vulnerabilità.</p>
+                    <br>
+                    <p class="security-insight">✓ Scansione automatizzata</p>
+                    <p class="security-insight">✓ Validazione manuale</p>
+                    <p class="security-insight">✓ Report con remediation</p>
+                </div>
+            </div>
+
+            <div class="card border-red">
+                <div class="card-title">💥 Penetration Test</div>
+                <div class="card-text">
+                    <p><strong>Appropriato per:</strong> Media-alta maturità</p>
+                    <br>
+                    <p>Simula un attacco informatico per determinare se e come la rete può essere compromessa. Eseguito con pieno consenso legale dell'organizzazione.</p>
+                    <br>
+                    <p class="security-insight">✓ Exploitation attiva</p>
+                    <p class="security-insight">✓ Post-exploitation</p>
+                    <p class="security-insight">✓ Attack chain completa</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 2;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>OVAL - Open Vulnerability Assessment Language</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔍 OVAL</h1>
+        <div class="subtitle">Open Vulnerability Assessment Language</div>
+
+        <div class="card border-blue">
+            <div class="card-title">📖 Cos'è OVAL?</div>
+            <div class="card-text">
+                <p>Standard internazionale di sicurezza <strong>pubblicamente disponibile</strong> utilizzato per valutare e dettagliare lo stato corrente e i problemi del sistema.</p>
+                <br>
+                <p><strong>Supportato da:</strong> U.S. Department of Homeland Security</p>
+                <p><strong>Repository:</strong> Oltre 7000+ definizioni per uso pubblico</p>
+                <br>
+                <p class="security-insight">Utilizzato dal Security Content Automation Protocol (SCAP) del NIST</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/VulnerabilityAssessment_Diagram_05.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="OVAL Process">
+        </div>
+
+        <div class="grid-2-col">
+            <div class="card border-green">
+                <div class="card-title">🔄 Processo OVAL in 3 Passi</div>
+                <div class="card-text">
+                    <p><strong>1. Identificare</strong> le configurazioni del sistema per il testing</p>
+                    <br>
+                    <p><strong>2. Valutare</strong> lo stato corrente del sistema</p>
+                    <br>
+                    <p><strong>3. Divulgare</strong> le informazioni in un report</p>
+                    <br>
+                    <p><strong>Stati possibili:</strong></p>
+                    <p>• Vulnerable (Vulnerabile)</p>
+                    <p>• Non-compliant (Non conforme)</p>
+                    <p>• Installed Asset (Asset installato)</p>
+                    <p>• Patched (Patchato)</p>
+                </div>
+            </div>
+
+            <div class="card border-purple">
+                <div class="card-title">📋 Classi di Definizioni OVAL</div>
+                <div class="card-text">
+                    <p><strong>Vulnerability Definitions:</strong></p>
+                    <p>Identificano vulnerabilità di sistema</p>
+                    <br>
+                    <p><strong>Compliance Definitions:</strong></p>
+                    <p>Verificano se le configurazioni soddisfano i requisiti policy</p>
+                    <br>
+                    <p><strong>Inventory Definitions:</strong></p>
+                    <p>Valutano se un software specifico è presente</p>
+                    <br>
+                    <p><strong>Patch Definitions:</strong></p>
+                    <p>Identificano se il sistema ha la patch appropriata</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-yellow" style="margin-top: 25px;">
+            <div class="card-title">🔢 Formato ID OVAL</div>
+            <div class="card-text">
+                <p><strong>Struttura:</strong> <span class="tech-term">oval:Organization Domain:ID Type:ID Value</span></p>
+                <br>
+                <div class="code-box">Esempio: oval:org.mitre.oval:obj:1116
+
+ID Types:
+• def (definition)
+• obj (object)
+• ste (state)
+• var (variable)</div>
+                <br>
+                <p>Scanner come <strong>Nessus</strong> possono utilizzare OVAL per configurare template di scanning per la compliance di sicurezza.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 15;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

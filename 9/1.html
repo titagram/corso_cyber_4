@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Log4Shell - Il "Mostro"</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-blue.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">CVE-2021-44228: Quando i Log prendono vita</h1>
+        <div class="subtitle">Log4Shell: Il "Mostro"</div>
+
+        <div class="grid-2-col">
+            <div class="card border-red">
+                <div class="card-title">Dati</div>
+                <div class="card-text">
+                    <p><strong>Data:</strong> Dicembre 2021 (Zero-Day).</p>
+                    <p><strong>CVSS:</strong> 10.0 (Criticità Assoluta).</p>
+                    <p><strong>Vettore:</strong> JNDI Injection via Log4j.</p>
+                    <p><strong>Effetto:</strong> RCE (Esecuzione Codice Remoto) senza autenticazione.</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">Spiegazione</div>
+                <div class="card-text">
+                    <p><strong>Cos'è Log4j?</strong> È la libreria standard usata in Java per scrivere i file di log. È onnipresente: da Minecraft ai server bancari, da iCloud ai tostapane smart.</p>
+                    <p><strong>Il Paradosso:</strong> Una funzionalità pensata per rendere i log "più intelligenti" (arricchendoli con dati esterni) ha permesso agli attaccanti di trasformare una semplice riga di testo in un comando di sistema.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 1;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="main.js"></script>
+</body>
+</html>

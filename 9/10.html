@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Log4Shell - Stabilizzazione della Shell</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-blue.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Upgrade: Rendere la Shell utilizzabile</h1>
+        <div class="subtitle">Stabilizzazione della Shell</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Azione</div>
+                <div class="card-text">
+                    <pre><code class="language-bash">python3 -c "import pty; pty.spawn('/bin/bash')"</code></pre>
+                    <p>Ctrl+Z (Background).</p>
+                    <pre><code class="language-bash">stty raw -echo; fg</code></pre>
+                    <pre><code class="language-bash">export TERM=xterm</code></pre>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione</div>
+                <div class="card-text">
+                    <p>La shell che otteniamo è "stupida" (non ha cronologia, se premi Ctrl+C cade la connessione).</p>
+                    <p>Usiamo Python per creare uno pseudo-terminale (PTY) e mappiamo i tasti del nostro PC (raw echo) sul server remoto. Ora sembra una connessione SSH vera.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 10;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="main.js"></script>
+</body>
+</html>

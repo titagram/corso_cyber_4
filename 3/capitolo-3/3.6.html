@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>3.6 Bloccare l'editing da Dashboard</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-blue">
+            <div class="card-title">3.6 Bloccare l'editing da Dashboard</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>WordPress permette agli admin di modificare i file di temi e plugin dalla dashboard.</li>
+                        <li>Se un account admin viene compromesso, l'attaccante può inserire una backdoor.</li>
+                        <li><strong>Aggiungere in wp-config.php:</strong></li>
+                    </ul>
+                    <div class="code-box">define('DISALLOW_FILE_EDIT', true);</div>
+                    <ul>
+                        <li>Questa costante disabilita l'editor.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>L'editor di file integrato è comodo in sviluppo, ma è un rischio enorme in produzione. Se un attaccante ruba la password di un admin, può semplicemente andare nell'editor, aggiungere codice malevolo a un file del tema e ottenere una RCE.</p>
+                    <p>Disabilitare questa funzione con la costante <code>DISALLOW_FILE_EDIT</code> è una delle prime cose da fare in un hardening. Rimuove un intero vettore di attacco che viene spesso sfruttato dopo una compromissione iniziale di credenziali.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="3.5.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="3.7.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

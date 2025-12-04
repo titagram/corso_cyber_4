@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Mindset & Design - Defense in Depth</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🛡️ Mindset & Design - Defense in Depth</h1>
+        <div class="subtitle">La sicurezza è un processo stratificato, non un prodotto singolo</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>"Assume Breach"</strong> - Progetta l'applicazione assumendo che ogni componente possa essere compromesso. Implementa controlli ridondanti a più livelli: network, applicazione, dati.</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>Principle of Least Privilege</strong> - Ogni utente, servizio e processo deve avere solo i permessi strettamente necessari (RBAC, ACL)</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Fail Securely</strong> - In caso di errore, l'applicazione deve fallire verso uno stato sicuro (deny by default, chiusura sessioni, blocco transazioni)</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Defense in Depth</strong> - Implementa controlli multipli: WAF + Input Validation + Parameterized Queries + DB Permissions + Network Segmentation</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Security by Design</strong> - Threat Modeling (STRIDE) in fase di progettazione, non come afterthought</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ DIFESA & IMPLEMENTAZIONE</div>
+            <div class="card-text">
+                <p><strong>Perché la Difesa Stratificata Funziona:</strong> Anche se un singolo controllo viene compromesso (es. bypass di un filtro), gli altri layer prevengono la compromissione completa del sistema.</p>
+                <br>
+                <p><strong>Esempio Pratico - Validazione Multi-Layer:</strong></p>
+                <div class="code-box">// ✅ 3 Layer di Difesa
+1. Client-side → Feedback UX immediato
+2. Server-side → Validazione security (OBBLIGATORIO)
+3. Database → Constraints e tipo checking
+
+// Anche se bypass layer 1, layer 2+3 proteggono</div>
+                <br>
+                <p><strong>Checklist Defense in Depth:</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ Network Layer: WAF, IDS/IPS, segmentazione di rete</li>
+                    <li>✓ Application Layer: Input validation, output encoding, authentication</li>
+                    <li>✓ Data Layer: Encryption at rest, database permissions, backup immutabili</li>
+                    <li>✓ Monitoring Layer: SIEM, alerting, anomaly detection</li>
+                </ul>
+                <br>
+                <p class="security-insight"><strong>Best Practice:</strong> Implementa almeno 3 controlli indipendenti per ogni funzionalità critica. Se uno fallisce, gli altri devono poter contenere la minaccia.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 1;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>
+

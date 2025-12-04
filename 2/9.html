@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Asset Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">📦 Asset Management</h1>
+        <div class="subtitle">Se Vuoi Proteggerlo, Devi Prima Conoscerlo!</div>
+
+        <div class="card border-blue">
+            <div class="card-title">🎯 Importanza dell'Asset Inventory</div>
+            <div class="card-text">
+                <p>L'Asset Inventory è un <strong>componente critico</strong> del vulnerability management. Un'organizzazione deve comprendere quali asset sono nella sua rete per fornire la protezione appropriata e configurare le difese adeguate.</p>
+                <br>
+                <p class="security-insight">Principio fondamentale: Se non sai cosa devi proteggere, non puoi proteggerlo!</p>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-green">
+                <div class="card-title">💾 Asset On-Premises</div>
+                <div class="card-text">
+                    <p><strong>Storage Devices:</strong></p>
+                    <p>• HDDs e SSDs (endpoint e server)</p>
+                    <p>• External drives</p>
+                    <p>• Optical media (DVD, Blu-ray, CD)</p>
+                    <p>• Flash media (USB, SD card)</p>
+                    <p>• Legacy: floppy disk, ZIP drive, tape</p>
+                    <br>
+                    <p><strong>Network Devices:</strong></p>
+                    <p>• Router, Firewall</p>
+                    <p>• Switch, Hub</p>
+                    <p>• IDS/IPS, DLP</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">☁️ Asset Cloud</div>
+                <div class="card-text">
+                    <p><strong>Cloud Providers:</strong></p>
+                    <p>• Amazon Web Services (AWS)</p>
+                    <p>• Google Cloud Platform (GCP)</p>
+                    <p>• Microsoft Azure</p>
+                    <p>• Ambienti Multi-cloud</p>
+                    <br>
+                    <p><strong>SaaS Applications:</strong></p>
+                    <p>• Google Drive, Dropbox</p>
+                    <p>• Microsoft Teams, Office 365</p>
+                    <p>• Apple iCloud</p>
+                    <p>• Adobe Creative Suite</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-purple" style="margin-top: 25px;">
+            <div class="card-title">🔄 Gestione Continua</div>
+            <div class="card-text">
+                <p>Le organizzazioni aggiungono o rimuovono frequentemente computer, data storage, capacità di server cloud o altri data asset. <strong>Ogni volta che vengono aggiunti o rimossi asset, questo deve essere accuratamente annotato nell'inventory.</strong></p>
+                <br>
+                <p>Gli asset dovrebbero avere <strong>classificazioni dei dati</strong> per garantire controlli di sicurezza e accesso adeguati.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 9;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

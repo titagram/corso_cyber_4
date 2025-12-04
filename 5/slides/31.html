@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 4: Exploitation - Stabilizzare la Shell</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 4: Exploitation</h1>
+        <div class="subtitle">Slide 4.8: Stabilizzare e Migliorare la Shell</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Shell Upgrade</div>
+                <div class="card-text">
+                    <p>Una reverse shell "raw" è instabile: no tab completion, no CTRL+C, no editor. Dobbiamo stabilizzarla.</p>
+                    <br>
+                    <p><strong>Problemi della shell raw:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>CTRL+C chiude la connessione</li>
+                        <li>No history dei comandi</li>
+                        <li>No autocompletamento</li>
+                        <li>Alcuni comandi non funzionano</li>
+                        <li>Output non formattato</li>
+                    </ul>
+                    <br>
+                    <p><strong>Obiettivo:</strong> Ottenere una shell PTY (pseudo-terminal) completa, simile a SSH.</p>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Una shell stabile è essenziale per il post-exploitation. Molti tool (linpeas, pspy) richiedono un terminale completo.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Python PTY Upgrade</div>
+                <div class="card-text">
+                    <p><strong>Step 1: Spawn PTY con Python</strong></p>
+                    <div class="code-box"><span class="text-green">www-data@target:$</span> python3 -c 'import pty;pty.spawn("/bin/bash")'
+<span class="text-green">www-data@target:$</span></div>
+                    <br>
+                    <p><strong>Step 2: Background e configurazione</strong></p>
+                    <div class="code-box"><span class="text-green">www-data@target:$</span> ^Z  <span class="text-yellow"># CTRL+Z per background</span>
+
+<span class="text-yellow">[Sul tuo Kali:]</span>
+<span class="text-red">└─$</span> stty raw -echo; fg
+
+<span class="text-yellow">[Torna sulla shell target:]</span>
+<span class="text-green">www-data@target:$</span> export TERM=xterm
+<span class="text-green">www-data@target:$</span> export SHELL=/bin/bash
+<span class="text-green">www-data@target:$</span> stty rows 40 cols 160</div>
+                    <br>
+                    <p><strong>Risultato:</strong></p>
+                    <div class="code-box"><span class="text-green">✓ Tab completion funziona</span>
+<span class="text-green">✓ CTRL+C non chiude la shell</span>
+<span class="text-green">✓ Vim, nano, less funzionano</span>
+<span class="text-green">✓ Clear screen funziona</span></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Prima di procedere, stabiliziamo la shell. A sinistra, i problemi di una shell raw.
+        A destra, la procedura standard. Il comando Python spawna un pseudo-terminal.
+        Poi la sequenza CTRL+Z, stty raw -echo, fg è la magia che trasforma tutto.
+        'stty raw -echo' sul nostro terminale passa i caratteri grezzi alla shell remota.
+        'fg' riporta la shell in foreground. Poi esportiamo TERM e SHELL per completare.
+        Ora abbiamo una shell completa: possiamo usare vim, tab completion, CTRL+C senza problemi.
+        Questa procedura dovete memorizzarla - la userete SEMPRE."
+    -->
+
+    <script>const slideNumero = 31;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

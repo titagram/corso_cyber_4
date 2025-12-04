@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 1: Network Discovery & Fingerprinting - Directory Enumeration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 1: Network Discovery & Fingerprinting</h1>
+        <div class="subtitle">Slide 1.6: Directory Enumeration con Gobuster</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Brute Force delle Directory</div>
+                <div class="card-text">
+                    <p>Il <strong>Directory Enumeration</strong> (o Directory Busting) consiste nel provare migliaia di nomi di directory/file comuni per scoprire risorse nascoste.</p>
+                    <br>
+                    <p><strong>Tool principali:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code class="tech-term">gobuster</code> - Veloce, scritto in Go</li>
+                        <li><code class="tech-term">ffuf</code> - Fuzz Faster U Fool</li>
+                        <li><code class="tech-term">dirb</code> - Classico, più lento</li>
+                        <li><code class="tech-term">feroxbuster</code> - Ricorsivo automatico</li>
+                    </ul>
+                    <br>
+                    <p><strong>Wordlist essenziali (Kali):</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code>/usr/share/wordlists/dirb/common.txt</code></li>
+                        <li><code>/usr/share/seclists/Discovery/Web-Content/</code></li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Cercate file di backup (.bak, .old, .swp, ~) e config esposti (.env, wp-config.php.bak). Sono errori comuni e devastanti.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Gobuster in Azione</div>
+                <div class="card-text">
+                    <p><strong>Comando:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> gobuster dir -u http://vulnerable-wp.local \
+    -w /usr/share/wordlists/dirb/common.txt \
+    -x php,txt,bak,old -t 50</div>
+                    <br>
+                    <p><strong>Flag importanti:</strong></p>
+                    <div class="code-box">dir       → Modalità directory
+-u        → URL target
+-w        → Wordlist
+-x        → Estensioni da testare
+-t 50     → 50 thread (velocità)</div>
+                    <br>
+                    <p><strong>Output (troncato):</strong></p>
+                    <div class="code-box">/index.php            (Status: 301)
+/wp-admin             (Status: 301)
+/wp-content           (Status: 301)
+/wp-includes          (Status: 301)
+<span class="text-red">/wp-config.php.bak    (Status: 200) ← JACKPOT!</span>
+/xmlrpc.php           (Status: 200)
+/readme.html          (Status: 200)</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ora passiamo al brute force delle directory. A sinistra, i tool disponibili - gobuster è il mio preferito per velocità.
+        A destra, il comando. Notate il flag -x che aggiunge estensioni: cerchiamo non solo directory, ma anche file specifici.
+        L'output mostra le directory standard di WordPress, ma guardate quella riga rossa: wp-config.php.bak!
+        Questo è un errore GRAVISSIMO: qualcuno ha fatto un backup del file di configurazione e l'ha lasciato accessibile.
+        wp-config.php contiene credenziali del database, salt per le password, chiavi di autenticazione... è game over.
+        Il flag -t 50 usa 50 thread - attenti a non esagerare o potreste fare un DoS involontario sul target!"
+    -->
+
+    <script>const slideNumero = 7;</script>
+    <script src="main.js"></script>
+</body>
+</html>

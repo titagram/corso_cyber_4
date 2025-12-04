@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>3.4 `wp-includes`: Il Core Intoccabile</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-red">
+            <div class="card-title">3.4 `wp-includes`: Il Core Intoccabile</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Contiene le funzioni e le classi fondamentali di WordPress.</li>
+                        <li>Questa cartella non dovrebbe MAI essere scrivibile da <code>www-data</code>.</li>
+                        <li>Una modifica a un file qui dentro può creare una backdoor a livello core.</li>
+                        <li>Strumenti come <strong>WordFence</strong> scansionano l'integrità di questi file.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Se un attaccante riesce a modificare un file in <code>wp-includes</code>, la compromissione è profonda. Può inserire una backdoor in una funzione usata da tutto il sito, rendendola quasi invisibile.</p>
+                    <p>Per questo, i permessi su questa cartella devono essere restrittivi. L'utente <code>www-data</code> deve solo poter leggere. I plugin di sicurezza controllano le somme hash di questi file per rilevare modifiche non autorizzate, confrontandole con quelle dei file originali di WordPress.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="3.3.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="3.5.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

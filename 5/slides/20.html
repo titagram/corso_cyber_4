@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 3: Vulnerability Assessment - Searchsploit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 3: Vulnerability Assessment & Triage</h1>
+        <div class="subtitle">Slide 3.3: Ricerca Exploit con Searchsploit</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Dall'Informazione all'Azione</div>
+                <div class="card-text">
+                    <p><code class="tech-term">Searchsploit</code> è l'interfaccia CLI per <strong>Exploit-DB</strong>, il più grande archivio pubblico di exploit e PoC.</p>
+                    <br>
+                    <p><strong>Cosa contiene Exploit-DB:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Script Python, Ruby, Bash</li>
+                        <li>Moduli Metasploit</li>
+                        <li>Proof of Concept (PoC)</li>
+                        <li>Documentazione vulnerabilità</li>
+                        <li>Shellcode e payload</li>
+                    </ul>
+                    <br>
+                    <p><strong>Comandi utili:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code>searchsploit -m [ID]</code> - Copia exploit</li>
+                        <li><code>searchsploit -x [ID]</code> - Visualizza exploit</li>
+                        <li><code>searchsploit -u</code> - Aggiorna database</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> LEGGETE sempre l'exploit prima di eseguirlo! Potrebbe contenere backdoor o richiedere modifiche per funzionare.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Trovare Exploit</div>
+                <div class="card-text">
+                    <p><strong>Ricerca per nome plugin:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> searchsploit wordpress simple file list</div>
+                    <br>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-box">-------------------------------------------------
+ Exploit Title                           |  Path
+-------------------------------------------------
+WordPress Plugin Simple File List 4.2.2  | php/webapps/<span class="text-green">49253.py</span>
+  - Unauthenticated Arbitrary File Upload
+WordPress Plugin Simple File List < 6.0  | php/webapps/51668.py
+  - Remote Code Execution
+-------------------------------------------------</div>
+                    <br>
+                    <p><strong>Copiare l'exploit nella directory corrente:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> searchsploit -m 49253
+  Copied to: /home/kali/49253.py</div>
+                    <br>
+                    <p><strong>Analizzare l'exploit:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> head -50 49253.py</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Vulnerabilità confermata, ora ci serve l'arma. A sinistra, cos'è Searchsploit.
+        È una copia locale di Exploit-DB che potete interrogare offline. Aggiornatela con -u periodicamente.
+        A destra, cerchiamo exploit per simple-file-list. Trovato! ID 49253, uno script Python.
+        Il flag -m copia l'exploit nella directory corrente. Prima di eseguirlo, LEGGETE sempre il codice!
+        Gli exploit pubblici potrebbero essere modificati con backdoor, o richiedere parametri specifici.
+        head -50 mostra le prime 50 righe: solitamente troverete istruzioni d'uso e variabili da configurare."
+    -->
+
+    <script>const slideNumero = 20;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 1: Network Discovery & Fingerprinting - Robots.txt e Sitemap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 1: Network Discovery & Fingerprinting</h1>
+        <div class="subtitle">Slide 1.5: Robots.txt e Sitemap Analysis</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: La Mappa del Tesoro</div>
+                <div class="card-text">
+                    <p>Il file <code class="tech-term">robots.txt</code> indica ai crawler quali percorsi NON indicizzare. Ironicamente, è una lista di risorse "interessanti" per un pentester.</p>
+                    <br>
+                    <p><strong>Cosa cercare:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Directory di amministrazione (<code>/wp-admin/</code>)</li>
+                        <li>Backup nascosti (<code>/backup/</code>, <code>/old/</code>)</li>
+                        <li>Aree private (<code>/private/</code>, <code>/staging/</code>)</li>
+                        <li>File di configurazione</li>
+                    </ul>
+                    <br>
+                    <p>La <code class="tech-term">sitemap.xml</code> elenca tutte le pagine pubbliche del sito, utile per mappare la struttura.</p>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> "Disallow" in robots.txt NON blocca l'accesso! È solo un "suggerimento" ai crawler onesti. Le directory vietate sono spesso le più interessanti.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Esplorazione File Pubblici</div>
+                <div class="card-text">
+                    <p><strong>Lettura robots.txt:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> curl http://vulnerable-wp.local/robots.txt</div>
+                    <br>
+                    <p><strong>Output tipico WordPress:</strong></p>
+                    <div class="code-box">User-agent: *
+Disallow: <span class="text-yellow">/wp-admin/</span>
+Disallow: <span class="text-yellow">/wp-includes/</span>
+Disallow: <span class="text-yellow">/wp-content/plugins/</span>
+Disallow: <span class="text-yellow">/wp-content/uploads/private/</span>
+Allow: /wp-admin/admin-ajax.php
+
+Sitemap: http://vulnerable-wp.local/sitemap.xml</div>
+                    <br>
+                    <p><strong>Lettura sitemap:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> curl -s http://vulnerable-wp.local/sitemap.xml | head -20</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Il file robots.txt è pensato per i motori di ricerca, ma per noi è una roadmap. A sinistra, cosa cercare.
+        A destra, un robots.txt tipico di WordPress. Notate: wp-admin, wp-includes, e una directory 'private' negli uploads.
+        Quella directory /wp-content/uploads/private/ è sospetta - qualcuno ha voluto nasconderla, quindi potrebbe contenere dati sensibili.
+        La sitemap ci dà la struttura completa del sito. Utile per capire quante pagine ha, se ci sono aree nascoste, ecc.
+        RICORDATE: Disallow NON significa 'bloccato', significa solo 'per favore non indicizzare'. Possiamo accedere liberamente!"
+    -->
+
+    <script>const slideNumero = 6;</script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>2.1 Perché WP non è MVC</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-blue">
+            <div class="card-title">2.1 Perché WP non è MVC</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Non c'è una netta separazione tra Model, View, e Controller.</li>
+                        <li>Non esiste un router centrale come in Laravel o Symfony.</li>
+                        <li>La logica è distribuita e attivata da eventi (hooks).</li>
+                        <li><strong>Confronto con Laravel:</strong> <code>routes/web.php</code> definisce le rotte, qui non c'è un equivalente diretto.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Chi viene da framework moderni come Laravel si aspetta una struttura MVC. WordPress non funziona così. Non troverete una cartella <code>Controllers</code>.</p>
+                    <p>La logica è spesso mescolata con la vista nei file del tema, e il "routing" è un processo implicito basato sulla gerarchia dei file del tema. Questo approccio event-driven è potente e flessibile, ma può anche portare a un codice più caotico e difficile da analizzare per la sicurezza.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="../capitolo-1/1.7.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="2.2.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

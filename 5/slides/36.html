@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 5: Post-Exploitation - Cleanup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 5: Post-Exploitation</h1>
+        <div class="subtitle">Slide 5.5: Cleanup - Pulizia Post-Test</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Lasciare il Sistema Pulito</div>
+                <div class="card-text">
+                    <p>Un pentester professionista <strong>DEVE</strong> rimuovere tutti gli artefatti lasciati durante il test. È una questione di etica e professionalità.</p>
+                    <br>
+                    <p><strong>Cosa rimuovere:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>☐ Webshell caricate</li>
+                        <li>☐ File di test/exploit</li>
+                        <li>☐ Account creati</li>
+                        <li>☐ SSH keys aggiunte</li>
+                        <li>☐ Cron jobs inseriti</li>
+                        <li>☐ Modifiche a file di sistema</li>
+                        <li>☐ Database entries di test</li>
+                    </ul>
+                    <br>
+                    <p><strong>Documentare:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Lista di tutto ciò che è stato modificato</li>
+                        <li>Conferma di rimozione</li>
+                        <li>Hash dei file prima/dopo (se applicabile)</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Non rimuovere gli artefatti è una violazione contrattuale grave. Potreste essere ritenuti responsabili se un attaccante li sfruttasse.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Checklist di Cleanup</div>
+                <div class="card-text">
+                    <p><strong>1. Rimuovere webshell:</strong></p>
+                    <div class="code-box"><span class="text-red">#</span> rm /var/www/html/wp-content/plugins/simple-file-list/ee-files/shell.php
+<span class="text-red">#</span> rm /var/www/html/wp-content/themes/twentynineteen/404.php.bak</div>
+                    <br>
+                    <p><strong>2. Rimuovere account test (MySQL):</strong></p>
+                    <div class="code-box">mysql> DELETE FROM wp_users WHERE user_login = 'support_backup';
+mysql> DELETE FROM wp_usermeta WHERE user_id NOT IN (SELECT ID FROM wp_users);</div>
+                    <br>
+                    <p><strong>3. Rimuovere SSH keys:</strong></p>
+                    <div class="code-box"><span class="text-red">#</span> sed -i '/chiave_attacker/d' /root/.ssh/authorized_keys</div>
+                    <br>
+                    <p><strong>4. Verificare file modificati di recente:</strong></p>
+                    <div class="code-box"><span class="text-red">#</span> find /var/www/html -mtime -1 -type f</div>
+                    <br>
+                    <p><strong>5. Documentare nel report:</strong></p>
+                    <div class="code-box">"Tutti gli artefatti di test sono stati rimossi in data [DATA]. 
+Verificata assenza di webshell e account anomali."</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ultima slide del capitolo: la pulizia. Questo passaggio è OBBLIGATORIO.
+        A sinistra, la checklist di cosa rimuovere. Ogni shell, ogni account, ogni modifica.
+        A destra, i comandi pratici. rm per i file, DELETE per il database, sed per le chiavi SSH.
+        Il comando find con -mtime -1 mostra tutti i file modificati nelle ultime 24 ore - utile per verificare.
+        Nel report finale, includete SEMPRE una sezione 'Cleanup' che confermi la rimozione di tutto.
+        Se per qualche motivo non potete rimuovere qualcosa, avvisate IMMEDIATAMENTE il cliente.
+        Un pentester che lascia backdoor non è un pentester, è un attaccante."
+    -->
+
+    <script>const slideNumero = 36;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

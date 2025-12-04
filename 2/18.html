@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Nessus - Tipi di Scan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔍 Nessus - Tipi di Scan</h1>
+        <div class="subtitle">Discovery, Vulnerabilities, Compliance</div>
+
+        <div class="card border-blue">
+            <div class="card-title">🆕 Creare un Nuovo Scan</div>
+            <div class="card-text">
+                <p>Per configurare un nuovo scan, cliccare su <strong>New Scan</strong> e selezionare un tipo di scan.</p>
+                <br>
+                <p><strong>Categorie di Template:</strong></p>
+                <p>• Discovery</p>
+                <p>• Vulnerabilities</p>
+                <p>• Compliance</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/nessus_scan_types.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Nessus Scan Types">
+        </div>
+
+        <div class="grid-3-col">
+            <div class="card border-green">
+                <div class="card-title">🔍 Discovery</div>
+                <div class="card-text">
+                    <p><strong>Host Discovery:</strong></p>
+                    <p>Identifica host attivi e porte aperte nella rete</p>
+                    <br>
+                    <p><strong>Obiettivo:</strong></p>
+                    <p>Mappare la rete e identificare dispositivi accessibili</p>
+                </div>
+            </div>
+
+            <div class="card border-red">
+                <div class="card-title">⚠️ Vulnerabilities</div>
+                <div class="card-text">
+                    <p><strong>Basic Network Scan:</strong></p>
+                    <p>Scan di base per vulnerabilità comuni</p>
+                    <br>
+                    <p><strong>Advanced Scan:</strong></p>
+                    <p>Scan completamente personalizzabile</p>
+                    <br>
+                    <p><strong>Altri:</strong></p>
+                    <p>Malware Scan, Web App Tests, CVE specifici</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">📋 Compliance</div>
+                <div class="card-text">
+                    <p><strong>Audit & Compliance:</strong></p>
+                    <p>Verifica conformità a standard specifici</p>
+                    <br>
+                    <p><strong>Standard supportati:</strong></p>
+                    <p>• PCI-DSS</p>
+                    <p>• HIPAA</p>
+                    <p>• CIS Benchmarks</p>
+                    <p>• Altri standard</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-purple" style="margin-top: 25px;">
+            <div class="card-title">⚙️ Configurazione Base</div>
+            <div class="card-text">
+                <div style="text-align: center; margin: 20px 0;">
+                    <img src="img/general.png" style="max-width: 80%; border-radius: 8px;" alt="General Settings">
+                </div>
+                <p><strong>Settings Generali:</strong></p>
+                <p>• Nome dello scan</p>
+                <p>• Descrizione (opzionale)</p>
+                <p>• Target (IP, range, FQDN)</p>
+                <p>• Cartella di destinazione</p>
+                <p>• Schedule (opzionale)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 18;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

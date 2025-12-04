@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Vulnerability Scanning Overview</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔍 Vulnerability Scanning Overview</h1>
+        <div class="subtitle">Automated Scanning per Identificare le Vulnerabilità</div>
+
+        <div class="card border-blue">
+            <div class="card-title">🎯 Cos'è il Vulnerability Scanning?</div>
+            <div class="card-text">
+                <p>Il vulnerability scanning viene eseguito per <strong>identificare potenziali vulnerabilità</strong> in dispositivi di rete come router, firewall, switch, nonché server, workstation e applicazioni.</p>
+                <br>
+                <p><strong>Caratteristiche:</strong></p>
+                <p>• Scanning automatizzato</p>
+                <p>• Si concentra su vulnerabilità note e potenziali</p>
+                <p>• Tipicamente NON sfrutta le vulnerabilità</p>
+                <p>• Richiede validazione manuale per eliminare falsi positivi</p>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-green">
+                <div class="card-title">📊 Test Statici</div>
+                <div class="card-text">
+                    <p>Determinano una vulnerabilità se la <strong>versione identificata</strong> di un particolare asset ha un CVE pubblico.</p>
+                    <br>
+                    <p><strong>Limitazioni:</strong></p>
+                    <p>• Non sempre accurato</p>
+                    <p>• Una patch potrebbe essere stata applicata</p>
+                    <p>• Il target potrebbe non essere specificamente vulnerabile a quel CVE</p>
+                    <br>
+                    <p class="security-insight">Esempio: Scanner rileva Apache 2.4.49, associa CVE-2021-41773, ma la patch è già applicata</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">🔬 Test Dinamici</div>
+                <div class="card-text">
+                    <p>Provano payload specifici (solitamente benigni) sul target.</p>
+                    <br>
+                    <p><strong>Test comuni:</strong></p>
+                    <p>• Weak credentials</p>
+                    <p>• SQL injection</p>
+                    <p>• Command injection</p>
+                    <p>• Cross-site scripting (XSS)</p>
+                    <br>
+                    <p class="security-insight">Se un payload restituisce un hit, c'è una buona probabilità che sia vulnerabile</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-red" style="margin-top: 25px;">
+            <div class="card-title">🔄 Scansioni Continue</div>
+            <div class="card-text">
+                <p>Le organizzazioni dovrebbero eseguire <strong>sia scansioni autenticate che non autenticate</strong> su una pianificazione continua per garantire che:</p>
+                <br>
+                <p>✓ Gli asset siano patchati man mano che vengono scoperte nuove vulnerabilità</p>
+                <p>✓ Qualsiasi nuovo asset aggiunto alla rete non abbia patch mancanti</p>
+                <p>✓ Non ci siano problemi di configurazione/patching</p>
+                <br>
+                <p>Il vulnerability scanning dovrebbe alimentare il <strong>programma di patch management</strong> di un'organizzazione.</p>
+            </div>
+        </div>
+
+        <div class="card border-purple" style="margin-top: 25px;">
+            <div class="card-title">🛠️ Tool Principali</div>
+            <div class="card-text">
+                <p><strong>Commerciali:</strong> Nessus (free community edition), Qualys (free community edition), Nexpose (30-day trial)</p>
+                <p><strong>Open-Source:</strong> OpenVAS</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 16;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenVAS - Configurazione Targets</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🎯 OpenVAS - Configurazione Targets</h1>
+        <div class="subtitle">Definire i Target delle Scansioni</div>
+
+        <div class="card border-blue">
+            <div class="card-title">📋 Prima di Scansionare: Configurare i Targets</div>
+            <div class="card-text">
+                <p>Prima di impostare qualsiasi scansione, è meglio configurare i <strong>target</strong> per la scan. Navigare su <span class="tech-term">Configuration → Targets</span> per vedere i target già aggiunti all'applicazione.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/targets.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Targets">
+        </div>
+
+        <div class="grid-2-col">
+            <div class="card border-green">
+                <div class="card-title">➕ Aggiungere un Target</div>
+                <div class="card-text">
+                    <img src="img/addingtarget.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="Adding Target">
+                    <p><strong>Opzioni configurabili:</strong></p>
+                    <p>• <strong>Name:</strong> Nome descrittivo del target</p>
+                    <p>• <strong>Hosts:</strong> IP singolo o lista di host</p>
+                    <p>• <strong>Ports:</strong> Porte da scansionare</p>
+                    <p>• <strong>Credentials:</strong> Autenticazione (opzionale)</p>
+                    <p>• <strong>Alive Test:</strong> Metodo per verificare se l'host è raggiungibile</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">🔐 Credenziali per Authenticated Scan</div>
+                <div class="card-text">
+                    <p>Tipicamente, una scansione autenticata sfrutta un utente ad alti privilegi come <span class="text-red">root</span> o <span class="text-red">Administrator</span>.</p>
+                    <br>
+                    <p><strong>Vantaggi:</strong></p>
+                    <p>✓ Massima quantità di informazioni</p>
+                    <p>✓ Identificazione patch mancanti</p>
+                    <p>✓ Verifica configurazioni</p>
+                    <p>✓ Software installato</p>
+                    <br>
+                    <p class="security-insight">Con il massimo livello di permessi, si ottiene visibilità completa sulle vulnerabilità presenti</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-purple" style="margin-top: 25px;">
+            <div class="card-title">✅ Alive Test</div>
+            <div class="card-text">
+                <p>L'opzione <strong>Alive Test</strong> determina come OpenVAS verifica se l'host è raggiungibile prima di iniziare la scansione.</p>
+                <br>
+                <p><strong>Scan Config Default:</strong> Sfrutta l'NVT "Ping Host" nella NVT Family</p>
+                <br>
+                <p><strong>Altre opzioni:</strong></p>
+                <p>• ICMP Ping</p>
+                <p>• TCP-ACK Service Ping</p>
+                <p>• TCP-SYN Service Ping</p>
+                <p>• ARP Ping</p>
+                <p>• Consider Alive (assume l'host sia sempre raggiungibile)</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/targetsview.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Targets View">
+        </div>
+    </div>
+
+    <script>const slideNumero = 26;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

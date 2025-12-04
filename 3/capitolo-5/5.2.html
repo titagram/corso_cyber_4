@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>5.2 Inizializzazione e Caricamento Plugin</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-green">
+            <div class="card-title">5.2 Inizializzazione e Caricamento Plugin</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><code>wp-settings.php</code> è il file che orchestra tutto.</li>
+                        <li><strong>1.</strong> Carica le librerie, imposta le variabili di base.</li>
+                        <li><strong>2.</strong> Carica i plugin "Must-Use" (<code>mu-plugins</code>).</li>
+                        <li><strong>3.</strong> Poi carica i plugin attivi (dalla tabella <code>wp_options</code>).</li>
+                        <li><strong>4.</strong> Infine, carica il <code>functions.php</code> del tema.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>L'ordine di caricamento è importante. I plugin "Must-Use" vengono eseguiti per primi, il che li rende un buon posto per mettere codice di sicurezza critico. Poi vengono i plugin normali, e solo alla fine il tema.</p>
+                    <p>Se un plugin e un tema definiscono una funzione con lo stesso nome, questo può causare un errore fatale. La conoscenza di questo ordine è essenziale per il debugging.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="5.1.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="5.3.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

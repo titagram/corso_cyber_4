@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>3.1 Anatomia della Root Directory</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-blue">
+            <div class="card-title">3.1 Anatomia della Root Directory</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><strong>wp-admin/</strong>: Il pannello di amministrazione.</li>
+                        <li><strong>wp-includes/</strong>: File e librerie del core di WP.</li>
+                        <li><strong>wp-content/</strong>: Il "regno" degli utenti: temi, plugin, uploads.</li>
+                        <li><strong>wp-config.php</strong>: Il file più critico. Contiene le credenziali del DB.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>La struttura di WordPress è molto chiara. <code>wp-admin</code> e <code>wp-includes</code> sono il "core". In un setup ideale, l'utente <code>www-data</code> non dovrebbe mai poterli modificare.</p>
+                    <p><code>wp-content</code> è dove avviene tutta l'azione: i temi, i plugin che installiamo, e i file che carichiamo finiscono tutti qui. È la <strong>superficie di attacco principale</strong>, perché è l'unica parte che, per design, deve essere parzialmente scrivibile dal web server.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="../capitolo-2/2.7.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="3.2.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

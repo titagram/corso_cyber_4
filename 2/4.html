@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Vulnerability Assessment vs Penetration Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">⚖️ Vulnerability Assessment vs Penetration Test</h1>
+        <div class="subtitle">Due Approcci Complementari ma Distinti</div>
+
+        <div class="grid-2-col">
+            <div class="card border-green">
+                <div class="card-title">📊 Vulnerability Assessment</div>
+                <div class="card-text">
+                    <p><strong>Obiettivo:</strong> Identificare e catalogare vulnerabilità</p>
+                    <br>
+                    <p><strong>Approccio:</strong></p>
+                    <p>• Basato su checklist e standard</p>
+                    <p>• Scansione automatizzata + validazione</p>
+                    <p>• NO exploitation attiva</p>
+                    <p>• NO privilege escalation</p>
+                    <p>• NO lateral movement</p>
+                    <br>
+                    <p><strong>Quando:</strong></p>
+                    <p>✓ Monitoraggio mensile/trimestrale</p>
+                    <p>✓ Tutte le organizzazioni</p>
+                    <p>✓ Vista delle vulnerabilità note</p>
+                    <br>
+                    <p class="security-insight"><strong>Vantaggi:</strong> Cost-effective, meno skill richieste, frequente</p>
+                </div>
+            </div>
+
+            <div class="card border-red">
+                <div class="card-title">💣 Penetration Test</div>
+                <div class="card-text">
+                    <p><strong>Obiettivo:</strong> Simulare un attacco reale</p>
+                    <br>
+                    <p><strong>Approccio:</strong></p>
+                    <p>• Tattiche manuali e automatizzate</p>
+                    <p>• Exploitation attiva</p>
+                    <p>• Privilege escalation</p>
+                    <p>• Lateral movement</p>
+                    <p>• Post-exploitation</p>
+                    <br>
+                    <p><strong>Quando:</strong></p>
+                    <p>✓ Annuale/Semi-annuale</p>
+                    <p>✓ Media-alta maturità di sicurezza</p>
+                    <p>✓ Attack chain realistiche</p>
+                    <br>
+                    <p class="security-insight"><strong>Vantaggi:</strong> Analisi approfondita, raccomandazioni personalizzate</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-blue" style="margin-top: 25px;">
+            <div class="card-title">🔄 Sono Complementari!</div>
+            <div class="card-text">
+                <p>Le organizzazioni dovrebbero eseguire <strong>vulnerability assessment regolari</strong> per identificare nuove vulnerabilità man mano che vengono scoperte, anche se ricevono penetration test annuali.</p>
+                <br>
+                <p><span class="text-yellow">⚠️ Importante:</span> I penetration test dovrebbero essere eseguiti SOLO dopo aver condotto con successo alcuni vulnerability assessment e aver implementato le correzioni.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 4;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

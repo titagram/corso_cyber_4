@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Risk e Likelihood Matrix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">⚖️ Risk (Rischio)</h1>
+        <div class="subtitle">La Possibilità che Asset o Dati Vengano Danneggiati</div>
+
+        <div class="card border-purple">
+            <div class="card-title">📐 Formula del Rischio</div>
+            <div class="card-text" style="text-align: center;">
+                <h2 style="color: #667eea; font-size: 2em; margin: 20px 0;">Threat + Vulnerability = Risk</h2>
+                <br>
+                <p style="text-align: left;"><strong>Risk:</strong> Qualcosa di negativo che <span class="text-red">potrebbe</span> accadere</p>
+                <p style="text-align: left;"><strong>Threat:</strong> Qualcosa di negativo che <span class="text-yellow">sta</span> accadendo</p>
+                <p style="text-align: left;"><strong>Vulnerability:</strong> Debolezze che <span class="text-blue">potrebbero portare</span> a una minaccia</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/whatisrisk.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Risk Matrix">
+        </div>
+
+        <div class="card border-blue" style="margin-top: 25px;">
+            <div class="card-title">📊 Matrice Likelihood-Impact</div>
+            <div class="card-text">
+                <p>Il rischio viene misurato usando una matrice qualitativa basata su <strong>probabilità (likelihood)</strong> e <strong>impatto</strong>:</p>
+                <br>
+                <div class="grid-2-col">
+                    <div>
+                        <p><strong>Rischio Più Basso (1):</strong></p>
+                        <p>Low Likelihood + Low Impact</p>
+                        <br>
+                        <p><strong>Rischio Medio (3):</strong></p>
+                        <p>High Likelihood + Low Impact<br>
+                        oppure Medium Likelihood + Medium Impact</p>
+                    </div>
+                    <div>
+                        <p><strong>Rischio Più Alto (5):</strong></p>
+                        <p>High Likelihood + High Impact</p>
+                        <br>
+                        <p class="security-insight">Le vulnerabilità con alta probabilità di essere sfruttate e alto impatto sull'organizzazione devono essere prioritizzate per la remediation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 8;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

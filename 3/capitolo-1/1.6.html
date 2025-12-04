@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>1.6 Versioni PHP e Moduli Pericolosi</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-blue">
+            <div class="card-title">1.6 Versioni PHP e Moduli Pericolosi</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Usare sempre versioni di PHP attivamente supportate.</li>
+                        <li>Vecchie versioni hanno vulnerabilità note e non patchate.</li>
+                        <li><strong>Disabilitare funzioni PHP pericolose:</strong></li>
+                    </ul>
+                    <div class="code-box">exec, shell_exec, passthru, system</div>
+                    <ul>
+                        <li>Modificare <code>php.ini</code>:</li>
+                    </ul>
+                    <div class="code-box">disable_functions = exec,shell_exec,passthru,system</div>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Usare una versione di PHP obsoleta è come lasciare la porta di casa aperta. Le vulnerabilità vengono scoperte continuamente, e senza patch di sicurezza il vostro sito è esposto.</p>
+                    <p>Inoltre, PHP ha funzioni molto potenti che permettono di eseguire comandi a livello di sistema operativo. Se la vostra applicazione non ne ha bisogno, disabilitatele nel <code>php.ini</code>. Questo può impedire a un attaccante di ottenere una shell completa anche dopo aver sfruttato una RCE.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="1.5.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="1.7.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

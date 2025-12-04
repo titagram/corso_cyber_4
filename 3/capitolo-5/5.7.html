@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>5.7 REST API Lifecycle</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-green">
+            <div class="card-title">5.7 REST API Lifecycle (`/wp-json`)</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Le richieste a <code>/wp-json/</code> hanno un lifecycle diverso.</li>
+                        <li>WordPress rileva la richiesta e carica il server REST API.</li>
+                        <li>Viene eseguito l'hook <code>rest_api_init</code>, where custom routes are registered.</li>
+                        <li>L'autenticazione è gestita separatamente.</li>
+                        <li>⚠️ Molti plugin di sicurezza "tradizionali" non proteggevano adeguatamente la REST API.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>La REST API è quasi un'applicazione a sé stante dentro WordPress. Ha i suoi hooks, il suo sistema di routing e di autenticazione. Quando è stata introdotta, ha aperto una nuova, vasta superficie di attacco.</p>
+                    <p>Molti siti avevano regole di sicurezza che si applicavano solo al frontend "classico", lasciando gli endpoint API esposti. È fondamentale assicurarsi che le protezioni coprano anche questo percorso, inclusi rate limiting e validazione input.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="5.6.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="5.8.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

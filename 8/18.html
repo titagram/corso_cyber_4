@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniezione nel Plugin - Slide 18</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Injection: Modifica di Hello Dolly</h1>
+        <div class="subtitle">Iniezione nel Plugin</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Azione</div>
+                <div class="card-text">
+                    <ol>
+                        <li>Menu "Plugin" -> "Editor file del plugin".</li>
+                        <li>Selezionare "Hello Dolly".</li>
+                        <li>Sostituire tutto il codice con la nostra Reverse Shell.</li>
+                        <li>Salvare ("Update File").</li>
+                        <li><strong>IMPORTANTE:</strong> Avviare listener: <code>nc -lvnp 4444</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione Tecnica</div>
+                <div class="card-text">
+                    <p><strong>Perché Hello Dolly?</strong> È un plugin presente di default su tutte le installazioni WP, spesso inattivo e dimenticato. È il nascondiglio perfetto per una backdoor temporanea.</p>
+                    <p>L'editor di plugin interno di WP è una "feature" pericolosissima se un account admin viene compromesso.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 18;</script>
+    <script src="main.js"></script>
+</body>
+</html>

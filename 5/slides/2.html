@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 1: Network Discovery & Fingerprinting - Setup Iniziale</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 1: Network Discovery & Fingerprinting</h1>
+        <div class="subtitle">Slide 1.1: Setup Iniziale dell'Ambiente</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Risoluzione DNS Locale</div>
+                <div class="card-text">
+                    <p>Prima di qualsiasi attività di pentesting, è fondamentale configurare l'ambiente. Vogliamo che il nostro sistema risolva il dominio <code class="tech-term">vulnerable-wp.local</code> nell'IP del target.</p>
+                    <p>Il file <code class="tech-term">/etc/hosts</code> ha priorità sul DNS esterno, permettendoci di creare una mappatura locale nome→IP.</p>
+                    <br>
+                    <p><strong>Perché è importante?</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>WordPress usa i nomi di dominio per i redirect</li>
+                        <li>Alcuni plugin verificano il dominio</li>
+                        <li>Simula un ambiente di produzione reale</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Questa tecnica è usata anche negli attacchi DNS Spoofing per dirottare traffico legittimo verso server malevoli.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Configurazione /etc/hosts</div>
+                <div class="card-text">
+                    <p><strong>Step 1:</strong> Aggiungiamo la mappatura nel file hosts:</p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─#</span> echo "10.10.10.20 vulnerable-wp.local" >> /etc/hosts</div>
+                    <br>
+                    <p><strong>Step 2:</strong> Verifichiamo la configurazione:</p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─#</span> ping -c 2 vulnerable-wp.local
+
+PING vulnerable-wp.local (10.10.10.20) 56(84) bytes of data.
+64 bytes from 10.10.10.20: icmp_seq=1 ttl=64 time=0.5 ms
+64 bytes from 10.10.10.20: icmp_seq=2 ttl=64 time=0.4 ms
+
+--- vulnerable-wp.local ping statistics ---
+2 packets transmitted, <span class="text-green">2 received</span>, 0% packet loss</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ok team, iniziamo dal setup. A sinistra la teoria: modifichiamo /etc/hosts per far credere al nostro sistema che 'vulnerable-wp.local' corrisponda all'IP 10.10.10.20.
+        A destra, la pratica. Il comando 'echo' con '>>' AGGIUNGE la riga senza cancellare il contenuto esistente. Attenzione: usare '>' singolo cancellerebbe tutto il file!
+        Il ping conferma che la risoluzione funziona. Se non risponde, verificate che la VM target sia accesa e sulla stessa rete."
+    -->
+
+    <script>const slideNumero = 2;</script>
+    <script src="main.js"></script>
+</body>
+</html>

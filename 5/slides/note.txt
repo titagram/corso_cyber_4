@@ -1,0 +1,3 @@
+- capire dove mettere l'api key i wpscan su mac
+- verificare vulnerabilità di dvwa
+- sistemare 25.html

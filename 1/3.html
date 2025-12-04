@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Output Encoding - XSS Contexts</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🎨 Output Encoding - XSS Contexts</h1>
+        <div class="subtitle">Context-aware encoding: l'output encoding deve adattarsi al contesto</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>Context is King</strong> - Non esiste un'unica funzione "escape" universale. Devi codificare l'output in base al contesto: HTML, HTML Attribute, JavaScript, URL, CSS. Usare l'encoding sbagliato = XSS.</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>Template Engine Auto-Escaping</strong> - Usa framework moderni (React JSX, Vue, Angular) con escaping automatico o librerie come DOMPurify</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Context-Aware Encoding</strong> - HTML entity encoding per HTML body, JavaScript encoding per script context, URL encoding per href/src</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Content Security Policy (CSP)</strong> - Header <span class="tech-term">Content-Security-Policy: default-src 'self'</span> per mitigare XSS anche in caso di bypass</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Evita innerHTML, eval(), new Function()</strong> - Usa invece textContent, createElement, o template sicuri</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ DIFESA & IMPLEMENTAZIONE</div>
+            <div class="card-text">
+                <p><strong>Protezione da XSS:</strong> Previeni <span class="tech-term">Cross-Site Scripting</span> (Reflected, Stored, DOM-based) con encoding context-aware e Content Security Policy, proteggendo sessioni e dati utente.</p>
+                <br>
+                <p><strong>Framework Moderni - Auto-Escaping:</strong></p>
+                <div class="code-box">// ✅ Framework con auto-escaping (raccomandato)
+React JSX → {variabile} è safe di default
+Vue → {{ variabile }} è safe di default  
+Angular → {{ variabile }} è safe di default
+
+// ⚠️ Bypass solo se HTML trusted + sanitized
+DOMPurify.sanitize(html) → rimuove payload XSS</div>
+                <br>
+                <p><strong>Content Security Policy (CSP) - Mitigazione XSS:</strong></p>
+                <div class="code-box">// ✅ CSP Header - Anche se XSS esiste, limita il danno
+Content-Security-Policy: 
+  default-src 'self';
+  script-src 'self' 'nonce-{random}';
+  object-src 'none';
+  
+// Blocca inline scripts non autorizzati
+// Usa Helmet.js (Node) o equivalenti per setup</div>
+                <br>
+                <p><strong>DOM Manipulation Sicura:</strong></p>
+                <div class="code-box">// ✅ SICURO
+textContent, setAttribute, createElement
+
+// ❌ PERICOLOSO - Evita sempre
+innerHTML, eval(), new Function(), setTimeout(string)
+
+// Se HTML necessario → DOMPurify.sanitize()</div>
+                <br>
+                <p><strong>Tools e Librerie di Prevenzione XSS:</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>DOMPurify:</strong> HTML sanitization (client e server)</li>
+                    <li>✓ <strong>Helmet.js:</strong> Security headers per Express</li>
+                    <li>✓ <strong>OWASP Java Encoder:</strong> Context-aware encoding</li>
+                    <li>✓ <strong>Bleach (Python):</strong> HTML sanitization</li>
+                </ul>
+                <br>
+                <p class="security-insight"><strong>Best Practice:</strong> Usa sempre framework moderni con auto-escaping. Implementa CSP strict. Valida input e codifica output. Evita innerHTML e eval(). Testa regolarmente con scanner XSS automatici (OWASP ZAP, Burp Suite Scanner).</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 3;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>
+

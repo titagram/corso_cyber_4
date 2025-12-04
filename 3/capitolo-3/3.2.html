@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>3.2 Deep Dive su wp-config.php</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-green">
+            <div class="card-title">3.2 Deep Dive su wp-config.php</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Credenziali del database: <code>DB_USER</code>, <code>DB_PASSWORD</code>.</li>
+                        <li><strong>Salt Keys:</strong> Usate per la sicurezza dei cookie.</li>
+                        <li>Prefisso delle tabelle: <code>$table_prefix</code>.</li>
+                        <li><code>WP_DEBUG</code>: Se <code>true</code>, può rivelare informazioni sensibili.</li>
+                        <li><strong>Se un attaccante legge questo file, ha vinto.</strong></li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p><code>wp-config.php</code> è il file più importante e sensibile. Contiene tutto ciò che serve per connettersi al database. Se un attaccante riesce a leggerlo (ad esempio, a causa di una vulnerabilità di Local File Inclusion), ottiene accesso completo al database.</p>
+                    <p>Le Salt Keys gli permettono di forgiare cookie di autenticazione. <code>WP_DEBUG</code> in produzione è un errore grave perché stampa errori dettagliati che aiutano un attaccante a capire la struttura del sito e identificare vulnerabilità.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="3.1.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="3.3.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

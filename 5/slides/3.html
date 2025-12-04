@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 1: Network Discovery & Fingerprinting - Port Scanning</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 1: Network Discovery & Fingerprinting</h1>
+        <div class="subtitle">Slide 1.2: Port Scanning con Nmap</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Anatomia di una Scansione</div>
+                <div class="card-text">
+                    <p>Il port scanning rivela quali servizi sono in ascolto sul target. Ogni porta aperta è un potenziale vettore d'attacco.</p>
+                    <br>
+                    <p><strong>Flag utilizzati:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code class="tech-term">-sS</code>: SYN Scan (stealth, non completa il 3-way handshake)</li>
+                        <li><code class="tech-term">-sC</code>: Esegue script NSE di default</li>
+                        <li><code class="tech-term">-sV</code>: Rileva versione dei servizi</li>
+                        <li><code class="tech-term">-p-</code>: Scansiona tutte le 65535 porte</li>
+                        <li><code class="tech-term">-T4</code>: Timing aggressivo (più veloce)</li>
+                        <li><code class="tech-term">-oN</code>: Output in formato normale (file)</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> La versione esatta del software (es. Apache 2.4.38) è cruciale per cercare CVE specifiche. Un server "hardened" nasconde queste info.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Scansione Completa</div>
+                <div class="card-text">
+                    <p><strong>Comando:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─#</span> nmap -sS -sC -sV -p- -T4 vulnerable-wp.local -oN scan.txt</div>
+                    <br>
+                    <p><strong>Output (troncato):</strong></p>
+                    <div class="code-box">Starting Nmap 7.94 ( https://nmap.org )
+Nmap scan report for vulnerable-wp.local (10.10.10.20)
+Host is up (0.00051s latency).
+Not shown: 65532 closed tcp ports
+
+PORT     STATE SERVICE VERSION
+<span class="text-green">22/tcp   open  ssh     OpenSSH 7.9p1 Debian</span>
+<span class="text-green">80/tcp   open  http    Apache httpd 2.4.38</span>
+|_http-server-header: Apache/2.4.38 (Debian)
+|_http-title: Vulnerable WordPress Site
+<span class="text-green">3306/tcp open  mysql   MySQL 5.7.26</span>
+
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Passiamo alla scansione delle porte. A sinistra spiego ogni flag di Nmap - memorizzateli perché li userete sempre.
+        Il SYN scan (-sS) è preferito perché non completa la connessione TCP, quindi è meno 'visibile' nei log.
+        A destra, l'output ci rivela 3 porte aperte: SSH (22), HTTP (80) e MySQL (3306). 
+        Notate le versioni: Apache 2.4.38 e MySQL 5.7.26. Queste info saranno fondamentali per cercare vulnerabilità note.
+        Il flag -oN salva l'output in un file - SEMPRE salvare i risultati durante un pentest!"
+    -->
+
+    <script>const slideNumero = 3;</script>
+    <script src="main.js"></script>
+</body>
+</html>

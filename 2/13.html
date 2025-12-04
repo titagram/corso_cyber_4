@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>CIA Triad - Impact Metrics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🛡️ CIA Triad</h1>
+        <div class="subtitle">Confidentiality, Integrity, Availability</div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/cia_triad.png" style="max-width: 80%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="CIA Triad">
+        </div>
+
+        <div class="card border-blue">
+            <div class="card-title">🔐 Confidentiality (Riservatezza)</div>
+            <div class="card-text">
+                <p><strong>Garantisce che solo gli individui autorizzati abbiano accesso ai dati.</strong></p>
+                <br>
+                <p><strong>High Severity:</strong> Un attaccante ruba password o chiavi di crittografia</p>
+                <p><strong>Low Severity:</strong> Un attaccante ottiene informazioni non vitali per l'organizzazione</p>
+                <br>
+                <div class="code-box">Esempio: Furto di credenziali di database
+che contengono dati sensibili dei clienti
+→ HIGH Confidentiality Impact</div>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-green">
+                <div class="card-title">✅ Integrity (Integrità)</div>
+                <div class="card-text">
+                    <p><strong>Assicura che i dati non siano modificati o manomessi, mantenendo l'accuratezza.</strong></p>
+                    <br>
+                    <p><strong>High Severity:</strong> Un attaccante modifica file aziendali cruciali</p>
+                    <p><strong>Low Severity:</strong> Un attaccante non può controllare specificamente i file modificati</p>
+                    <br>
+                    <p class="security-insight">Fondamentale per mantenere la fiducia nei dati aziendali</p>
+                </div>
+            </div>
+
+            <div class="card border-red">
+                <div class="card-title">⚡ Availability (Disponibilità)</div>
+                <div class="card-text">
+                    <p><strong>Garantisce che le informazioni siano prontamente accessibili per le esigenze aziendali.</strong></p>
+                    <br>
+                    <p><strong>High Severity:</strong> Un attaccante causa l'indisponibilità completa dell'ambiente</p>
+                    <p><strong>Low Severity:</strong> Un attaccante non può negare completamente l'accesso</p>
+                    <br>
+                    <p class="security-insight">Essenziale per la continuità operativa</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-purple" style="margin-top: 25px;">
+            <div class="card-title">🎯 Impact Metrics nel CVSS</div>
+            <div class="card-text">
+                <p>Le Impact Metrics rappresentano le ripercussioni dello sfruttamento con successo di un problema e cosa viene impattato in un ambiente. Sono basate sulla CIA Triad e determinano una parte significativa del punteggio CVSS finale.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 13;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

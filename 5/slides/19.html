@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 3: Vulnerability Assessment - Verifica Manuale</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 3: Vulnerability Assessment & Triage</h1>
+        <div class="subtitle">Slide 3.2: Verifica Manuale della Versione</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Trovare la Versione Reale</div>
+                <div class="card-text">
+                    <p>Per confermare o smentire un sospetto di WPScan, dobbiamo determinare la versione esatta del plugin.</p>
+                    <br>
+                    <p><strong>File che contengono la versione:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code class="tech-term">readme.txt</code> - Campo "Stable tag"</li>
+                        <li><code class="tech-term">readme.md</code> - Markdown version</li>
+                        <li><code class="tech-term">changelog.txt</code> - Storia versioni</li>
+                        <li><code class="tech-term">[plugin-name].php</code> - Header PHP</li>
+                        <li><code class="tech-term">package.json</code> - Se usa npm</li>
+                    </ul>
+                    <br>
+                    <p><strong>Percorso standard:</strong></p>
+                    <div class="code-box">/wp-content/plugins/[nome-plugin]/readme.txt</div>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> L'accesso a readme.txt è una piccola "information disclosure", ma è così comune da essere considerata normale. Un admin attento potrebbe bloccarla.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Verifica con cURL</div>
+                <div class="card-text">
+                    <p><strong>Cercare la versione nel readme:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> curl -s http://vulnerable-wp.local/wp-content/plugins/simple-file-list/readme.txt | grep -i "stable tag"</div>
+                    <br>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-box">Stable tag: <span class="text-red">4.2.2</span></div>
+                    <br>
+                    <p><strong>Analisi:</strong></p>
+                    <div class="code-box">Versione installata: <span class="text-red">4.2.2</span>
+Versione fix (CVE):  <span class="text-green">4.2.3</span>
+                    
+<span class="text-red">4.2.2 < 4.2.3 → VULNERABILE!</span></div>
+                    <br>
+                    <p>✅ <strong>Confermato:</strong> La versione 4.2.2 è vulnerabile alla RCE. Il sospetto di WPScan era corretto! Questo è un <span class="text-red">VERO POSITIVO</span>.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ora verifichiamo manualmente. A sinistra, i file che possono contenere la versione.
+        readme.txt è il più comune e affidabile - tutti i plugin del repository WordPress ce l'hanno.
+        A destra, il comando. curl scarica il readme, grep filtra la riga 'Stable tag'.
+        Risultato: 4.2.2. La vulnerabilità è fixata in 4.2.3. Quindi 4.2.2 È vulnerabile!
+        Abbiamo trasformato un 'forse' in un 'sicuramente sì'. Questo è il valore della verifica manuale.
+        Nel report scriveremo: 'Vulnerabilità confermata manualmente tramite verifica versione in readme.txt'."
+    -->
+
+    <script>const slideNumero = 19;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

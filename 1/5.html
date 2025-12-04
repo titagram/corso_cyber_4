@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Auth & Session Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔐 Auth & Session Management</h1>
+        <div class="subtitle">Hashing, Cookie Flags, e Token Security - Proteggere le credenziali e le sessioni</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>Password = Hash + Salt + Algorithm robusto</strong> - Mai salvare password in chiaro o con MD5/SHA1. Usa algoritmi resistenti al bruteforce: Argon2id, bcrypt, scrypt. Session tokens devono essere imprevedibili e protetti da XSS/CSRF.</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>Password Hashing: Argon2id (preferito), bcrypt, scrypt</strong> - NO a MD5, SHA1, SHA256 plain. Work factor elevato (bcrypt cost 12+)</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Cookie Flags: HttpOnly, Secure, SameSite=Strict</strong> - Previene XSS cookie theft e CSRF</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Session Token: Cryptographically Random</strong> - Min 128 bit entropy, genera con <span class="tech-term">crypto.randomBytes()</span>, NO UUID o timestamp-based</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>MFA obbligatoria per admin</strong> - TOTP (Google Authenticator), WebAuthn/FIDO2, o SMS come fallback (mai come metodo primario)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ DIFESA & IMPLEMENTAZIONE</div>
+            <div class="card-text">
+                <p><strong>Protezione Autenticazione e Sessioni:</strong> Previeni <span class="tech-term">Credential Stuffing, Bruteforce, Session Hijacking, CSRF</span> con hashing robusto, cookie sicuri, rate limiting e MFA.</p>
+                <br>
+                <p><strong>Password Hashing - Algoritmi Sicuri:</strong></p>
+                <div class="code-box">// ✅ OWASP Raccomandati (in ordine di preferenza)
+1. Argon2id → Resiste CPU + GPU attacks
+2. bcrypt → Work factor minimo 12
+3. scrypt → Good alternative
+
+// ❌ NON USARE MAI
+MD5, SHA1, SHA256 plain → Crackabili in secondi
+
+// Librerie: argon2 (Node), bcrypt (Python/Ruby), password_hash (PHP)</div>
+                <br>
+                <p><strong>Cookie Sicuri - Flags Obbligatori:</strong></p>
+                <div class="code-box">// ✅ Cookie configuration sicura
+Set-Cookie: session=<random_token>;
+  HttpOnly;        // No JavaScript access (previene XSS theft)
+  Secure;          // Solo HTTPS
+  SameSite=Strict; // CSRF protection
+  Max-Age=1800;    // 30 min
+  
+// ✅ Session regeneration dopo login (previene fixation)
+// Usa express-session, Flask sessions, o equivalenti</div>
+                <br>
+                <p><strong>Rate Limiting e Account Protection:</strong></p>
+                <div class="code-box">// ✅ Protezione Bruteforce
+- Rate limiting su /login → 5 tentativi / 15 min per IP
+- Account lockout → 5 failed attempts = lock 30 min
+- CAPTCHA dopo 3 tentativi falliti
+- Email notification su lock
+
+// Librerie: express-rate-limit, Flask-Limiter, rack-attack (Ruby)</div>
+                <br>
+                <p><strong>Multi-Factor Authentication (MFA):</strong></p>
+                <div class="code-box">// ✅ MFA - Secondo fattore di autenticazione
+Opzioni (in ordine di sicurezza):
+1. WebAuthn/FIDO2 (hardware keys, biometric)
+2. TOTP (Google Authenticator, Authy) 
+3. SMS (fallback, meno sicuro)
+
+// Mandatory per: Admin accounts, Sensitive operations
+// Optional ma raccomandato: Tutti gli utenti
+
+// Librerie: speakeasy (TOTP), @simplewebauthn (WebAuthn)</div>
+                <br>
+                <p><strong>CSRF Protection:</strong></p>
+                <div class="code-box">// ✅ CSRF Protection mechanisms
+1. CSRF Tokens → Unique per session, validati server-side
+2. SameSite Cookie → Strict/Lax mode
+3. Custom Headers → X-CSRF-Token per API
+
+// Framework: csurf (Express), django.middleware.csrf (Django)</div>
+                <br>
+                <p class="security-insight"><strong>Best Practice:</strong> Usa Argon2id o bcrypt per password. Configura cookie con HttpOnly, Secure, SameSite. Implementa rate limiting e account lockout. Abilita MFA per tutti gli account admin e offri come opzione per tutti gli utenti. Rigenera session ID dopo login. Monitora tentativi di login falliti.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 5;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>
+

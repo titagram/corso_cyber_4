@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>1.3 Permessi: Dev vs. Prod</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-yellow">
+            <div class="card-title">1.3 Permessi: Dev (777) vs. Prod (755/644)</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><strong>777:</strong> Lettura, scrittura ed esecuzione per tutti. Errore comune in dev.</li>
+                        <li><strong>755</strong> per le directory: Il proprietario può fare tutto, gli altri leggere ed eseguire.</li>
+                        <li><strong>644</strong> per i file: Il proprietario può leggere/scrivere, gli altri solo leggere.</li>
+                        <li><strong>Obiettivo:</strong> Il web server non deve poter scrivere sul codice sorgente.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Un errore classico è usare <code>chmod -R 777</code> per "risolvere" problemi di permessi. In produzione, questo è un disastro. Significa che se un attaccante trova una falla che permette la scrittura di file, può modificare qualsiasi file, inclusi i file del core di WordPress, per installare una backdoor.</p>
+                    <p><strong>La regola d'oro in produzione:</strong> le directory a <code>755</code> e i file a <code>644</code>. L'utente <code>www-data</code> deve poter scrivere solo in directory specifiche come <code>wp-content/uploads</code>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="1.2.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="1.4.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

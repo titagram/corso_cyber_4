@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>2.3 Actions vs. Filters</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-yellow">
+            <div class="card-title">2.3 Actions vs. Filters</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><strong>Actions:</strong> Fanno qualcosa. Non restituiscono un valore.</li>
+                    </ul>
+                    <div class="code-box">add_action('save_post', 'my_function');</div>
+                    <ul>
+                        <li><strong>Filters:</strong> Modificano dati. Ricevono un valore, lo cambiano e lo restituiscono.</li>
+                    </ul>
+                    <div class="code-box">add_filter('the_title', 'my_other_function');</div>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>La distinzione è fondamentale. Le <strong>Actions</strong> sono per eseguire azioni: loggare un evento, invalidare una cache, inviare una mail. I <strong>Filters</strong> sono per modificare dati in transito: cambiare il contenuto di un post prima di mostrarlo, alterare una query al database.</p>
+                    <p>Un errore comune è dimenticare di restituire il valore in un filtro, il che "rompe" la catena e può causare la sparizione di contenuti. Dal punto di vista della sicurezza, i filtri sono particolarmente potenti (e pericolosi).</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="2.2.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="2.4.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

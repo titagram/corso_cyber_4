@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>5.1 Flusso di Caricamento Iniziale</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-blue">
+            <div class="card-title">5.1 Flusso di Caricamento Iniziale</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Tutto parte da <code>index.php</code>.</li>
+                        <li><code>index.php</code> → <code>wp-blog-header.php</code></li>
+                        <li><code>wp-blog-header.php</code> → <code>wp-load.php</code></li>
+                        <li><code>wp-load.php</code> carica <code>wp-config.php</code> e poi <code>wp-settings.php</code>, where the magic begins.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Capire il flusso di bootstrap è importante per sapere dove intervenire. Ogni richiesta a una pagina WordPress passa attraverso questa catena di file.</p>
+                    <p>Se un attaccante modifica uno di questi file core, può eseguire codice malevolo all'inizio di ogni singola richiesta, prima ancora che i plugin di sicurezza vengano caricati. Questo è il motivo per cui i file core devono essere read-only per <code>www-data</code>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="../capitolo-4/4.7.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="5.2.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

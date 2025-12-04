@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 1: Network Discovery & Fingerprinting - HTTP Headers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 1: Network Discovery & Fingerprinting</h1>
+        <div class="subtitle">Slide 1.3: Analisi degli Header HTTP</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Leggere gli Header HTTP</div>
+                <div class="card-text">
+                    <p>Ogni risposta HTTP contiene header con metadati preziosi per il pentester. Gli header più interessanti sono:</p>
+                    <br>
+                    <ul style="margin-left: 20px;">
+                        <li><code class="tech-term">Server</code>: Rivela web server e versione</li>
+                        <li><code class="tech-term">X-Powered-By</code>: Tecnologia backend (PHP, ASP.NET)</li>
+                        <li><code class="tech-term">X-Frame-Options</code>: Protezione clickjacking</li>
+                        <li><code class="tech-term">X-XSS-Protection</code>: Filtro XSS del browser</li>
+                        <li><code class="tech-term">Content-Security-Policy</code>: Policy CSP</li>
+                        <li><code class="tech-term">Set-Cookie</code>: Flag di sicurezza dei cookie</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> L'assenza di header di sicurezza (CSP, X-Frame-Options) indica una configurazione debole. Annotate ogni header mancante nel vostro report.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Analisi con cURL</div>
+                <div class="card-text">
+                    <p><strong>Richiesta solo header (-I = HEAD request):</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> curl -I http://vulnerable-wp.local</div>
+                    <br>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-box">HTTP/1.1 200 OK
+Date: Mon, 01 Dec 2025 10:00:00 GMT
+<span class="text-red">Server: Apache/2.4.38 (Debian)</span>
+<span class="text-red">X-Powered-By: PHP/7.3.4</span>
+Link: &lt;http://vulnerable-wp.local/wp-json/&gt;; rel="https://api.w.org/"
+Content-Type: text/html; charset=UTF-8
+
+<span class="text-yellow">⚠️ MANCANO: X-Frame-Options, CSP, X-XSS-Protection</span></div>
+                    <br>
+                    <p><strong>Verboso (-v) per vedere anche request headers:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> curl -v http://vulnerable-wp.local 2>&1 | head -20</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ora analizziamo cosa ci dice il web server di sé stesso. A sinistra, la lista degli header importanti da cercare.
+        A destra, usiamo curl con -I per richiedere solo gli header (HEAD request, non scarica il body).
+        L'output è una miniera d'oro: Apache 2.4.38, PHP 7.3.4, e notiamo il link alle REST API di WordPress (/wp-json/).
+        Cosa manca? X-Frame-Options, CSP, X-XSS-Protection. Questo va nel report come 'Security Misconfiguration'.
+        Il server è troppo 'loquace' - rivela troppe informazioni. Un server hardened mostrerebbe solo 'Server: Apache'."
+    -->
+
+    <script>const slideNumero = 4;</script>
+    <script src="main.js"></script>
+</body>
+</html>

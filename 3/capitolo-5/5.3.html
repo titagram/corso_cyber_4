@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>5.3 La Main Query (WP_Query)</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-yellow">
+            <div class="card-title">5.3 La Main Query (WP_Query)</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Dopo aver caricato tutto, WordPress analizza l'URL.</li>
+                        <li>Crea un oggetto <code>WP_Query</code> che traduce l'URL in una query SQL.</li>
+                        <li>L'hook <code>pre_get_posts</code> permette di modificare questa query prima che venga eseguita.</li>
+                        <li>È qui che la richiesta "diventa" una query al database.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>La <code>WP_Query</code> è il cuore del sistema di recupero dei contenuti. È un pezzo di codice molto complesso che costruisce dinamicamente una query SQL basata sui parametri dell'URL.</p>
+                    <p>L'hook <code>pre_get_posts</code> è estremamente potente. I plugin lo usano per creare filtri di ricerca avanzati o per escludere certe categorie di post, ma se usato male, può rompere completamente il sito o introdurre vulnerabilità SQLi.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="5.2.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="5.4.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

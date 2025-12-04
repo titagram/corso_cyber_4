@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>2.5 I Plugin di Sicurezza usano i Filters</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-purple">
+            <div class="card-title">2.5 I Plugin di Sicurezza usano i Filters</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Un plugin WAF può usare i filtri per la sanitizzazione:</li>
+                    </ul>
+                    <div class="code-box">add_filter('the_content', 'sanitize_output');</div>
+                    <ul>
+                        <li>La funzione <code>sanitize_output</code> pulisce il codice da XSS prima che venga mostrato.</li>
+                        <li>Possono anche filtrare <code>$_GET</code> e <code>$_POST</code> per bloccare SQLi.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>I filtri sono lo strumento principale dei plugin di sicurezza. Possono intercettare qualsiasi dato prima che venga salvato nel database o mostrato all'utente.</p>
+                    <p>Un plugin WAF si aggancia a filtri sui dati in input per cercare pattern di SQL injection o XSS. Si aggancia anche a filtri sui dati in output per assicurarsi che nessun codice malevolo venga renderizzato nella pagina, agendo come un secondo livello di difesa (defense in depth).</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="2.4.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="2.6.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>2.7 Confronto con il Service Container</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-green">
+            <div class="card-title">2.7 Confronto con il Service Container di Laravel</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><strong>Laravel:</strong> Le dipendenze (es. la connessione al DB) sono "iniettate" nei controller.</li>
+                        <li>Ogni componente dichiara ciò di cui ha bisogno.</li>
+                        <li><strong>WordPress:</strong> I componenti si aspettano di trovare le dipendenze nello scope globale.</li>
+                        <li>Il Service Container offre isolamento e prevedibilità.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Facciamo un parallelo con Laravel. In Laravel, se un controller ha bisogno di parlare con il database, lo riceve come argomento nel costruttore. Il Service Container si occupa di crearlo e passarglielo.</p>
+                    <p>In WordPress, una funzione semplicemente assume che <code>$wpdb</code> esista e sia configurato correttamente. L'approccio di Laravel rende il codice più testabile, isolato e manutenibile, riducendo i rischi di effetti collaterali indesiderati.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="2.6.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="../capitolo-3/3.1.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

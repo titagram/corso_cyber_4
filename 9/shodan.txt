@@ -1,0 +1,10 @@
+http.title:"Solr Admin"
+"Apache Solr" port:8983
+product:Elasticsearch port:9200
+"VMware Horizon"
+"Ruckus Wireless Admin"
+"Apache Struts"
+"Apache Druid"
+"Apache Flink"
+"Logstash"
+"Unifi Network" port:8443

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>5.6 Il caricamento del WAF</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-blue">
+            <div class="card-title">5.6 Il caricamento del WAF</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><strong>Quando viene caricato un plugin WAF?</strong></li>
+                        <li>Se è un plugin normale, viene caricato insieme a tutti gli altri. Potrebbe essere troppo tardi.</li>
+                        <li>Se è un "Must-Use" plugin, viene caricato prima. ✅ Meglio.</li>
+                        <li><strong>L'ideale:</strong> un WAF a livello di server (es. ModSecurity).</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Il tempismo è tutto per un WAF. Se un plugin malevolo viene caricato prima del WAF, potrebbe bypassarlo. Ecco perché i WAF seri spesso si installano come <code>mu-plugin</code>.</p>
+                    <p>Ma la soluzione migliore in assoluto è un WAF a livello di web server, che agisce da filtro prima ancora che PHP venga invocato. Questo protegge anche da attacchi che mirano a sfruttare vulnerabilità nel motore PHP stesso.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="5.5.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="5.7.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

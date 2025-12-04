@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 2: WordPress Enumeration - XML-RPC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 2: WordPress Enumeration</h1>
+        <div class="subtitle">Slide 2.6: XML-RPC - Il Vettore Sottovalutato</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Cos'è XML-RPC</div>
+                <div class="card-text">
+                    <p><code class="tech-term">xmlrpc.php</code> è un'interfaccia legacy per pubblicare contenuti da remoto. È abilitata di default ed è un vettore d'attacco potentissimo.</p>
+                    <br>
+                    <p><strong>Perché è pericoloso:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><span class="text-red">Brute Force Amplificato</span>: un singolo request può testare centinaia di password (system.multicall)</li>
+                        <li><span class="text-red">DDoS Amplification</span>: pingback può essere usato per amplificare attacchi</li>
+                        <li><span class="text-red">Bypass WAF</span>: molti WAF non filtrano XML-RPC</li>
+                        <li><span class="text-red">No Rate Limiting</span>: spesso non ha protezioni</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> XML-RPC dovrebbe essere DISABILITATO in produzione. Se lo trovate attivo, è una vulnerabilità da segnalare e sfruttare.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Testing XML-RPC</div>
+                <div class="card-text">
+                    <p><strong>Verificare se XML-RPC è attivo:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> curl -s -X POST http://vulnerable-wp.local/xmlrpc.php \
+    -d '&lt;methodCall&gt;&lt;methodName&gt;system.listMethods&lt;/methodName&gt;&lt;/methodCall&gt;'</div>
+                    <br>
+                    <p><strong>Output (se attivo):</strong></p>
+                    <div class="code-box">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;methodResponse&gt;
+  &lt;params&gt;&lt;param&gt;&lt;value&gt;&lt;array&gt;&lt;data&gt;
+    <span class="text-green">&lt;value&gt;&lt;string&gt;system.multicall&lt;/string&gt;&lt;/value&gt;</span>
+    &lt;value&gt;&lt;string&gt;wp.getUsersBlogs&lt;/string&gt;&lt;/value&gt;
+    &lt;value&gt;&lt;string&gt;wp.getAuthors&lt;/string&gt;&lt;/value&gt;
+    ... (80+ metodi)
+  &lt;/data&gt;&lt;/array&gt;&lt;/value&gt;&lt;/param&gt;&lt;/params&gt;
+&lt;/methodResponse&gt;</div>
+                    <br>
+                    <p><span class="text-green">✓ XML-RPC attivo!</span> Vettore per brute force disponibile.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "XML-RPC è spesso ignorato ma è FONDAMENTALE. A sinistra, perché è così pericoloso.
+        Il metodo system.multicall permette di inviare centinaia di tentativi di login in UNA SOLA richiesta HTTP.
+        Questo bypassa la maggior parte delle protezioni anti-brute-force che contano le richieste.
+        A destra, il test. Inviamo una richiesta POST con XML per listare i metodi disponibili.
+        Se risponde con la lista, XML-RPC è attivo. Notate 'system.multicall' nell'output - è la nostra arma.
+        Molti WAF non filtrano il traffico XML-RPC perché non sanno che è un vettore d'attacco!"
+    -->
+
+    <script>const slideNumero = 15;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

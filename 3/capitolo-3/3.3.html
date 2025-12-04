@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>3.3 La cartella `uploads` e le Web Shell</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-yellow">
+            <div class="card-title">3.3 La cartella `uploads` e le Web Shell</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li><code>wp-content/uploads/</code> è dove finiscono i media caricati.</li>
+                        <li>Deve essere scrivibile da <code>www-data</code>.</li>
+                        <li>Se un attaccante riesce a bypassare i controlli e a caricare un file <code>.php</code> qui...</li>
+                        <li>...ha una <strong>web shell persistente</strong> (se l'esecuzione di PHP non è bloccata).</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>La cartella <code>uploads</code> è il campo di battaglia principale. È la porta di ingresso per le web shell. Molte vulnerabilità nei plugin riguardano la gestione insicura degli upload.</p>
+                    <p>L'attaccante cerca di mascherare un file PHP come se fosse un'immagine (es. <code>shell.php.jpg</code>) per bypassare i controlli. Se ci riesce, e se il server è configurato per eseguire PHP in quella cartella, il gioco è fatto. Questo è il motivo per cui bloccare l'esecuzione di PHP in <code>uploads</code> è critico.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="3.2.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="3.4.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

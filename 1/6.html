@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Access Control - IDOR & Server-side Checks</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🚫 Access Control - IDOR & Server-side Checks</h1>
+        <div class="subtitle">Ogni richiesta deve verificare: "Questo utente può fare questa operazione su questa risorsa?"</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>Zero Trust per ogni richiesta</strong> - Non fidarti mai del fatto che l'utente "non dovrebbe" arrivare a un endpoint. Implementa controlli di autorizzazione server-side per ogni operazione. Client-side controls = UX, non security.</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>Server-side Authorization per ogni endpoint</strong> - Verifica che <span class="tech-term">req.user.id</span> abbia i permessi per accedere alla risorsa richiesta</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Direct Object References: usa UUID invece di ID incrementali</strong> - Rende IDOR enumeration molto più difficile</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Centralizza la logica di autorizzazione</strong> - Middleware/Decorator per RBAC/ABAC (Role/Attribute-Based Access Control)</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Principle of Least Privilege</strong> - Deny by default, abilita solo operazioni esplicitamente permesse per quel ruolo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ DIFESA & IMPLEMENTAZIONE</div>
+            <div class="card-text">
+                <p><strong>Protezione Access Control:</strong> Previeni <span class="tech-term">IDOR (Insecure Direct Object Reference)</span> e privilege escalation implementando controlli di autorizzazione server-side per ogni richiesta.</p>
+                <br>
+                <p><strong>Authorization Check - Principio Base:</strong></p>
+                <div class="code-box">// ✅ OGNI endpoint deve verificare autorizzazione
+function getInvoice(req, res) {
+    // 1. Autentica utente (chi sei?)
+    // 2. Autorizza operazione (puoi farlo?)
+    
+    if (invoice.userId !== req.user.id && !req.user.isAdmin) {
+        return res.status(403).json({ error: 'Forbidden' });
+    }
+    
+    // Ok, procedi...
+}
+
+// Centralizza logica in middleware per riutilizzo</div>
+                <br>
+                <p><strong>RBAC (Role-Based Access Control):</strong></p>
+                <div class="code-box">// ✅ Sistema permessi basato su ruoli
+Ruoli: admin, editor, viewer, user
+Permissions: resource:action (es. posts:delete)
+
+// Middleware verifica: user.role ha permission necessaria?
+// Se no → 403 Forbidden + log security event
+
+// Alternative: ABAC (Attribute-Based) per regole complesse</div>
+                <br>
+                <p><strong>UUID vs ID Sequenziali:</strong></p>
+                <div class="code-box">// ❌ ID Sequenziali (1, 2, 3, ...)
+- Enumerabili → Facile provare tutti gli ID
+- Rivelano informazioni (totale utenti, rate di crescita)
+
+// ✅ UUID v4 (random 128-bit)
+- Non enumerabili → Non indovinabili
+- No information leakage
+- Safe per distributed systems
+
+// Usa UUID per resource IDs pubblici</div>
+                <br>
+                <p><strong>Protezione Mass Assignment:</strong></p>
+                <div class="code-box">// ❌ VULNERABLE - Salva tutti i campi da req.body
+User.update(req.user.id, req.body)
+// Attacker: { "isAdmin": true, "balance": 999999 }
+
+// ✅ SAFE - Whitelist campi modificabili
+const allowed = ['name', 'email', 'avatar'];
+const updates = pick(req.body, allowed);
+User.update(req.user.id, updates);
+
+// Pattern: DTO, explicit field mapping, ORM field whitelist</div>
+                <br>
+                <p><strong>Testing Access Control:</strong></p>
+                <div class="code-box">// ✅ Test matrix: Ogni ruolo × Ogni endpoint
+- User1 accede a risorsa User2 → expect 403
+- User accede a endpoint Admin → expect 403
+- Admin accede a tutto → expect 200/201
+
+// Tools: Burp Autorize extension, OWASP ZAP, test suite custom</div>
+                <br>
+                <p><strong>Tools per Testing Access Control:</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Burp Suite Autorize Extension:</strong> Testing automatico authorization</li>
+                    <li>✓ <strong>OWASP ZAP Access Control Testing:</strong> Scanner automatico</li>
+                    <li>✓ <strong>Postman Test Collections:</strong> Test matrix ruoli/permessi</li>
+                    <li>✓ <strong>Custom CI/CD Tests:</strong> Integration tests per ogni ruolo</li>
+                </ul>
+                <br>
+                <p class="security-insight"><strong>Best Practice:</strong> Implementa authorization check su OGNI endpoint. Usa UUID per identificatori. Centralizza logica RBAC in middleware. Whitelist campi modificabili (no mass assignment). Testa sistematicamente con diversi ruoli. Log tutti i tentativi di accesso non autorizzato per monitoring.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 6;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>
+

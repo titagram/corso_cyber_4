@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>4.2 Serializzazione e PHP Object Injection</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-green">
+            <div class="card-title">4.2 Serializzazione e PHP Object Injection</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>WordPress salva dati complessi (array, oggetti) come stringhe serializzate nel DB.</li>
+                        <li>Se un attaccante può controllare una stringa che viene poi deserializzata (<code>unserialize()</code>)...</li>
+                        <li>...può potenzialmente scatenare una vulnerabilità di <strong>PHP Object Injection</strong>.</li>
+                        <li>Questo può portare a RCE, a seconda dei "gadgets" (classi) disponibili.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>La serializzazione è un modo per trasformare un oggetto PHP in una stringa per poterlo salvare. Il problema è che la funzione <code>unserialize()</code> può essere molto pericolosa se usata su dati controllati dall'utente.</p>
+                    <p>Un attaccante può creare una stringa serializzata malevola che, una volta deserializzata, esegue codice tramite metodi "magici" come <code>__wakeup()</code> o <code>__destruct()</code>. È una classe di vulnerabilità complessa ma molto potente, spesso usata in exploitation chains avanzate.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="4.1.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="4.3.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

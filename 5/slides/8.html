@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 1: Network Discovery & Fingerprinting - SSL/TLS Analysis</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 1: Network Discovery & Fingerprinting</h1>
+        <div class="subtitle">Slide 1.7: Analisi SSL/TLS</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Vulnerabilità nei Certificati</div>
+                <div class="card-text">
+                    <p>Quando il target usa HTTPS, l'analisi SSL/TLS può rivelare vulnerabilità critiche nella configurazione crittografica.</p>
+                    <br>
+                    <p><strong>Cosa cercare:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><span class="text-red">SSLv3, TLS 1.0, TLS 1.1</span> → Deprecati</li>
+                        <li><span class="text-red">Cipher suite deboli</span> (RC4, DES, NULL)</li>
+                        <li><span class="text-red">Certificato scaduto/self-signed</span></li>
+                        <li><span class="text-yellow">HSTS mancante</span></li>
+                        <li><span class="text-red">Heartbleed, POODLE, BEAST</span></li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Un certificato self-signed in produzione è un red flag enorme. Indica negligenza nella configurazione e possibile vulnerabilità a MITM.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: testssl.sh</div>
+                <div class="card-text">
+                    <p><strong>Tool consigliato:</strong> testssl.sh (completo e dettagliato)</p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> testssl.sh https://vulnerable-wp.local</div>
+                    <br>
+                    <p><strong>Output esempio (troncato):</strong></p>
+                    <div class="code-box">Testing protocols via sockets...
+
+ SSLv2      not offered (OK)
+ SSLv3      not offered (OK)
+ TLS 1      <span class="text-red">offered (deprecated)</span>
+ TLS 1.1    <span class="text-red">offered (deprecated)</span>
+ TLS 1.2    offered (OK)
+ TLS 1.3    offered (OK)
+
+Testing vulnerabilities:
+ Heartbleed (CVE-2014-0160)    <span class="text-green">not vulnerable (OK)</span>
+ POODLE, SSL (CVE-2014-3566)   <span class="text-green">not vulnerable (OK)</span>
+ 
+<span class="text-yellow">HSTS                           not offered</span></div>
+                    <br>
+                    <p><strong>Alternativa rapida:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> sslscan vulnerable-wp.local:443</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Se il target usa HTTPS, questa analisi è obbligatoria. A sinistra, le vulnerabilità comuni da cercare.
+        A destra, testssl.sh è lo strumento più completo. L'output ci dice che TLS 1.0 e 1.1 sono ancora attivi - vanno disabilitati.
+        Notate che HSTS (HTTP Strict Transport Security) non è configurato. Questo significa che un attaccante potrebbe fare downgrade a HTTP.
+        Nel nostro lab usiamo HTTP, ma in produzione troverete quasi sempre HTTPS. Non saltate mai questa fase!
+        sslscan è un'alternativa più veloce ma meno dettagliata. Usate testssl.sh per report professionali."
+    -->
+
+    <script>const slideNumero = 8;</script>
+    <script src="main.js"></script>
+</body>
+</html>

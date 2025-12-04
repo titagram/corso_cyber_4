@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Nessus - Configurazione Discovery e Assessment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">⚙️ Nessus - Configurazione Avanzata</h1>
+        <div class="subtitle">Discovery, Assessment e Advanced Settings</div>
+
+        <div class="card border-blue">
+            <div class="card-title">🔍 Discovery Settings</div>
+            <div class="card-text">
+                <div class="grid-2-col">
+                    <div>
+                        <p><strong>Host Discovery:</strong></p>
+                        <p>• Abilitare scan per dispositivi fragili</p>
+                        <p>• ⚠️ Attenzione: stampanti di rete potrebbero stampare fogli di carta con testo garbage</p>
+                        <br>
+                        <img src="img/options.png" style="max-width: 100%; border-radius: 8px;" alt="Options">
+                    </div>
+                    <div>
+                        <p><strong>Port Scanning:</strong></p>
+                        <p>• Common ports</p>
+                        <p>• All ports</p>
+                        <p>• Custom range</p>
+                        <br>
+                        <img src="img/discovery.png" style="max-width: 100%; border-radius: 8px;" alt="Discovery">
+                    </div>
+                </div>
+                <br>
+                <p><strong>Service Discovery:</strong></p>
+                <p>• Probe all ports per trovare servizi (abilitato di default)</p>
+                <p>• Identificazione servizi SSL/TLS</p>
+                <p>• Identificazione certificati in scadenza o revocati</p>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-green">
+                <div class="card-title">🌐 Web Application Scanning</div>
+                <div class="card-text">
+                    <img src="img/webapp.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="Web App Settings">
+                    <p>• Abilitare web app scanning se richiesto</p>
+                    <p>• Custom user agent</p>
+                    <p>• URL per test RFI (Remote File Inclusion)</p>
+                    <p>• Opzioni di crawling personalizzabili</p>
+                </div>
+            </div>
+
+            <div class="card border-red">
+                <div class="card-title">🔐 Brute Force & Enumeration</div>
+                <div class="card-text">
+                    <img src="img/hydra.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="Brute Force">
+                    <p><strong>Autenticazione:</strong></p>
+                    <p>• Tentativo con credenziali fornite</p>
+                    <p>• Brute-force con liste custom</p>
+                    <br>
+                    <p><strong>User Enumeration:</strong></p>
+                    <p>• RID Brute Forcing</p>
+                    <p>• Starting/Ending UIDs configurabili</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-purple" style="margin-top: 25px;">
+            <div class="card-title">🛡️ Advanced Settings</div>
+            <div class="card-text">
+                <img src="img/advanced.png" style="max-width: 60%; border-radius: 8px; margin: 15px auto; display: block;" alt="Advanced">
+                <p><strong>Safe Checks:</strong> Abilitato di default - previene check che potrebbero impattare negativamente il target</p>
+                <p><strong>Throttling:</strong> Rallenta la scansione se viene rilevata congestione di rete</p>
+                <p><strong>Stop Scan:</strong> Interrompe la scansione di host che diventano non responsivi</p>
+                <p><strong>Random Order:</strong> Scansiona gli IP target in ordine casuale</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 19;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

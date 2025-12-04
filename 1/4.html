@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Security - Prepared Statements & Least Privilege</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🗄️ Database Security</h1>
+        <div class="subtitle">Prepared Statements & Least Privilege - La prima linea di difesa contro SQL Injection</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>Parametrizzazione è l'unica protezione affidabile</strong> - I Prepared Statements separano la logica SQL dai dati utente. Mai concatenare stringhe per costruire query. Mai.</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>Prepared Statements / Parameterized Queries</strong> - Usa SEMPRE query parametrizzate (PDO, mysqli_prepare, psycopg2, SQLAlchemy ORM)</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Database User con Least Privilege</strong> - L'utente DB dell'app NON deve essere root/admin. Solo SELECT/INSERT/UPDATE/DELETE sulle tabelle necessarie, no DROP, no GRANT</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Stored Procedures per logica complessa</strong> - Quando possibile, incapsula la logica business in stored procedures con privilegi limitati</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Database-level Encryption</strong> - Encryption at rest (Transparent Data Encryption) e in transit (TLS per connessioni DB)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ DIFESA & IMPLEMENTAZIONE</div>
+            <div class="card-text">
+                <p><strong>Protezione da SQL Injection:</strong> Previeni <span class="tech-term">SQL Injection</span> usando query parametrizzate e configurando il database con principio del minimo privilegio, impedendo accesso non autorizzato ai dati.</p>
+                <br>
+                <p><strong>Prepared Statements - Approccio Sicuro:</strong></p>
+                <div class="code-box">// ✅ Parametrizzazione in vari linguaggi
+
+// Node.js → db.execute('SELECT * FROM users WHERE id = ?', [userId])
+// Python → cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
+// Java → PreparedStatement con setInt/setString
+// PHP → PDO prepare() + execute()
+
+// ❌ MAI string concatenation
+// query = "SELECT * FROM users WHERE id = " + userId  // VULNERABLE!</div>
+                <br>
+                <p><strong>ORM Sicuri - Ulteriore Layer di Protezione:</strong></p>
+                <div class="code-box">// ✅ ORM raccomandati (parametrizzano automaticamente)
+Sequelize (Node), SQLAlchemy (Python), 
+Entity Framework (C#), ActiveRecord (Ruby)
+
+// ⚠️ Anche con ORM: NO raw queries con concatenazione!
+// ❌ User.query(`SELECT * FROM users WHERE id = ${userId}`)
+// ✅ User.findOne({ where: { id: userId } })</div>
+                <br>
+                <p><strong>Database Hardening - Principio Minimo Privilegio:</strong></p>
+                <div class="code-box">-- ✅ Utente DB con privilegi minimi
+Concedi SOLO: SELECT, INSERT, UPDATE, DELETE
+Su tabelle necessarie (no wildcard su tutti DB)
+
+NON concedere MAI:
+✗ FILE (read/write filesystem)
+✗ PROCESS (list processes)
+✗ SUPER (admin operations)
+✗ DROP, CREATE, GRANT
+
+// Limita blast radius in caso di SQLi compromise</div>
+                <br>
+                <p><strong>Stored Procedures - Per Logica Critica:</strong></p>
+                <div class="code-box">-- ✅ Stored procedures per operazioni sensibili
+Benefici:
+- Logica business nel DB (atomic operations)
+- Limita surface attack (grant EXECUTE only)
+- Performance (compiled, cached)
+
+// Usa per: transazioni finanziarie, batch operations critiche</div>
+                <br>
+                <p><strong>Monitoring e Alerting:</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Log query sospette:</strong> Multiple OR conditions, UNION, benchmark(), sleep()</li>
+                    <li>✓ <strong>Rate limiting:</strong> Previeni enumerazione massiva</li>
+                    <li>✓ <strong>WAF database-aware:</strong> ModSecurity, AWS WAF con rule SQL injection</li>
+                    <li>✓ <strong>Regular scanning:</strong> SQLMap in modalità safe per testing difensivo</li>
+                </ul>
+                <br>
+                <p class="security-insight"><strong>Best Practice:</strong> Mai concatenare stringhe per query SQL. Usa SEMPRE prepared statements o ORM. Limita privilegi database al minimo necessario. Monitora e log tutte le query. Testa regolarmente con scanner SQLi automatici.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 4;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporting - Best Practices</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">📝 Reporting - Best Practices</h1>
+        <div class="subtitle">Creare Report Professionali per Vulnerability Assessment</div>
+
+        <div class="card border-blue">
+            <div class="card-title">🎯 Importanza del Reporting</div>
+            <div class="card-text">
+                <p>Le <strong>soft skill</strong> nella sicurezza informatica sono critiche per avere successo nel proprio ruolo. Anche se i tool di vulnerability scanning sfruttano strumenti automatizzati, c'è ancora bisogno di trasferire le informazioni in un <strong>report pronto per il cliente</strong>.</p>
+                <br>
+                <p>Il report dovrebbe essere leggibile da chiunque, da una persona tecnica a una non tecnica.</p>
+                <br>
+                <p class="security-insight">Il reporting è la parte più cruciale di qualsiasi assessment!</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/graph.png" style="max-width: 80%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Vulnerability Graph">
+        </div>
+
+        <div class="grid-2-col">
+            <div class="card border-green">
+                <div class="card-title">📋 1. Executive Summary</div>
+                <div class="card-text">
+                    <p>L'Executive Summary è inteso per essere leggibile da un <strong>executive</strong> che necessita di una panoramica ad alto livello.</p>
+                    <br>
+                    <p><strong>Deve includere:</strong></p>
+                    <p>• Overview dei risultati chiave</p>
+                    <p>• Item più importanti da fixare immediatamente</p>
+                    <p>• Prioritizzazione basata sulla severity</p>
+                    <p>• Vista grafica delle vulnerabilità per severity</p>
+                    <br>
+                    <p class="security-insight">Permette agli executive di prioritizzare le remediation</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">📊 2. Overview of Assessment</div>
+                <div class="card-text">
+                    <p>L'Overview dell'Assessment dovrebbe includere la <strong>metodologia</strong> sfruttata durante l'assessment.</p>
+                    <br>
+                    <p><strong>Contenuto:</strong></p>
+                    <p>• Processo di esecuzione dell'assessment</p>
+                    <p>• Tool utilizzati (es. Nessus, OpenVAS)</p>
+                    <p>• Approccio metodologico</p>
+                    <p>• Periodo di testing</p>
+                    <br>
+                    <p>Dettagliare l'esecuzione dell'assessment durante il periodo di testing.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-purple">
+                <div class="card-title">📅 3. Scope e Duration</div>
+                <div class="card-text">
+                    <p>La sezione Scope e Duration dovrebbe includere <strong>tutto ciò che il cliente ha autorizzato</strong> per l'assessment.</p>
+                    <br>
+                    <p><strong>Deve specificare:</strong></p>
+                    <p>• Target scope (IP ranges, domini, applicazioni)</p>
+                    <p>• Out-of-scope items</p>
+                    <p>• Periodo di testing (date inizio/fine)</p>
+                    <p>• Finestre temporali autorizzate</p>
+                    <p>• Limitazioni o restrizioni</p>
+                </div>
+            </div>
+
+            <div class="card border-red">
+                <div class="card-title">🔍 4. Vulnerabilities & Recommendations</div>
+                <div class="card-text">
+                    <p>La sezione più importante del report. Dovrebbe dettagliare i <strong>findings scoperti</strong> durante il vulnerability assessment dopo aver eliminato falsi positivi.</p>
+                    <br>
+                    <p><strong>Per ogni vulnerabilità:</strong></p>
+                    <p>• <strong>Vulnerability Name</strong></p>
+                    <p>• <strong>CVE</strong></p>
+                    <p>• <strong>CVSS Score</strong></p>
+                    <p>• <strong>Description</strong></p>
+                    <p>• <strong>References</strong></p>
+                    <p>• <strong>Remediation Steps</strong></p>
+                    <p>• <strong>Proof of Concept</strong></p>
+                    <p>• <strong>Affected Systems</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-blue" style="margin-top: 25px;">
+            <div class="card-title">✍️ Best Practices di Scrittura</div>
+            <div class="card-text">
+                <p><strong>✓ Scrivere per qualsiasi audience</strong> - Il report deve essere comprensibile sia da tecnici che da non-tecnici</p>
+                <p><strong>✓ Essere concisi e chiari</strong> - Frasi dirette con grammatica corretta</p>
+                <p><strong>✓ Fornire riferimenti</strong> - Quando si descrivono informazioni tecniche, referenziarle per permettere al lettore di comprendere o riprodurre</p>
+                <p><strong>✓ Raggruppare findings simili</strong> - Basati sul tipo di problema o severity</p>
+                <p><strong>✓ Eliminare falsi positivi</strong> - Solo vulnerabilità verificate nel report finale</p>
+                <br>
+                <p class="security-insight">I report più forti sono concisi e chiari per il lettore</p>
+            </div>
+        </div>
+
+        <div class="card border-green" style="margin-top: 25px;">
+            <div class="card-title">🎓 Conclusione del Corso</div>
+            <div class="card-text">
+                <p>Congratulazioni! Hai completato il corso su Vulnerability Assessment.</p>
+                <br>
+                <p><strong>Ora dovresti essere in grado di:</strong></p>
+                <p>✓ Comprendere i diversi tipi di security assessment</p>
+                <p>✓ Eseguire vulnerability assessment con Nessus e OpenVAS</p>
+                <p>✓ Interpretare risultati CVSS e CVE</p>
+                <p>✓ Creare report professionali</p>
+                <p>✓ Applicare best practices di scanning</p>
+                <br>
+                <p><strong>Continua a praticare e buona fortuna nei tuoi assessment!</strong> 🚀</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 31;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

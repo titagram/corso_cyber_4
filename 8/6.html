@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Preparazione Infrastruttura (OOB) - Slide 6</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Setup: Out-Of-Band (OOB) Server</h1>
+        <div class="subtitle">Preparazione Infrastruttura</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Azione</div>
+                <div class="card-text">
+                    <p><strong>Comando:</strong></p>
+                    <div class="code-box">php -S 0.0.0.0:1234</div>
+                    <p><strong>Stato:</strong> Server in ascolto sulla porta 1234.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione Tecnica</div>
+                <div class="card-text">
+                    <p><strong>Perché un server nostro?</strong> L'attacco è <strong>Blind XXE</strong>. Quando carichiamo il file WAV, WordPress non ci mostra a schermo il contenuto di <code>/etc/passwd</code>.</p>
+                    <p><strong>La Strategia:</strong> Dobbiamo costringere il server vittima a "telefonare a casa" (al nostro server PHP) portandosi dietro i dati rubati come parte dell'URL. Questo server servirà sia per ospitare il payload DTD, sia per ricevere i dati esfiltrati.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 6;</script>
+    <script src="main.js"></script>
+</body>
+</html>

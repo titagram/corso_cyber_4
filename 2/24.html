@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Nessus - Best Practices e Troubleshooting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">⚠️ Nessus - Best Practices</h1>
+        <div class="subtitle">Evitare Problemi e Mitigare l'Impatto</div>
+
+        <div class="card border-red">
+            <div class="card-title">🚨 Problemi Potenziali delle Scansioni</div>
+            <div class="card-text">
+                <p>Le scansioni possono causare problemi su reti sensibili e fornire falsi positivi, nessun risultato, o avere un impatto sfavorevole sulla rete.</p>
+                <br>
+                <p><strong>⚠️ È sempre meglio comunicare con il cliente (o stakeholder interni) su:</strong></p>
+                <p>• Host sensibili/legacy da escludere dalla scansione</p>
+                <p>• Host ad alta priorità/disponibilità da scansionare separatamente</p>
+                <p>• Scansioni fuori dall'orario di lavoro</p>
+                <p>• Configurazioni diverse per evitare problemi potenziali</p>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-yellow">
+                <div class="card-title">🔧 Mitigare Falsi Positivi</div>
+                <div class="card-text">
+                    <p><strong>Problema:</strong> Firewall mostra tutte le porte aperte o nessuna porta aperta</p>
+                    <br>
+                    <p><strong>Soluzione:</strong></p>
+                    <p>Configurare Advanced Scan e disabilitare l'opzione <span class="tech-term">"Ping the remote host"</span></p>
+                    <br>
+                    <p>Questo ferma la scansione dall'usare ICMP per verificare che l'host sia "live" e procede direttamente con la scansione.</p>
+                    <br>
+                    <p class="security-insight">Alcuni firewall restituiscono "ICMP Unreachable" che Nessus interpreta come host live</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">⚡ Rate Limiting</div>
+                <div class="card-text">
+                    <p><strong>Per reti sensibili:</strong></p>
+                    <br>
+                    <p>Regolare le <strong>Performance Options</strong> e modificare <span class="tech-term">Max Concurrent Checks Per Host</span></p>
+                    <br>
+                    <p>Questo limita il numero di plugin usati concorrentemente contro l'host.</p>
+                    <br>
+                    <p><strong>Quando usarlo:</strong></p>
+                    <p>• Host sotto carico pesante</p>
+                    <p>• Web application ampiamente utilizzate</p>
+                    <p>• Dispositivi legacy o embedded</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-blue">
+                <div class="card-title">🛡️ Safe Checks</div>
+                <div class="card-text">
+                    <p><strong>Sempre abilitare "Safe Checks"</strong> a meno che non sia specificamente richiesto diversamente.</p>
+                    <br>
+                    <p><strong>Cosa previene:</strong></p>
+                    <p>• Plugin che potrebbero crashare servizi</p>
+                    <p>• Test di Denial of Service</p>
+                    <p>• Modifiche invasive al sistema</p>
+                    <br>
+                    <p class="security-insight">Minimizza l'impatto potenziale e diminuisce significativamente il tempo di scansione</p>
+                </div>
+            </div>
+
+            <div class="card border-purple">
+                <div class="card-title">📝 Documentazione</div>
+                <div class="card-text">
+                    <p><strong>Best Practices:</strong></p>
+                    <br>
+                    <p>✓ Allertare il personale necessario prima di iniziare</p>
+                    <p>✓ Mantenere log dettagliati dell'attività di scansione</p>
+                    <p>✓ Documentare eventuali incident per investigazioni</p>
+                    <p>✓ Comunicare al completamento della scansione</p>
+                    <br>
+                    <p><strong>Mai scansionare:</strong></p>
+                    <p>✗ Stampanti (senza precauzioni)</p>
+                    <p>✗ Sistemi legacy critici senza accordo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 24;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

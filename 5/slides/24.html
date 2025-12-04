@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 4: Exploitation - Introduzione</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 4: Exploitation</h1>
+        <div class="subtitle">Slide 4.1: Dalla Teoria all'Azione</div>
+
+        <div class="grid-2-col">
+            <div class="card border-red">
+                <div class="card-title">⚠️ DISCLAIMER ETICO</div>
+                <div class="card-text">
+                    <p>Lo sfruttamento delle vulnerabilità è la fase più delicata. Richiede:</p>
+                    <br>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Autorizzazione scritta</strong> del proprietario</li>
+                        <li><strong>Scope definito</strong> - cosa posso/non posso fare</li>
+                        <li><strong>Backup</strong> dei sistemi prima di iniziare</li>
+                        <li><strong>Documentazione</strong> di ogni azione</li>
+                        <li><strong>Canale di comunicazione</strong> per emergenze</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Art. 615-ter C.P.:</strong> L'accesso abusivo a sistema informatico è punito con reclusione fino a 3 anni. Con autorizzazione scritta, il pentest è LEGALE.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Vettori di Attacco Disponibili</div>
+                <div class="card-text">
+                    <p><strong>Riepilogo dal nostro assessment:</strong></p>
+                    <div class="code-box"><span class="text-red">1. RCE via Simple File List 4.2.2</span>
+   → Upload arbitrario di file PHP
+   → Esecuzione codice remoto
+   → NO autenticazione richiesta
+
+<span class="text-yellow">2. Accesso Admin via password debole</span>
+   → admin:admin123
+   → Accesso completo al backend
+
+<span class="text-yellow">3. Plugin Editor (se admin)</span>
+   → Modifica diretta file PHP dei plugin
+   → Inserimento webshell
+
+<span class="text-green">4. Theme Editor (se admin)</span>
+   → Modifica file 404.php o functions.php
+   → Inserimento backdoor</div>
+                    <br>
+                    <p>Inizieremo con il vettore più critico: <span class="text-red">RCE unauthenticated</span></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Capitolo 4! Qui le cose si fanno serie. A sinistra, il disclaimer etico - leggetelo bene.
+        Tutto quello che faremo da qui in poi è ILLEGALE senza autorizzazione scritta. Nel nostro lab, ovviamente, è tutto autorizzato.
+        A destra, i vettori di attacco che abbiamo identificato. Il più succoso è la RCE su Simple File List: non richiede autenticazione!
+        Significa che chiunque può sfruttarla da Internet. È il nostro primo obiettivo.
+        Come backup, abbiamo le credenziali admin che abbiamo trovato con il brute force.
+        Una volta dentro WordPress, possiamo usare il Plugin Editor o Theme Editor per ottenere una shell persistente.
+        Iniziamo!"
+    -->
+
+    <script>const slideNumero = 24;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

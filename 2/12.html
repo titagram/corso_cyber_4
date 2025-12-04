@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>CVSS - Common Vulnerability Scoring System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">📊 CVSS - Common Vulnerability Scoring System</h1>
+        <div class="subtitle">Standard Industriale per il Calcolo della Severità</div>
+
+        <div class="card border-blue">
+            <div class="card-title">🎯 Cos'è CVSS?</div>
+            <div class="card-text">
+                <p>Il <strong>Common Vulnerability Scoring System</strong> è uno standard industriale per calcolare i rating di severità delle vulnerabilità. I tool di scanning applicano automaticamente questi score, ma è importante capire come vengono derivati.</p>
+                <br>
+                <p><strong>Range Score:</strong> <span class="text-red">0.0 - 10.0</span></p>
+                <br>
+                <p class="security-insight">CVSS è spesso usato insieme a Microsoft DREAD (Damage, Reproducibility, Exploitability, Affected Users, Discoverability)</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/VulnerabilityAssessment_Diagram_08.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="CVSS Metrics">
+        </div>
+
+        <div class="grid-3-col">
+            <div class="card border-green">
+                <div class="card-title">📈 Base Metric Group</div>
+                <div class="card-text">
+                    <p>Rappresenta le caratteristiche della vulnerabilità.</p>
+                    <br>
+                    <p><strong>Exploitability Metrics:</strong></p>
+                    <p>• Attack Vector</p>
+                    <p>• Attack Complexity</p>
+                    <p>• Privileges Required</p>
+                    <p>• User Interaction</p>
+                    <br>
+                    <p><strong>Impact Metrics:</strong></p>
+                    <p>• Confidentiality</p>
+                    <p>• Integrity</p>
+                    <p>• Availability</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">⏱️ Temporal Metric Group</div>
+                <div class="card-text">
+                    <p>Dettagli sulla disponibilità di exploit o patch.</p>
+                    <br>
+                    <p><strong>Exploit Code Maturity:</strong></p>
+                    <p>• Not Defined</p>
+                    <p>• High</p>
+                    <p>• Functional</p>
+                    <p>• Proof-of-Concept</p>
+                    <p>• Unproven</p>
+                    <br>
+                    <p><strong>Remediation Level</strong></p>
+                    <p><strong>Report Confidence</strong></p>
+                </div>
+            </div>
+
+            <div class="card border-purple">
+                <div class="card-title">🏢 Environmental Metric Group</div>
+                <div class="card-text">
+                    <p>Significato della vulnerabilità per l'organizzazione specifica.</p>
+                    <br>
+                    <p><strong>Modified Base Metrics:</strong></p>
+                    <p>Metriche che possono essere alterate se l'organizzazione ritiene un rischio maggiore in:</p>
+                    <p>• Confidentiality</p>
+                    <p>• Integrity</p>
+                    <p>• Availability</p>
+                    <br>
+                    <p>Valori: High, Medium, Low</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 12;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

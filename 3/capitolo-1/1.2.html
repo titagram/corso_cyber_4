@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>1.2 Il Ruolo dell'utente www-data</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-green">
+            <div class="card-title">1.2 Il Ruolo dell'utente www-data</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Utente <strong>www-data</strong> (o <strong>apache</strong>) esegue il processo PHP.</li>
+                        <li>Tutti i siti e i plugin condividono lo stesso utente.</li>
+                        <li>Una vulnerabilità in un plugin = compromissione dell'intero utente.</li>
+                        <li><strong>Rischio:</strong> Scrittura di file in aree non autorizzate.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>L'utente <code>www-data</code> è il cuore del problema di isolamento in molti setup PHP. Se avete più siti sullo stesso server, una falla in uno di essi permette all'attaccante di leggere e scrivere file di tutti gli altri siti eseguiti con lo stesso utente.</p>
+                    <p>Non è come in un ambiente containerizzato dove ogni sito ha il suo filesystem. Se <code>www-data</code> può scrivere in una directory, qualsiasi script PHP eseguito sotto <code>www-data</code> può farlo. Questo è un punto critico per la sicurezza multi-tenant.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="1.1.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="1.3.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

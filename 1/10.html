@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Headers & Infrastructure Hardening</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔒 Security Headers & Infrastructure Hardening</h1>
+        <div class="subtitle">Fortifica l'infrastruttura con configurazioni difensive</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>Defense in Depth al livello infrastruttura</strong> - HTTP Security Headers e configurazioni server corrette creano un ulteriore layer di difesa contro vari attacchi (XSS, clickjacking, MIME sniffing, etc.).</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>Security Headers Obbligatori</strong> - CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>HTTPS Everywhere</strong> - TLS 1.3, certificati validi, HSTS con preload, redirect automatico HTTP→HTTPS</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Server Hardening</strong> - Rimuovi header informativi, disabilita metodi HTTP non necessari, configura timeouts</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Network Segmentation</strong> - DMZ, firewall, WAF, rate limiting, DDoS protection</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ HARDENING CHECKLIST - INFRASTRUTTURA</div>
+            <div class="card-text">
+                <p><strong>1. Security Headers Obbligatori</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Content-Security-Policy:</strong> default-src 'self', blocca inline scripts non autorizzati</li>
+                    <li>✓ <strong>Strict-Transport-Security:</strong> max-age 2 anni, includeSubDomains, preload</li>
+                    <li>✓ <strong>X-Frame-Options:</strong> DENY (previene clickjacking)</li>
+                    <li>✓ <strong>X-Content-Type-Options:</strong> nosniff (previene MIME sniffing)</li>
+                    <li>✓ <strong>Referrer-Policy:</strong> strict-origin-when-cross-origin</li>
+                    <li>✓ <strong>Permissions-Policy:</strong> Disabilita feature non usate (camera, microphone, geolocation)</li>
+                </ul>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #888;">
+                    💡 <strong>Implementazione:</strong> Usa Helmet.js (Node), SecurityHeaders middleware (Python/Django), Spring Security (Java)
+                </p>
+                <br>
+                
+                <p><strong>2. HTTPS & TLS - Configurazione Sicura</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>TLS 1.3 / 1.2 only:</strong> Disabilita TLS 1.0, 1.1 e SSLv3</li>
+                    <li>✓ <strong>Strong Ciphers:</strong> ECDHE + AES-GCM, no RC4, no MD5</li>
+                    <li>✓ <strong>Certificati validi:</strong> Let's Encrypt auto-renewal, wildcard se necessario</li>
+                    <li>✓ <strong>HSTS Preload:</strong> Registra su hstspreload.org dopo test</li>
+                    <li>✓ <strong>Redirect HTTP→HTTPS:</strong> Automatico 301, no contenuti misti</li>
+                    <li>✓ <strong>OCSP Stapling:</strong> Abilita per performance e privacy</li>
+                </ul>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #888;">
+                    🔍 <strong>Testing:</strong> SSL Labs (ssllabs.com/ssltest), testssl.sh, Mozilla Observatory
+                </p>
+                <br>
+                
+                <p><strong>3. Web Server Hardening</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Nascondi versioni:</strong> Server tokens off, no banner informativi</li>
+                    <li>✓ <strong>Disable directory listing:</strong> No autoindex</li>
+                    <li>✓ <strong>Limita metodi HTTP:</strong> Solo GET/POST/PUT/DELETE necessari</li>
+                    <li>✓ <strong>Rate limiting:</strong> Soglie per IP su login (5/min), API (100/min)</li>
+                    <li>✓ <strong>Timeout configurati:</strong> Client body/header timeout brevi (10-30s)</li>
+                    <li>✓ <strong>File upload limits:</strong> Max size appropriato, whitelist MIME types</li>
+                    <li>✓ <strong>Blocco bot malevoli:</strong> User-agent filtering, Captcha su form pubblici</li>
+                </ul>
+                <br>
+                
+                <p><strong>4. WAF (Web Application Firewall)</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>OWASP ModSecurity CRS:</strong> Rule set aggiornato per OWASP Top 10</li>
+                    <li>✓ <strong>Cloud WAF:</strong> Cloudflare, AWS WAF, Azure Application Gateway</li>
+                    <li>✓ <strong>Custom rules:</strong> Blocco pattern specifici per la tua app</li>
+                    <li>✓ <strong>Geo-blocking:</strong> Limita accesso admin a regioni/IP specifici</li>
+                    <li>✓ <strong>DDoS protection:</strong> Rate limiting avanzato, challenge pages</li>
+                </ul>
+                <br>
+                
+                <p><strong>5. Container & Orchestration Security</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Base images minimal:</strong> Alpine, distroless - meno superficie attacco</li>
+                    <li>✓ <strong>Non-root user:</strong> USER directive, no privileged containers</li>
+                    <li>✓ <strong>Read-only filesystem:</strong> Dove possibile, tmpfs per temporary</li>
+                    <li>✓ <strong>Image scanning:</strong> Trivy/Clair in CI/CD, fail on Critical</li>
+                    <li>✓ <strong>Network policies:</strong> Kubernetes NetworkPolicy per isolamento</li>
+                    <li>✓ <strong>Secrets management:</strong> Vault, Kubernetes Secrets (encrypted at rest)</li>
+                    <li>✓ <strong>Resource limits:</strong> CPU/Memory limits per prevenire DoS</li>
+                </ul>
+                <br>
+                
+                <p><strong>6. Infrastructure as Code Security</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Policy as Code:</strong> Checkov, tfsec per Terraform/CloudFormation</li>
+                    <li>✓ <strong>Least privilege IAM:</strong> Ruoli specifici, no wildcard permissions</li>
+                    <li>✓ <strong>Encryption at rest:</strong> Volumi EBS, S3 buckets, database encryption</li>
+                    <li>✓ <strong>Security groups stretti:</strong> Solo porte necessarie, IP whitelisting</li>
+                    <li>✓ <strong>Logging abilitato:</strong> CloudTrail, VPC Flow Logs, Application Logs</li>
+                </ul>
+                <br>
+                
+                <p class="security-insight"><strong>Best Practice:</strong> Implementa security headers completi (test con securityheaders.com). TLS 1.3 + HSTS mandatory. Rate limiting su tutti endpoint pubblici. WAF con rule set OWASP. Container security: minimal images, non-root, scanning automatico. Revisione configurazioni quarterly. Automated compliance checking (CIS benchmarks).</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 10;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Supply Chain Security</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">📦 Supply Chain Security</h1>
+        <div class="subtitle">Dependencies & CVE Management - La tua app è sicura quanto la sua dipendenza più vulnerabile</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>Conosci e monitora ogni dipendenza</strong> - Le vulnerabilità nelle librerie di terze parti (npm, pip, Maven) sono un attack vector primario. Un singolo pacchetto compromesso può distruggere la tua supply chain (es. event-stream, ua-parser-js).</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>SCA (Software Composition Analysis)</strong> - Usa Snyk, OWASP Dependency-Check, npm audit, GitHub Dependabot per scansione automatica CVE</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Lock File & Integrity Checks</strong> - Committare package-lock.json/yarn.lock, usare <span class="tech-term">npm ci</span> (non <span class="tech-term">npm install</span>), verificare checksum/signature</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Principle of Least Dependency</strong> - Minimizza le dipendenze. Ogni package è un potenziale vettore. Valuta se puoi implementare funzionalità semplici invece di importare 50MB di librerie</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Private Registry & Vendoring</strong> - Per progetti critici, usa registry privato (Nexus, Artifactory), vetting manuale di nuove dipendenze, vendoring per isolation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ DIFESA & IMPLEMENTAZIONE</div>
+            <div class="card-text">
+                <p><strong>Protezione Supply Chain:</strong> Previeni <span class="tech-term">Supply Chain Attacks, Dependency Confusion, Typosquatting, Malicious Packages</span> con scanning automatico, lock files, e vetting delle dipendenze.</p>
+                <br>
+                <p><strong>SCA (Software Composition Analysis) - CI/CD:</strong></p>
+                <div class="code-box"># ✅ Dependency scanning automatico in pipeline
+1. Pre-commit: npm audit locale
+2. CI/CD: Snyk / Dependabot / npm audit
+3. Fail build se vulnerabilità Critical/High
+4. Automated PR per fix disponibili
+
+# Tools: Snyk, GitHub Dependabot, npm audit, pip-audit</div>
+                <br>
+                <p><strong>Lock Files e Integrity:</strong></p>
+                <div class="code-box"># ✅ Best practices dependencies
+1. Committa SEMPRE lock files (package-lock.json, yarn.lock)
+2. CI/CD: usa 'npm ci' (non 'npm install')
+3. Pin versions esatte (no ^ o ~)
+4. Verifica signatures: npm audit signatures
+5. Private registry per packages interni
+6. Scoped packages: @company/package-name</div>
+                <br>
+                <p><strong>Dependency Vetting - Red Flags:</strong></p>
+                <div class="code-box">// ✅ Prima di aggiungere nuova dipendenza, verifica:
+Red flags da evitare:
+✗ Package troppo nuovo (<30 giorni)
+✗ Download bassi (<1000/week)
+✗ No repository pubblico
+✗ Single maintainer sconosciuto
+✗ Maintainer change recente
+✗ CVE note non fixate
+✗ Typosquatting di package popolari
+
+// Privilegia: mature libraries, community attiva, sponsor noti</div>
+                <br>
+                <p><strong>Private Registry - Per Progetti Enterprise:</strong></p>
+                <div class="code-box"># ✅ Private registry benefici:
+- Cache packages pubblici (velocità + resilienza)
+- Host packages interni privati
+- Scanning packages prima di servire
+- Block packages sospetti
+- Audit trail di cosa viene usato
+
+# Tools: Verdaccio (open), Nexus, Artifactory, npm Enterprise</div>
+                <br>
+                <p><strong>Subresource Integrity (SRI) per CDN:</strong></p>
+                <div class="code-box">&lt;!-- ✅ SRI previene CDN compromise --&gt;
+&lt;script src="https://cdn.example.com/lib.js"
+        integrity="sha384-{hash}"
+        crossorigin="anonymous"&gt;&lt;/script&gt;
+
+// Browser verifica hash. Se non match → blocca file
+// Genera hash: https://www.srihash.org/</div>
+                <br>
+                <p><strong>Dependency Update Strategy:</strong></p>
+                <div class="code-box">// ✅ Strategia aggiornamenti sicura
+- Security patches: Immediate (automated)
+- Minor/Patch: Weekly automated con test pass
+- Major: Manual review (breaking changes)
+
+// Tools: Renovate Bot, Dependabot
+// Alert immediato su CVE Critical/High</div>
+                <br>
+                <p><strong>Monitoring e Response:</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>GitHub/GitLab Dependabot:</strong> Alert automatici CVE + PR fix</li>
+                    <li>✓ <strong>Snyk/WhiteSource:</strong> Continuous monitoring production dependencies</li>
+                    <li>✓ <strong>Socket.dev:</strong> Real-time supply chain threat detection</li>
+                    <li>✓ <strong>SBOM Generation:</strong> Software Bill of Materials per compliance</li>
+                </ul>
+                <br>
+                <p class="security-insight"><strong>Best Practice:</strong> Scansiona dipendenze ad ogni commit (CI/CD). Usa lock files e verifica integrity. Implementa vetting process per nuove dipendenze. Considera private registry per caching e control. Aggiorna regolarmente ma con testing. Usa SRI per CDN. Genera SBOM per visibilità completa. Monitora advisory security (GitHub Security Advisories, npm security, etc.).</p>
+            </div>
+        </div>
+
+        <div class="card border-purple" style="margin-top: 20px;">
+            <div class="card-title">🎯 Conclusione - Secure Coding Mindset</div>
+            <div class="card-text">
+                <p><strong>La sicurezza è un processo continuo, non un checklist one-time.</strong></p>
+                <br>
+                <p>✓ <strong>Shift Left:</strong> Integra security testing in ogni fase del SDLC (IDE plugins, pre-commit hooks, CI/CD gates)</p>
+                <p>✓ <strong>Threat Modeling:</strong> Pensa come un attacker durante il design - "come romperei questo?"</p>
+                <p>✓ <strong>Defense in Depth:</strong> Nessun controllo singolo è infallibile. Stratifica le difese.</p>
+                <p>✓ <strong>Continuous Learning:</strong> Le tecniche di attacco evolvono. OWASP Top 10, CVE, bug bounty reports sono la tua fonte di aggiornamento.</p>
+                <br>
+                <p class="security-insight"><strong>Remember:</strong> Un attacker deve trovare un solo bug. Tu devi proteggere tutto. Ma ogni controllo che implementi aumenta esponenzialmente il costo dell'attacco. <strong>Make it expensive.</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 8;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+</body>
+</html>
+

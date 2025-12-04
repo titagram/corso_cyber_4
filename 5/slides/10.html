@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 2: WordPress Enumeration - Passive Scan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 2: WordPress Enumeration</h1>
+        <div class="subtitle">Slide 2.1: Passive Scan con WPScan</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Mappare senza far Rumore</div>
+                <div class="card-text">
+                    <p><code class="tech-term">WPScan</code> è il tool definitivo per il pentesting di WordPress. Iniziamo sempre con una scansione passiva (stealthy).</p>
+                    <br>
+                    <p><strong>Cosa fa la modalità stealthy:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Legge solo informazioni pubbliche</li>
+                        <li>Analizza il codice sorgente HTML</li>
+                        <li>Controlla header HTTP e meta generator</li>
+                        <li>Non esegue brute force di file</li>
+                        <li>Minimo rischio di detection</li>
+                    </ul>
+                    <br>
+                    <p><strong>API Token:</strong> Per avere info sulle CVE, registratevi su <code class="tech-term">wpscan.com</code> e usate <code>--api-token</code></p>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Una scansione passiva rivela spesso già la versione di WordPress, il tema e alcuni plugin. Sufficienti per una prima valutazione!</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: WPScan Stealthy Mode</div>
+                <div class="card-text">
+                    <p><strong>Comando:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> wpscan --url http://vulnerable-wp.local --stealthy</div>
+                    <br>
+                    <p><strong>Output (troncato):</strong></p>
+                    <div class="code-box">_______________________________________________________________
+        __          _______   _____
+        \ \        / /  __ \ / ____|
+         \ \  /\  / /| |__) | (___   ___  __ _ _ __
+          \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+           \  /\  /  | |     ____) | (__| (_| | | | |
+            \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+[+] URL: http://vulnerable-wp.local/ [10.10.10.20]
+[+] Started: Mon Dec 1 10:15:00 2025
+
+[+] WordPress version <span class="text-red">5.0</span> identified (Insecure, released 2018-12-06)
+[+] WordPress theme in use: <span class="text-yellow">twentynineteen</span>
+ | Location: .../themes/twentynineteen/
+ | Readme: .../themes/twentynineteen/readme.txt
+ | Style URL: .../themes/twentynineteen/style.css
+
+[i] Server: Apache/2.4.38 (Debian)</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Capitolo 2! Entriamo nel cuore del pentesting WordPress con WPScan. A sinistra, perché iniziamo in modalità stealthy.
+        Il flag --stealthy limita le richieste al minimo, comportandosi come un browser normale.
+        A destra, l'output è già ricchissimo: WordPress 5.0 marcato come 'Insecure'! È del 2018, quindi pieno di vulnerabilità note.
+        Il tema è twentynineteen, anche questo potrebbe avere bug.
+        NOTA IMPORTANTE: senza API token, WPScan non mostra le CVE. Registratevi su wpscan.com per il token gratuito (25 richieste/giorno)."
+    -->
+
+    <script>const slideNumero = 10;</script>
+    <script src="main.js"></script>
+</body>
+</html>

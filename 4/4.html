@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>La Vulnerabilità - Anatomia della CVE-2024-10924</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">La Vulnerabilità - Anatomia della CVE-2024-10924</h1>
+        <div class="card border-yellow">
+            <div class="card-title">Anatomia di un Bypass</div>
+            <div class="card-text">
+                <p><strong>Tipo:</strong> Authentication Bypass via REST API.</p>
+                <p><strong>Componente affetto:</strong> Gestione dell'onboarding 2FA.</p>
+                <p><strong>Endpoint:</strong> <code class="code-box">/reallysimplessl/v1/two_fa/skip_onboarding</code></p>
+                <p><strong>Il problema logico:</strong> Mancata validazione del risultato di una funzione di controllo.</p>
+                <p class="security-insight"><strong>Risultato:</strong> Un attaccante può loggarsi come qualsiasi utente (incluso l'admin) conoscendo solo l'ID utente (spesso 1).</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-nav">
+        <a href="1.html">1</a>
+        <a href="2.html">2</a>
+        <a href="3.html">3</a>
+        <a href="4.html" class="active">4</a>
+        <a href="5.html">5</a>
+        <a href="6.html">6</a>
+        <a href="7.html">7</a>
+        <a href="8.html">8</a>
+        <a href="9.html">9</a>
+        <a href="10.html">10</a>
+        <a href="11.html">11</a>
+        <a href="12.html">12</a>
+        <a href="13.html">13</a>
+        <a href="14.html">14</a>
+        <a href="15.html">15</a>
+    </div>
+
+    <script>const slideNumero = 4;</script>
+    <script src="main.js"></script>
+</body>
+</html>

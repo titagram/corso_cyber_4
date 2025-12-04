@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Tipi di Penetration Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🎭 Tipi di Penetration Test</h1>
+        <div class="subtitle">Black Box, Grey Box, White Box</div>
+
+        <div class="grid-3-col">
+            <div class="card border-red">
+                <div class="card-title">⬛ Black Box</div>
+                <div class="card-text">
+                    <p><strong>Nessuna conoscenza</strong> della rete o delle applicazioni.</p>
+                    <br>
+                    <p><strong>Informazioni fornite:</strong></p>
+                    <div class="code-box">• Nome dell'azienda (esterno)
+• Accesso alla rete (interno)
+• Nessuna informazione tecnica</div>
+                    <br>
+                    <p>Simula un <span class="text-red">attaccante esterno</span> senza conoscenze pregresse.</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">🔲 Grey Box</div>
+                <div class="card-text">
+                    <p><strong>Conoscenza parziale</strong> della rete.</p>
+                    <br>
+                    <p><strong>Informazioni fornite:</strong></p>
+                    <div class="code-box">• Range di IP in scope
+• Informazioni di base
+• Accesso utente standard</div>
+                    <br>
+                    <p>Simula un <span class="text-yellow">dipendente</span> o utente interno.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">⬜ White Box</div>
+                <div class="card-text">
+                    <p><strong>Piena conoscenza</strong> di tutto il sistema.</p>
+                    <br>
+                    <p><strong>Informazioni fornite:</strong></p>
+                    <div class="code-box">• Accesso completo ai sistemi
+• Configurazioni
+• Codice sorgente
+• Documentazione build</div>
+                    <br>
+                    <p>Obiettivo: scoprire <span class="text-green">tutte le vulnerabilità</span> possibili.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-blue" style="margin-top: 25px;">
+            <div class="card-title">🔧 Specializzazioni dei Pentester</div>
+            <div class="card-text">
+                <p><strong>Application Pentester:</strong> Web app, mobile app, thick-client, API. Competenza in code review.</p>
+                <p><strong>Network/Infrastructure Pentester:</strong> Networking, Windows, Linux, Active Directory, scripting.</p>
+                <p><strong>Physical Pentester:</strong> Sicurezza fisica, accesso a data center e uffici.</p>
+                <p><strong>Social Engineering Pentester:</strong> Phishing, vishing, e altri attacchi agli esseri umani.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 3;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

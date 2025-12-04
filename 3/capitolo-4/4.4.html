@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>4.4 Hashing delle Password: phpass</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-red">
+            <div class="card-title">4.4 Hashing delle Password: `phpass`</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>WordPress usa una libreria chiamata <code>phpass</code>.</li>
+                        <li>È un sistema di hashing "portable" basato su MD5 con 8192 iterazioni e salt.</li>
+                        <li>Non è forte come <code>bcrypt</code> o <code>Argon2</code> usati dai framework moderni.</li>
+                        <li>Una password debole può essere crackata relativamente in fretta.</li>
+                        <li><strong>Confronto:</strong> Laravel usa <code>bcrypt</code> di default.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>WordPress ha un sistema di hashing legacy. Sebbene sia meglio di un semplice MD5, non è al livello degli standard moderni come bcrypt. Il numero di iterazioni è basso per gli standard odierni.</p>
+                    <p>Questo significa che, a parità di hardware, un attaccante può testare molte più password al secondo rispetto a un sistema che usa bcrypt. Questo rende ancora più importante l'uso di password lunghe e complesse in WordPress.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="4.3.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="4.5.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

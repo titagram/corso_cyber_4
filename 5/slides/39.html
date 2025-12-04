@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 6: Reporting & Remediation - Raccomandazioni</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 6: Reporting & Remediation</h1>
+        <div class="subtitle">Slide 6.3: Remediation Roadmap</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Prioritizzare le Correzioni</div>
+                <div class="card-text">
+                    <p>Il cliente ha risorse limitate. Dobbiamo fornire un piano di remediation realistico e prioritizzato.</p>
+                    <br>
+                    <p><strong>Criteri di priorità:</strong></p>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;"><span class="text-red">Immediate (24-48h)</span></td>
+                            <td style="padding: 8px;">Critical + Exploit pubblico</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;"><span class="text-yellow">Short-term (1-2 settimane)</span></td>
+                            <td style="padding: 8px;">High severity</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <td style="padding: 8px;"><span class="text-green">Medium-term (1 mese)</span></td>
+                            <td style="padding: 8px;">Medium severity</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><span class="text-blue">Long-term (backlog)</span></td>
+                            <td style="padding: 8px;">Low/Informational</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <p><strong>Ogni raccomandazione deve essere:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Specifica e actionable</li>
+                        <li>Con effort stimato (es. 2h, 1 giorno)</li>
+                        <li>Con risorse/link utili</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> "Aggiornare tutto" non è una raccomandazione utile. "Aggiornare Simple File List da 4.2.2 a 4.4.1 (effort: 30 min)" sì.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Template: Remediation Plan</div>
+                <div class="card-text">
+                    <div class="code-box" style="font-size: 0.9em;">
+<span class="text-yellow">REMEDIATION ROADMAP</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+<span class="text-red">🔴 IMMEDIATE (24-48h)</span>
+━━━━━━━━━━━━━━━━━━━━━━━━
+1. Aggiornare Simple File List a >=4.2.3
+   Effort: 30 min | Owner: DevOps
+   
+2. Reset password utente 'admin'
+   Effort: 5 min | Owner: IT Admin
+
+<span class="text-yellow">🟡 SHORT-TERM (2 settimane)</span>
+━━━━━━━━━━━━━━━━━━━━━━━━
+3. Aggiornare WordPress core a 6.4+
+   Effort: 2h (test compatibilità)
+   
+4. Disabilitare XML-RPC
+   Effort: 15 min
+   How: add_filter('xmlrpc_enabled', '__return_false');
+
+<span class="text-green">🟢 MEDIUM-TERM (1 mese)</span>
+━━━━━━━━━━━━━━━━━━━━━━━━
+5. Implementare security headers
+6. Configurare rate limiting
+7. Audit tutti i plugin installati</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Il report non è completo senza un piano di azione. A sinistra, come prioritizzare.
+        La regola è semplice: Critical con exploit pubblico = fix OGGI, non domani.
+        A destra, un esempio di roadmap. Notate: ogni item ha effort stimato e owner suggerito.
+        'Aggiornare Simple File List' richiede 30 minuti, può farlo il DevOps.
+        'Aggiornare WordPress core' richiede 2 ore perché bisogna testare la compatibilità con i plugin.
+        Includete anche il COME dove possibile: per XML-RPC, la riga di codice esatta da aggiungere.
+        Questo trasforma il report da 'lista di problemi' a 'guida per risolverli'."
+    -->
+
+    <script>const slideNumero = 39;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

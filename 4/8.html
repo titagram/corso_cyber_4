@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>I Ruoli delle Funzioni (Analisi Logica)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Chi fa cosa? Anatomia del disastro</h1>
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title"><code>check_login_and_get_user()</code> -> Il "Buttafuori"</div>
+                <div class="card-text">
+                    <p><strong>Compito:</strong> Prende l'ID utente e il Nonce (il biglietto). Controlla se sono validi.</p>
+                    <p><strong>Comportamento corretto:</strong> Se il nonce è falso, restituisce <code>null</code> o lancia un errore. In questo caso, il buttafuori ha fatto il suo lavoro. Ha detto "Documento non valido!".</p>
+                </div>
+            </div>
+            <div class="card border-red">
+                <div class="card-title"><code>skip_onboarding()</code> -> Il "Manager distratto"</div>
+                <div class="card-text">
+                    <p><strong>Compito:</strong> Gestire il flusso dell'utente.</p>
+                    <p><strong>L'Errore:</strong> Chiama il buttafuori (<code>check_login...</code>), ma non ascolta la risposta.</p>
+                    <p><strong>Codice:</strong> Esegue il controllo, ma non c'è un <code>if (user == null) return error;</code>. Semplicemente prosegue ed esegue l'autenticazione.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-nav">
+        <a href="1.html">1</a>
+        <a href="2.html">2</a>
+        <a href="3.html">3</a>
+        <a href="4.html">4</a>
+        <a href="5.html">5</a>
+        <a href="6.html">6</a>
+        <a href="7.html">7</a>
+        <a href="8.html" class="active">8</a>
+        <a href="9.html">9</a>
+        <a href="10.html">10</a>
+        <a href="11.html">11</a>
+        <a href="12.html">12</a>
+        <a href="13.html">13</a>
+        <a href="14.html">14</a>
+        <a href="15.html">15</a>
+    </div>
+
+    <script>const slideNumero = 8;</script>
+    <script src="main.js"></script>
+</body>
+</html>

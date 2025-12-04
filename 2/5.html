@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Altri Tipi di Security Assessment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🎯 Altri Tipi di Security Assessment</h1>
+        <div class="subtitle">Security Audit, Bug Bounty, Red Team, Purple Team</div>
+
+        <div class="grid-2-col">
+            <div class="card border-yellow">
+                <div class="card-title">📜 Security Audit</div>
+                <div class="card-text">
+                    <p><strong>Mandatorio</strong> da enti esterni (governo, associazioni di settore)</p>
+                    <br>
+                    <p><strong>Esempio: PCI-DSS</strong></p>
+                    <p>Tutte le organizzazioni che accettano carte di credito devono essere conformi al Payment Card Industry Data Security Standard.</p>
+                    <br>
+                    <p class="security-insight">Non compliance = multe e impossibilità di accettare pagamenti</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">🐛 Bug Bounty Programs</div>
+                <div class="card-text">
+                    <p>Invitano il <strong>pubblico</strong> a trovare vulnerabilità in cambio di ricompense.</p>
+                    <br>
+                    <p><strong>Pagamenti:</strong> da centinaia a centinaia di migliaia di dollari</p>
+                    <br>
+                    <p><strong>Appropriato per:</strong></p>
+                    <p>• Grandi aziende (Microsoft, Apple)</p>
+                    <p>• Alta maturità di sicurezza</p>
+                    <p>• Team dedicato al triage</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-red">
+                <div class="card-title">🎯 Red Team Assessment</div>
+                <div class="card-text">
+                    <p><strong>Pentest evasivo black box</strong> che simula attacchi reali da threat actor esterni.</p>
+                    <br>
+                    <p><strong>Caratteristiche:</strong></p>
+                    <p>• Obiettivo specifico (es. raggiungere un server critico)</p>
+                    <p>• Reportano SOLO le vulnerabilità che hanno portato al goal</p>
+                    <p>• Tattiche avanzate ed evasive</p>
+                    <br>
+                    <p class="security-insight">Richiede alta maturità di sicurezza e budget significativo</p>
+                </div>
+            </div>
+
+            <div class="card border-purple">
+                <div class="card-title">💜 Purple Team Assessment</div>
+                <div class="card-text">
+                    <p><strong>Collaborazione</strong> tra offensive (Red Team) e defensive (Blue Team) security.</p>
+                    <br>
+                    <p><strong>Blue Team:</strong> SOC, CSIRT, Digital Forensics</p>
+                    <p><strong>Red Team:</strong> Offensive security specialists</p>
+                    <p><strong>Purple Team:</strong> Lavorano insieme!</p>
+                    <br>
+                    <p>Il Blue Team è coinvolto in ogni fase, fornendo input e feedback attivo durante il lavoro del Red Team.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 5;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

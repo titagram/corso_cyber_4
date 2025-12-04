@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenVAS - Export e Report Formats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">📤 OpenVAS - Export e Report Formats</h1>
+        <div class="subtitle">Formati di Export e Tool di Parsing</div>
+
+        <div class="card border-blue">
+            <div class="card-title">📑 Formati di Export Disponibili</div>
+            <div class="card-text">
+                <img src="img/reportformat.png" style="max-width: 100%; border-radius: 8px; margin: 15px 0;" alt="Report Formats">
+                <p>OpenVAS offre vari formati di export per scopi di reporting:</p>
+                <br>
+                <div class="grid-2-col">
+                    <div>
+                        <p>• <strong>XML:</strong> Formato strutturato per parsing</p>
+                        <p>• <strong>CSV:</strong> Per analisi in Excel/database</p>
+                        <p>• <strong>PDF:</strong> Report professionale</p>
+                    </div>
+                    <div>
+                        <p>• <strong>ITG:</strong> IT-Grundschutz format</p>
+                        <p>• <strong>TXT:</strong> Testo semplice</p>
+                        <p>• <strong>HTML:</strong> Visualizzazione web</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-top: 25px;">
+            <div class="card border-green">
+                <div class="card-title">🔧 Tool: openvasreporting</div>
+                <div class="card-text">
+                    <p>Possiamo esportare i risultati in XML e usare il tool <strong>openvasreporting</strong> by TheGroundZero per generare report più leggibili.</p>
+                    <br>
+                    <p><strong>Installazione e uso:</strong></p>
+                    <div class="code-box">pip3 install openvasreporting
+
+python3 -m openvasreporting \
+  -i report.xml \
+  -f xlsx</div>
+                    <br>
+                    <p class="security-insight">Link: github.com/TheGroundZero/openvasreporting</p>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">📊 Output Excel</div>
+                <div class="card-text">
+                    <img src="img/openvas_report.png" style="max-width: 100%; border-radius: 8px; margin-bottom: 15px;" alt="OpenVAS Report Excel">
+                    <p>Il tool genera un documento Excel con:</p>
+                    <p>• Tab separate per severity</p>
+                    <p>• Filtri applicabili</p>
+                    <p>• Facile da condividere con team</p>
+                    <p>• Formato professionale</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-purple" style="margin-top: 25px;">
+            <div class="card-title">📋 Table of Contents</div>
+            <div class="card-text">
+                <img src="img/report_toc.png" style="max-width: 80%; border-radius: 8px; margin: 15px auto; display: block;" alt="Report TOC">
+                <p>Il report generato include un indice completo per una navigazione facile.</p>
+            </div>
+        </div>
+
+        <div class="card border-red" style="margin-top: 25px;">
+            <div class="card-title">⚠️ Importante: Parser XML</div>
+            <div class="card-text">
+                <p>Se scegli di esportare il report in formato <strong>XML</strong>, puoi sfruttare vari parser XML per visualizzare i dati in un formato più leggibile.</p>
+                <br>
+                <p><strong>Vantaggi del formato XML:</strong></p>
+                <p>✓ Parsing automatizzato</p>
+                <p>✓ Integrazione con altri tool</p>
+                <p>✓ Trasformazioni personalizzate</p>
+                <p>✓ Import in sistemi di ticketing</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 30;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

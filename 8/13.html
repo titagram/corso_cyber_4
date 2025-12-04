@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Accesso al Database MySQL - Slide 13</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Database: Connessione e Dump</h1>
+        <div class="subtitle">Accesso al Database MySQL</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Azione</div>
+                <div class="card-text">
+                    <p><strong>Comando:</strong></p>
+                    <div class="code-box">mysql -u thedarktangent -p -h 10.82.x.x</div>
+                    <p><strong>Query:</strong></p>
+                    <div class="code-box"><pre><code>use wordpressdb2;
+show tables;
+select * from wptry_users;</code></pre></div>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione Tecnica</div>
+                <div class="card-text">
+                    <p>Ci connettiamo direttamente al servizio MySQL (porta 3306).</p>
+                    <p>Cerchiamo la tabella utenti (attenzione al prefisso personalizzato <code>wptry_</code> che è una buona pratica di sicurezza, ma inutile se leggiamo il config).</p>
+                    <p>Estraiamo gli Hash delle password degli amministratori.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 13;</script>
+    <script src="main.js"></script>
+</body>
+</html>

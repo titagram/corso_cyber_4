@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>2.6 La "Global State" di WordPress</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-blue">
+            <div class="card-title">2.6 La "Global State" di WordPress</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Molti dati e oggetti importanti sono variabili globali.</li>
+                        <li><strong>Esempi:</strong> <code>$wpdb</code>, <code>$post</code>, <code>$current_user</code>.</li>
+                        <li>Qualsiasi plugin o tema può modificare queste variabili globali.</li>
+                        <li><strong>Rischio:</strong> "Variable Contamination", un plugin ne rompe un altro.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>A differenza di Laravel che usa un Service Container per l'injection delle dipendenze, WordPress si affida pesantemente a variabili globali. L'oggetto <code>$wpdb</code> per le query, l'oggetto <code>$post</code> per il post corrente... sono tutti globali.</p>
+                    <p>Questo significa che un plugin scritto male può modificare <code>$post</code> e rompere il funzionamento di un altro plugin che si aspetta di trovarci dati diversi. È una fonte di bug e di comportamenti imprevedibili, difficili da debuggare.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="2.5.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="2.7.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

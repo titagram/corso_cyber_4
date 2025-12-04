@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Introduzione a Nessus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🔷 Nessus Overview</h1>
+        <div class="subtitle">Il Vulnerability Scanner di Tenable</div>
+
+        <div class="card border-blue">
+            <div class="card-title">📋 Cos'è Nessus?</div>
+            <div class="card-text">
+                <p><strong>Nessus Essentials</strong> by Tenable è la versione gratuita del vulnerability scanner Nessus ufficiale.</p>
+                <br>
+                <p><strong>Limitazioni versione gratuita:</strong></p>
+                <p>• Fino a <span class="text-red">16 host</span></p>
+                <p>• Funzionalità limitate</p>
+                <p>• Perfetto per iniziare</p>
+                <br>
+                <p class="security-insight">Il scanner gratuito tenterà di identificare vulnerabilità in un ambiente</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/Nessus_Essentials___Folders___View_Scan.png" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Nessus Dashboard">
+        </div>
+
+        <div class="grid-2-col">
+            <div class="card border-green">
+                <div class="card-title">📥 Download e Setup</div>
+                <div class="card-text">
+                    <p><strong>1. Download:</strong></p>
+                    <p>Navigare alla pagina di download di Nessus e scaricare il binario corretto per il proprio sistema</p>
+                    <br>
+                    <p><strong>2. Activation Code:</strong></p>
+                    <p>Visitare la pagina di attivazione per richiedere un codice di attivazione Nessus gratuito</p>
+                    <br>
+                    <p><strong>3. Avvio:</strong></p>
+                    <div class="code-box">sudo systemctl start nessusd.service</div>
+                </div>
+            </div>
+
+            <div class="card border-yellow">
+                <div class="card-title">🌐 Accesso Web Interface</div>
+                <div class="card-text">
+                    <p><strong>URL:</strong> <span class="tech-term">https://localhost:8834</span></p>
+                    <br>
+                    <p><strong>Configurazione iniziale:</strong></p>
+                    <p>• Selezionare Nessus Essentials</p>
+                    <p>• Inserire activation code</p>
+                    <p>• Creare account amministratore</p>
+                    <p>• Attendere download dei plugin</p>
+                    <br>
+                    <p class="security-insight">Il download dei plugin può richiedere diversi minuti</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="img/essentials.png" style="max-width: 80%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" alt="Nessus Essentials">
+        </div>
+    </div>
+
+    <script>const slideNumero = 17;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Handling & Logging</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">⚠️ Error Handling & Logging</h1>
+        <div class="subtitle">No Information Disclosure - "Parla poco con l'attacker, registra tutto per il difensore"</div>
+
+        <div class="card border-blue">
+            <div class="card-title">💡 Concetto Chiave</div>
+            <div class="card-text">
+                <p><strong>Fail Securely, Log Aggressively</strong> - Gli errori devono essere generici verso l'utente (no stack traces, no path, no DB details) ma dettagliati nei log server-side per incident response. I log sono il tuo DVR per ricostruire un attacco.</p>
+            </div>
+        </div>
+
+        <div class="card border-green">
+            <div class="card-title">✅ Checklist Operativa</div>
+            <div class="card-text">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 12px;">✓ <strong>Generic Error Messages al client</strong> - Return <span class="tech-term">"An error occurred"</span> invece di stack trace o query SQL</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Logging Completo Server-Side</strong> - User ID, IP, timestamp, endpoint, parametri (senza PII/secrets), status code, error details</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>SIEM Integration & Alerting</strong> - Invia log critici a SIEM (Splunk, ELK), alert su pattern sospetti (login bruteforce, 403 spike, SQL errors)</li>
+                    <li style="margin-bottom: 12px;">✓ <strong>Log Integrity: Write-only, Tamper-proof</strong> - Log su storage separato, immutabile (S3 with WORM), firma digitale</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-purple">
+            <div class="card-title">🛡️ DIFESA & IMPLEMENTAZIONE</div>
+            <div class="card-text">
+                <p><strong>Protezione Information Disclosure:</strong> Previeni <span class="tech-term">Information Disclosure</span> con error handling sicuro e logging strutturato, nascondendo dettagli tecnici agli utenti ma preservandoli per incident response.</p>
+                <br>
+                <p><strong>Error Handling Sicuro - Principi:</strong></p>
+                <div class="code-box">// ✅ Error handling sicuro
+
+// Al CLIENT (pubblico):
+{
+  "error": "An unexpected error occurred",
+  "errorId": "abc123",  // Per tracking supporto
+  "timestamp": "2024-..."
+}
+
+// Nei LOG (server-side):
+{
+  errorId: "abc123",
+  message: "Database connection failed",
+  stack: "Error: connection timeout...",
+  userId: 42,
+  ip: "1.2.3.4",
+  endpoint: "/api/users"
+}
+
+// MAI esporre: stack traces, path filesystem, query SQL, versioni</div>
+                <br>
+                <p><strong>Structured Logging - Security Events:</strong></p>
+                <div class="code-box">// ✅ Log tutti gli eventi security-relevant
+Eventi da loggare sempre:
+- Login success/fail
+- Authorization failures (403)
+- Password changes
+- Admin actions
+- Data access (PII, financial)
+- Input validation failures
+- Rate limit violations
+
+// Formato JSON strutturato:
+{ event, userId, ip, timestamp, severity, details }</div>
+                <br>
+                <p><strong>SIEM Integration e Alerting:</strong></p>
+                <div class="code-box">// ✅ SIEM per aggregazione e correlazione log
+SIEM tools: ELK Stack, Splunk, Datadog
+
+Workflow:
+1. App invia log strutturati a SIEM
+2. SIEM aggrega, indicizza, correla eventi
+3. Alert rules su pattern sospetti
+4. Dashboard real-time per security team
+
+// Alert su: spike 403, failed logins, privilege escalation</div>
+                <br>
+                <p><strong>Production Configuration Checklist:</strong></p>
+                <div class="code-box">// ✅ Pre-deploy checks automatici
+Verifica al startup:
+✓ DEBUG = false
+✓ NODE_ENV = production
+✓ SESSION_SECRET forte (>32 chars)
+✓ Stack traces disabilitati
+✓ Error verbosity = minimal
+✓ HTTPS enforced
+
+// Fail startup se misconfigured (fail-secure)</div>
+                <br>
+                <p><strong>Monitoring e Response Playbook:</strong></p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ <strong>Dashboard Grafana/Kibana:</strong> Visualizza security events in real-time</li>
+                    <li>✓ <strong>Alert automatici:</strong> Spike di 403, login failures, rate limit violations</li>
+                    <li>✓ <strong>Log retention:</strong> Minimo 90 giorni per compliance, archivio immutabile</li>
+                    <li>✓ <strong>Incident response:</strong> Playbook documentato per diversi tipi di alert</li>
+                </ul>
+                <br>
+                <p class="security-insight"><strong>Best Practice:</strong> Mai esporre stack traces o dettagli tecnici al client. Log tutti gli eventi security-relevant con struttura consistente. Integra con SIEM per correlazione e alerting. Monitora pattern anomali. Testa regolarmente incident response playbook. Proteggi i log da tampering con write-only permissions e archivio immutabile.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 7;</script>
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>
+

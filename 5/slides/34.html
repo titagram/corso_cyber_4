@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 5: Post-Exploitation - Data Exfiltration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 5: Post-Exploitation</h1>
+        <div class="subtitle">Slide 5.3: Data Exfiltration (PoC)</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Dimostrare l'Impatto</div>
+                <div class="card-text">
+                    <p>Per dimostrare la gravità del breach, dobbiamo mostrare quali dati un attaccante potrebbe rubare.</p>
+                    <br>
+                    <p><strong>Dati sensibili tipici in WordPress:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Database utenti (email, hash password)</li>
+                        <li>Dati clienti (e-commerce)</li>
+                        <li>Contenuti privati/draft</li>
+                        <li>File uploads degli utenti</li>
+                        <li>Credenziali in wp-config.php</li>
+                        <li>API keys, token OAuth</li>
+                        <li>Backup del database</li>
+                    </ul>
+                    <br>
+                    <p><strong>⚠️ In un pentest reale:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>NON esfiltrare dati reali</li>
+                        <li>Documentare COSA potreste prendere</li>
+                        <li>Screenshot sanitizzati (oscurare PII)</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> L'obiettivo è dimostrare l'impatto, non rubare dati. Un PoC di 5 righe dal DB è sufficiente per provare l'accesso.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Accesso al Database</div>
+                <div class="card-text">
+                    <p><strong>Connessione al MySQL:</strong></p>
+                    <div class="code-box"><span class="text-red">#</span> mysql -u wp_user -p'Sup3rS3cr3tP@ss!' wordpress</div>
+                    <br>
+                    <p><strong>Query sulle tabelle sensibili:</strong></p>
+                    <div class="code-box">mysql> SHOW TABLES;
++------------------------+
+| Tables_in_wordpress    |
++------------------------+
+| wp_users               |
+| wp_usermeta            |
+| wp_posts               |
+| wp_options             |
++------------------------+
+
+mysql> SELECT user_login, user_email FROM wp_users;
++------------+------------------------+
+| user_login | user_email             |
++------------+------------------------+
+| admin      | admin@vulnerable.local |
+| editor     | editor@company.com     |
+| customer1  | john.doe@gmail.com     |
++------------+------------------------+
+
+<span class="text-yellow">-- STOP QUI per il PoC --</span></div>
+                    <br>
+                    <p><strong>Per il report:</strong> Screenshot delle prime 3-5 righe, oscurando email reali se necessario.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Ora dimostriamo l'impatto. A sinistra, cosa potreste trovare in un WordPress compromesso.
+        A destra, l'accesso pratico. Usiamo le credenziali DB trovate in wp-config.php.
+        Una volta dentro MySQL, vediamo le tabelle. wp_users contiene tutti gli utenti.
+        Per il PoC, basta mostrare che POSSIAMO accedere. Non serve dump completo.
+        Nel report: 'Accesso completo al database WordPress ottenuto. Possibilità di esfiltrare [N] record utenti, [M] transazioni, etc.'
+        Includete uno screenshot con i primi risultati, oscurando dati personali reali.
+        ETICA: Un pentester dimostra il rischio, non lo realizza. Mai scaricare dati sensibili reali."
+    -->
+
+    <script>const slideNumero = 34;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>4.3 La tabella wp_users</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card border-yellow">
+            <div class="card-title">4.3 La tabella `wp_users`</div>
+            <div class="card-content-wrapper">
+                <div class="card-main-content">
+                    <ul>
+                        <li>Contiene la lista degli utenti.</li>
+                        <li><code>user_login</code>: il nome utente.</li>
+                        <li><code>user_pass</code>: l'hash della password.</li>
+                        <li><code>user_email</code>: l'indirizzo email.</li>
+                        <li>Se un attaccante ottiene un dump di questa tabella, può tentare di crackare le password offline.</li>
+                    </ul>
+                </div>
+                <div class="card-explanation">
+                    <div class="card-explanation-title">Approfondimento</div>
+                    <p>La tabella <code>wp_users</code> è un obiettivo ovvio. Contiene le informazioni di login. Anche se le password sono hashate, un dump del database permette a un attaccante di lanciare un attacco a dizionario o brute-force offline, senza limiti di tentativi.</p>
+                    <p>Se le password sono deboli, verranno trovate in poco tempo. Questo è il motivo per cui un backup del database deve essere protetto con la stessa cura del database stesso.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-links">
+            <a href="4.2.html">◄ Precedente</a>
+            <a href="../index.html">◄ Indice</a>
+            <a href="4.4.html">Successiva ►</a>
+        </div>
+    </div>
+</body>
+</html>

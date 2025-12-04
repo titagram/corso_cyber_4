@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 1: Network Discovery & Fingerprinting - WAF Detection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 1: Network Discovery & Fingerprinting</h1>
+        <div class="subtitle">Slide 1.4: WAF Detection</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Il Guardiano Invisibile</div>
+                <div class="card-text">
+                    <p>Un <strong>Web Application Firewall (WAF)</strong> ispeziona il traffico HTTP e blocca richieste malevole. È fondamentale sapere se c'è un WAF prima di procedere.</p>
+                    <br>
+                    <p><strong>WAF comuni:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><span class="text-yellow">Cloudflare</span> - Header: cf-ray, __cfduid</li>
+                        <li><span class="text-yellow">AWS WAF</span> - Header: x-amzn-RequestId</li>
+                        <li><span class="text-yellow">ModSecurity</span> - Spesso silenzioso</li>
+                        <li><span class="text-yellow">Wordfence</span> - Plugin WP specifico</li>
+                        <li><span class="text-yellow">Sucuri</span> - Header: x-sucuri-id</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Rilevare un WAF non significa fermarsi! Molti WAF sono mal configurati o bypassabili. Adattiamo la strategia: richieste più lente, payload offuscati, tecniche di evasione.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Lab: Rilevamento con Wafw00f</div>
+                <div class="card-text">
+                    <p><strong>Comando base:</strong></p>
+                    <div class="code-box"><span class="text-yellow">┌──(kali㉿kali)-[~]</span>
+<span class="text-red">└─$</span> wafw00f http://vulnerable-wp.local</div>
+                    <br>
+                    <p><strong>Output (Nessun WAF rilevato):</strong></p>
+                    <div class="code-box">                 ______
+                /      \
+               (  W00f! )
+                \______/
+                
+[*] Checking http://vulnerable-wp.local
+<span class="text-green">[+] The site http://vulnerable-wp.local is not behind a WAF.</span>
+[~] Number of requests: 8</div>
+                    <br>
+                    <p><strong>Se ci fosse Cloudflare:</strong></p>
+                    <div class="code-box"><span class="text-red">[+] The site is behind Cloudflare (Cloudflare Inc.) WAF.</span></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Prima di lanciare scansioni aggressive, verifichiamo se c'è un WAF. A sinistra, i WAF più comuni e come riconoscerli.
+        A destra, wafw00f è lo strumento specializzato. Invia richieste specifiche per 'triggerare' le risposte tipiche dei WAF.
+        Nel nostro lab, risultato: nessun WAF. Via libera alle scansioni aggressive!
+        Se invece trovaste Cloudflare o Sucuri, dovreste rallentare, usare proxy rotanti, o tecniche di bypass specifiche.
+        IMPORTANTE: Un WAF non è sinonimo di sicurezza. Molti sono configurati male e lasciano passare attacchi ben costruiti."
+    -->
+
+    <script>const slideNumero = 5;</script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Execution & Shell Access - Slide 19</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Pwned: Ottenere la Shell</h1>
+        <div class="subtitle">Execution & Shell Access</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Azione</div>
+                <div class="card-text">
+                    <ol>
+                        <li>Attivare il plugin "Hello Dolly" OPPURE navigare direttamente su <code>/wp-content/plugins/hello.php</code>.</li>
+                        <li><strong>Terminale Netcat:</strong></li>
+                    </ol>
+                    <div class="code-box"><pre><code>connect to [10.10.x.x] from (UNKNOWN) [10.82.x.x] 4444
+$ _</code></pre></div>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Spiegazione Tecnica</div>
+                <div class="card-text">
+                    <p>Attivando il plugin o visitando il file, il server web esegue il codice PHP.</p>
+                    <p>Il codice PHP esegue la connessione verso il nostro Netcat.</p>
+                    <p>Ora abbiamo controllo diretto sul sistema operativo del server (solitamente come utente <code>www-data</code>).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>const slideNumero = 19;</script>
+    <script src="main.js"></script>
+</body>
+</html>

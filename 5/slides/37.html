@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Capitolo 6: Reporting & Remediation - Struttura Report</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <div class="nav-btn" id="nav-menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div>
+        <div class="nav-btn" id="nav-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+        <div class="nav-btn" id="nav-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">Capitolo 6: Reporting & Remediation</h1>
+        <div class="subtitle">Slide 6.1: Struttura di un Report Professionale</div>
+
+        <div class="grid-2-col">
+            <div class="card border-blue">
+                <div class="card-title">Teoria: Anatomia del Report</div>
+                <div class="card-text">
+                    <p>Il report è il <strong>deliverable finale</strong> del pentest. Deve essere comprensibile sia dal management che dal team tecnico.</p>
+                    <br>
+                    <p><strong>Sezioni standard:</strong></p>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Executive Summary</strong> - Per il management (1-2 pagine)</li>
+                        <li><strong>Scope & Methodology</strong> - Cosa è stato testato e come</li>
+                        <li><strong>Findings Summary</strong> - Tabella riassuntiva vulnerabilità</li>
+                        <li><strong>Detailed Findings</strong> - Ogni vulnerabilità in dettaglio</li>
+                        <li><strong>Remediation Roadmap</strong> - Piano di correzione prioritizzato</li>
+                        <li><strong>Appendices</strong> - Screenshot, log, evidenze</li>
+                    </ol>
+                    <br>
+                    <p><strong>Due versioni:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li><span class="text-yellow">Executive</span> - Rischio business, no dettagli tecnici</li>
+                        <li><span class="text-green">Technical</span> - Tutti i dettagli per i developer</li>
+                    </ul>
+                    <br>
+                    <p class="security-insight"><strong>Security Insight:</strong> Il report è ciò che rimane del vostro lavoro. Un pentest eccellente con un report mediocre = cliente insoddisfatto.</p>
+                </div>
+            </div>
+
+            <div class="card border-green">
+                <div class="card-title">Template: Executive Summary</div>
+                <div class="card-text">
+                    <p><strong>Esempio Executive Summary:</strong></p>
+                    <div class="code-box" style="font-size: 0.95em;">
+<span class="text-yellow">PENETRATION TEST REPORT</span>
+Target: vulnerable-wp.local
+Date: 01/12/2025
+Tester: [Nome]
+
+<span class="text-yellow">EXECUTIVE SUMMARY</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+È stato condotto un penetration test sul sito 
+WordPress aziendale. Il test ha rivelato 
+vulnerabilità CRITICHE che permettono a un 
+attaccante non autenticato di ottenere 
+controllo completo del server.
+
+<span class="text-red">RISCHIO COMPLESSIVO: CRITICO</span>
+
+<span class="text-yellow">FINDINGS:</span>
+• Critical: 2 (RCE, Password deboli)
+• High: 3
+• Medium: 4
+• Low: 2
+
+<span class="text-yellow">IMPATTO POTENZIALE:</span>
+• Furto dati clienti
+• Defacement del sito
+• Accesso alla rete interna
+• Danni reputazionali</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 
+        SPEAKER NOTES:
+        "Capitolo finale: il report. A sinistra, la struttura standard che ogni report dovrebbe avere.
+        L'Executive Summary è cruciale: è l'unica parte che il CEO leggerà. Deve essere chiaro e non tecnico.
+        A destra, un esempio di come iniziare. Notate: rischio complessivo chiaro, numeri concreti, impatto business.
+        Non scrivete 'RCE via arbitrary file upload' nel summary. Scrivete 'Un attaccante può prendere controllo del server'.
+        Il management deve capire PERCHÉ deve investire tempo e soldi per correggere.
+        La versione tecnica invece conterrà tutti i dettagli: comandi, screenshot, PoC."
+    -->
+
+    <script>const slideNumero = 37;</script>
+    <script src="main.js"></script>
+</body>
+</html>
+
